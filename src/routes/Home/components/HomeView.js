@@ -22,10 +22,6 @@ export const HomeView = () => (
   		<div className="description">Here at the <a target="_blank" href="http://socialmachines.media.mit.edu/">Laboratory for Social Machines</a>, part of the MIT Media Lab, we believe technology can help offer an alternative to the horse-race journalism that has dominated election news for the last half-century. The Electome surfaces and tracks U.S. election issues the public cares about, or what we call “The Horse Race of Ideas.” Drawing from areas of computer science including machine learning, natural language processing, and network analysis, we explore how three separate forces – the campaign journalism, the messaging of the candidates, and the public’s response in the digital sphere – converge to shape the presidential election’s most important narratives as well as its outcome. Revealing the dynamic interaction of these forces, heretofore largely invisible, is one goal of the Electome. Another aim is to use the resulting analytics to drive election coverage produced in collaboration with leading media outlets. A key source for detecting the public’s voice will be social media. Thanks to a gift from Twitter, our lab has access to the entire database of tweets, with 500 million new ones added each day, and the social graph of Twitter.</div>
   	</div>
   	<div className="timeline"></div>
-  	<div className="media">
-  		<div className="media-label">Deployments</div>
-  		<a></a>
-  	</div>
   	<div className="partnerships">
   		<div className="partnerships-label">In partnership with</div>
   		<div className="logos">
@@ -39,7 +35,20 @@ export const HomeView = () => (
 	  		<div id="newseum-logo"></div>
   		</div>
   	</div>
-  	<div className="trademark"></div>
+  	<div className="media">
+  		<div className="media-label">Deployments</div>
+  		<div className="card-list">
+	  		<a className="card" href="http://knightfoundation.org/blogs/knightblog/2015/10/29/laboratory-social-machines-building-alternative-horse-race-journalism/" target="_blank">
+	  			<div className="title">Laboratory for Social Machines building an alternative to horse-race journalism</div>
+	  			<div className="attribution">
+	  				<div className="publication">KnightBlog</div>
+	  				<div className="date">October 29, 2015</div>
+	  				<div className="author">William Powers (LSM)</div>
+	  			</div>
+	  		</a>
+  		</div>
+  	</div>
+  	<div className="footer"></div>
   </div>
 )
 
