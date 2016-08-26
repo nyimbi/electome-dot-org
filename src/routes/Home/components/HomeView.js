@@ -46,6 +46,14 @@ export const HomeView = () => (
 	  				<div className="author">William Powers (LSM)</div>
 	  			</div>
 	  		</a>
+	  		<a className="card" href="http://knightfoundation.org/blogs/knightblog/2015/10/29/laboratory-social-machines-building-alternative-horse-race-journalism/" target="_blank">
+	  			<div className="title">Laboratory for Social Machines building an alternative to horse-race journalism</div>
+	  			<div className="attribution">
+	  				<div className="publication">KnightBlog</div>
+	  				<div className="date">October 29, 2015</div>
+	  				<div className="author">William Powers (LSM)</div>
+	  			</div>
+	  		</a>
   		</div>
   	</div>
   	<div className="footer"></div>

@@ -15,6 +15,7 @@ $header-height: 7rem;
 $home-h-padding: 10vw;
 $home-module-v-padding: 5rem;
 $home-divider-color: lighten($border-color, 5%);
+$home-text-link-color: #1E88E5;
 
 .home {
 	text-align: left;
@@ -102,6 +103,9 @@ $home-divider-color: lighten($border-color, 5%);
 
 .info {
 	padding: $home-module-v-padding $home-h-padding;
+	a {
+		color: $home-text-link-color;
+	}
 	.info-label {
 		@extend %header;
 		margin-bottom: 3rem;
@@ -131,11 +135,15 @@ $home-divider-color: lighten($border-color, 5%);
 		margin-top: 3rem;
 	}
 	.card {
+		transition: all $transition-duration;
 		display: block;
-		border: solid 1px darken($border-color, 10%);
+		border: solid 1px darken($border-color, 5%);
 		border-radius: 4px;
 		padding: 2rem;
 		text-decoration: none !important;
+		&:hover {
+			border-color: darken($border-color, 25%);
+		}
 		&:not(:last-of-type) {
 			margin-bottom: 2rem;
 		}
@@ -144,6 +152,7 @@ $home-divider-color: lighten($border-color, 5%);
 		}
 		.title {
 			font-weight: 500;
+			color: $home-text-link-color;
 		}
 		.publication {
 			color: $highlight-text-color;
