@@ -12,6 +12,7 @@ For example:
 */
 
 $header-height: 7rem;
+$home-h-padding: 10vw;
 
 .home {
 	text-align: left;
@@ -68,7 +69,7 @@ $header-height: 7rem;
 
 .hero {
 	border-bottom: solid 1px $border-color;
-	padding: 7rem 5rem;
+	padding: 7rem $home-h-padding;
 	h1 {
 		margin: 0;
 		font-size: 3rem;
@@ -80,7 +81,6 @@ $header-height: 7rem;
 	}
 	.description {
 		@extend %body-font;
-		color: $text-color !important;
 		max-width: 50vw;
 	}
 	.ctas {
@@ -96,5 +96,20 @@ $header-height: 7rem;
 		padding: 1rem 2rem;
 		display: inline-block;
 		text-transform: uppercase;
+	}
+}
+
+.info {
+	padding: 5rem $home-h-padding;
+	border-bottom: solid 1px $border-color;
+	.info-label {
+		@extend %header;
+		margin-bottom: 3rem;
+		text-align: center;
+	}
+	.description {
+		@extend %body-font;
+		column-count: 2;
+		column-gap: 4rem;
 	}
 }

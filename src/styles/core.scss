@@ -8,12 +8,13 @@
 
   %body-font {
     font-family: Merriweather;
-    color: $subdued-text-color;
+    color: lighten($text-color, 15%);
   }
 
   %header-font {
     font-family: Gotham;
     color: $text-color;
+    line-height: 1.8;
   }
 
   // Some best-practice CSS that's useful for most apps
@@ -34,5 +35,9 @@
   *:before,
   *:after {
     box-sizing: inherit;
+  }
+
+  a {
+    cursor: pointer;
   }
 }
