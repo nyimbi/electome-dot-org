@@ -10,3 +10,23 @@ For example:
 @import './variables/components';
 @import './themes/default';
 */
+
+.header {
+	text-align: left;
+}
+
+.title {
+	display: inline-block;
+	position: relative;
+	@extend %header;
+	&:before {
+		content: "";
+		width: 1.3rem;
+		height: 1.3rem;
+		background-image: url('../assets/images/logo.png');
+		background-repeat: no-repeat;
+		background-size: 100%;
+		position: absolute;
+		right: calc(100% + 1rem);
+	}
+}

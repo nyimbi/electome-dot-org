@@ -1,0 +1,81 @@
+$transition-duration: 250ms;
+
+$black: #474747;
+
+// https://color.adobe.com/CS04-color-theme-1994456
+$texas: #F6F792;
+$tuna: #333745;
+$downy: #77C4D3;
+$harp: #DAEDE2;
+$amaranth: #EA2E49;
+
+$alabaster: #f7f7f7;
+$dove-gray: #707070;
+$silver-sand: #c0c3c7;
+$athens-gray: #eaebed;
+
+$cerise-red: #DA3E58;
+
+$gray: #8F8F8F;
+$wild-sand: #f6f6f6;
+$mercury: #e9e9e9;
+$bittersweet: #FD7475;
+$padua: #ABE5CB;
+
+$gold: #C0A062;
+$fruit-salad: #4CAF50;
+
+// COLOR USES
+
+$body-bg-color: white;
+$action-green: $fruit-salad;
+
+// NEW COLORS - THIS IS THE NEW EVERYTHING
+
+$porcelain: #ECEFF1;
+$geyser: #CFD8DC;
+$tower_gray: #B0BEC5;
+$gull_gray: #90A4AE;
+$regent_gray: #78909C;
+$lynch: #607D8B;
+$cutty_sark: #546E7A;
+$fiord: #455A64;
+$limed_spruce: #37474F;
+$outer_space: #263238;
+
+$chat-scan-green: $regent_gray;
+
+$filters-background: $outer_space;
+$filters-highlight: $porcelain;
+$filters-subdued: $limed_spruce;
+$filters-light: $regent_gray;
+$filters-bright: $geyser;
+$filters-divider-color: $limed_spruce;
+
+$text-color: $dove-gray;
+$subdued-text-color: $geyser;
+$border-color: rgba($geyser, .5);
+$highlight-text-color: $outer_space;
+$smoke: $porcelain;
+
+$highlight-interval: rgba($smoke, .5);
+
+// DIMENSIONS
+
+$module_padding: 2.5rem;
+$visualization_component_buffer: 2rem;
+$filter_header_height: 4.5rem;
+$header-height: 6rem;
+$timeline-height: 6rem;
+$timeline-left-side-width: 20rem;
+$header-h-padding: 2.5rem;
+$filters-width: 22rem;
+$document-browser-width: 22vw;
+$content-width: 80;
+$min-content-width: 600px;
+$max-content-width: 900px;
+$annotation-poll-offset-y: 1rem;
+
+// FONT SIZES
+
+$font-size-medium: 1.3rem;
