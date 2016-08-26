@@ -13,6 +13,7 @@ For example:
 
 $header-height: 7rem;
 $home-h-padding: 10vw;
+$home-module-v-padding: 5rem;
 
 .home {
 	text-align: left;
@@ -100,7 +101,7 @@ $home-h-padding: 10vw;
 }
 
 .info {
-	padding: 5rem $home-h-padding;
+	padding: $home-module-v-padding $home-h-padding;
 	.info-label {
 		@extend %header;
 		margin-bottom: 3rem;
@@ -117,4 +118,25 @@ $home-h-padding: 10vw;
 	background: $smoke;
 	height: 50rem;
 	box-shadow: inset 0 0 3px rgba(0,0,0,0.1);
+}
+
+.media {
+	margin: 0;
+	padding: $home-module-v-padding $home-h-padding;
+	border-bottom: solid 1px $border-color;
+	.media-label {
+		@extend %header;
+		text-align: center;
+	}
+}
+
+.partnerships {
+	padding: $home-module-v-padding 0;
+	.partnerships-label {
+		@extend %header;
+		text-align: center;
+	}
+	.logos {
+		padding: 2rem;
+	}
 }

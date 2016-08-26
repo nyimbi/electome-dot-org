@@ -23,18 +23,21 @@ export const HomeView = () => (
   	</div>
   	<div className="timeline"></div>
   	<div className="media">
+  		<div className="media-label">Deployments</div>
   		<a></a>
   	</div>
-  	<div className="demo"></div>
   	<div className="partnerships">
-  		<div id="media-lab-logo"></div>
-  		<div id="twitter-logo"></div>
-  		<div id="commission-on-presidential-debates-logo"></div>
-  		<div id="washington-post-logo"></div>
-  		<div id="wsj-logo"></div>
-  		<div id="fusion-logo"></div>
-  		<div id="roper-center-logo"></div>
-  		<div id="newseum-logo"></div>
+  		<div className="partnerships-label">In partnership with</div>
+  		<div className="logos">
+	  		<div id="media-lab-logo"></div>
+	  		<div id="twitter-logo"></div>
+	  		<div id="commission-on-presidential-debates-logo"></div>
+	  		<div id="washington-post-logo"></div>
+	  		<div id="wsj-logo"></div>
+	  		<div id="fusion-logo"></div>
+	  		<div id="roper-center-logo"></div>
+	  		<div id="newseum-logo"></div>
+  		</div>
   	</div>
   	<div className="trademark"></div>
   </div>
