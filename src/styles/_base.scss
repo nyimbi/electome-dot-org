@@ -11,18 +11,50 @@ For example:
 @import './themes/default';
 */
 
+$header-height: 7rem;
+
 .home {
 	text-align: left;
+	padding-top: $header-height;
 }
 
 .header {
+	top: 0;
+	width: 100vw;
+	background: white;
+	position: fixed;
+	height: $header-height;
+	padding: 0 4rem;
+	@extend %material-design-shadow;
+	.title, .authentication-ctas, .signup, .login {
+		display: inline-block;
+	}
+	.title, .signup, .login {
+		@extend %header;
+	}
+	.authentication-ctas {
+		float: right;
+		height: $header-height;
+		.signup, .login {
+			cursor: pointer;
+			position: relative;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+		.login {
+			margin-left: 2rem;
+		}
+	}
 }
 
 .title {
 	display: inline-block;
 	position: relative;
 	@extend %header;
+	line-height: $header-height;
 	&:before {
+		top: calc(50% - 2px);
+		transform: translateY(-50%);
 		content: "";
 		width: 1.3rem;
 		height: 1.3rem;
@@ -30,6 +62,6 @@ For example:
 		background-repeat: no-repeat;
 		background-size: 100%;
 		position: absolute;
-		right: calc(100% + 1rem);
+		right: calc(100% + .8rem);
 	}
 }
