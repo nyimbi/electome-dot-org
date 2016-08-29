@@ -10,9 +10,9 @@ export const Timeline = React.createClass({
 
 	drawDebugGrid() {
 		const size = 50
-		const step = 1
+		const step = 5
 		const geometry = new THREE.Geometry()
-		const material = new THREE.LineBasicMaterial({ color: "red" })
+		const material = new THREE.LineBasicMaterial({ color: "white" })
 
 		for (let i = - size; i <= size; i+= step) {
 			geometry.vertices.push(new THREE.Vector3(-size, -0.04, i))
@@ -24,6 +24,9 @@ export const Timeline = React.createClass({
 
 		const line = new THREE.Line(geometry, material, THREE.LinePieces)
 		scene.add(line)
+
+		const axisHelper = new THREE.AxisHelper(50)
+		scene.add(axisHelper)
 	},
 
 	drawCurve() {
