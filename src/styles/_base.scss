@@ -83,6 +83,7 @@ $home-text-link-color: #1E88E5;
 	}
 	.description {
 		@extend %body-font;
+		font-size: 1.3rem;
 		max-width: 50vw;
 	}
 	.ctas {
@@ -113,6 +114,7 @@ $home-text-link-color: #1E88E5;
 	}
 	.description {
 		@extend %body-font;
+		font-size: 1.3rem;
 		column-count: 2;
 		column-gap: 4rem;
 	}
@@ -138,7 +140,7 @@ $home-text-link-color: #1E88E5;
 			
 		}
 		&[data-expanded="false"] {
-			max-height: 50rem;
+			max-height: 52rem;
 		}
 	}
 	.toggle {
@@ -166,6 +168,7 @@ $home-text-link-color: #1E88E5;
 		}
 		.title {
 			font-weight: 500;
+			font-size: 1.3rem;
 			color: $home-text-link-color;
 		}
 		.publication {
