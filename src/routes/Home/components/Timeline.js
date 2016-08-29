@@ -55,6 +55,13 @@ export const Timeline = React.createClass({
 		scene.add(object)
 	},
 
+	renderDATGUI() {
+		const gui = new dat.GUI({
+			height: 200
+		})
+
+	},
+
 	renderViz() {
 		const node = ReactDOM.findDOMNode(this)
 		const WIDTH = window.innerWidth
@@ -81,6 +88,8 @@ export const Timeline = React.createClass({
 		this.drawDebugGrid()
 
 		this.drawCurve()
+
+		this.renderDATGUI()
 
 		renderer.render(scene, camera)
 	},
