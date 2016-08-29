@@ -2,6 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 const clusters = require('../clusters.json')
 let scene = null
+let renderer = null
+let camera = null
+const params = {}
 
 export const Timeline = React.createClass({
 	getInitialState() {
@@ -9,8 +12,8 @@ export const Timeline = React.createClass({
 	},
 
 	drawDebugGrid() {
-		const size = 50
-		const step = 5
+		const { size, step } = params
+
 		const geometry = new THREE.Geometry()
 		const material = new THREE.LineBasicMaterial({ color: "white" })
 
@@ -57,12 +60,15 @@ export const Timeline = React.createClass({
 
 	renderDATGUI() {
 		const gui = new dat.GUI({
-			height: 200
+			height: 300
 		})
 
+		gui.add(params, "size").onFinishChange(this.renderViz)
+
+		gui.add(params, "step").onFinishChange(this.renderViz)
 	},
 
-	renderViz() {
+	initViz() {
 		const node = ReactDOM.findDOMNode(this)
 		const WIDTH = window.innerWidth
 		const HEIGHT = node.offsetHeight
@@ -72,8 +78,8 @@ export const Timeline = React.createClass({
 		const NEAR = 1
 		const FAR = 200
 
-		const renderer = new THREE.WebGLRenderer()
-		const camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR)
+		renderer = new THREE.WebGLRenderer()
+		camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR)
 
 		scene = new THREE.Scene()
 
@@ -85,17 +91,24 @@ export const Timeline = React.createClass({
 
 		node.appendChild(renderer.domElement)
 
+		params.size = 50
+		params.step = 5
+	},
+
+	renderViz() {
 		this.drawDebugGrid()
 
 		this.drawCurve()
-
-		this.renderDATGUI()
 
 		renderer.render(scene, camera)
 	},
 
 	componentDidMount() {
-		setTimeout(this.renderViz, 100)
+		setTimeout(() => {
+			this.initViz()
+			this.renderViz()
+			this.renderDATGUI()
+		}, 100)
 	},
 
 	render() {
