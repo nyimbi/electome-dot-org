@@ -4,7 +4,13 @@ const clusters = require('../clusters.json')
 let scene = null
 let renderer = null
 let camera = null
-const params = {}
+const params = {
+	size: 50,
+	step: 5,
+	cameraX: 2,
+	cameraY: 20,
+	cameraZ: 150
+}
 
 export const Timeline = React.createClass({
 	getInitialState() {
@@ -64,8 +70,10 @@ export const Timeline = React.createClass({
 		})
 
 		gui.add(params, "size").onFinishChange(this.renderViz)
-
 		gui.add(params, "step").onFinishChange(this.renderViz)
+		gui.add(params, "cameraX").onFinishChange(this.renderViz)
+		gui.add(params, "cameraY").onFinishChange(this.renderViz)
+		gui.add(params, "cameraZ").onFinishChange(this.renderViz)
 	},
 
 	initViz() {
@@ -85,18 +93,15 @@ export const Timeline = React.createClass({
 
 		scene.add(camera)
 
-		camera.position.set(2, 20, 150)
-
 		renderer.setSize(WIDTH, HEIGHT)
 
 		node.appendChild(renderer.domElement)
-
-		params.size = 50
-		params.step = 5
 	},
 
 	renderViz() {
 		this.drawDebugGrid()
+
+		camera.position.set(params.cameraX, params.cameraY, params.cameraZ)
 
 		this.drawCurve()
 
