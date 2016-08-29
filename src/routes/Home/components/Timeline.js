@@ -71,9 +71,9 @@ export const Timeline = React.createClass({
 
 		gui.add(params, "size").onFinishChange(this.renderViz)
 		gui.add(params, "step").onFinishChange(this.renderViz)
-		gui.add(params, "cameraX").onFinishChange(this.renderViz)
-		gui.add(params, "cameraY").onFinishChange(this.renderViz)
-		gui.add(params, "cameraZ").onFinishChange(this.renderViz)
+		gui.add(params, "cameraX").min(0).max(200).step(2).onFinishChange(this.renderViz)
+		gui.add(params, "cameraY").min(0).max(200).step(2).onFinishChange(this.renderViz)
+		gui.add(params, "cameraZ").min(0).max(200).step(2).onFinishChange(this.renderViz)
 	},
 
 	initViz() {
