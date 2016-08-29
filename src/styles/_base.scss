@@ -163,7 +163,7 @@ $home-text-link-color: #1E88E5;
 			display: inline-block;
 		}
 		.author {
-			&:before {
+			&:not(:empty):before {
 				content: "·";
 				display: inline-block;
 				margin-left: .5rem;

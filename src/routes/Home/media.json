@@ -1,169 +1,169 @@
 [
 	{
-		link: "http://socialmachines.media.mit.edu/wp-content/uploads/sites/27/2016/08/cnn3.png",
-		title: "Trump’s unique followers command a larger share of the Twitter conversation",
-		publication: "CNN Politics App",
-		date: "2016-08-12"
+		"link": "http://socialmachines.media.mit.edu/wp-content/uploads/sites/27/2016/08/cnn3.png",
+		"title": "Trump’s unique followers command a larger share of the Twitter conversation",
+		"publication": "CNN Politics App",
+		"date": "2016-08-12"
 	},
 	{
-		link: "https://medium.com/@socialmachines/look-whos-talking-72c3c3d160b#.w2vso1vii",
-		title: "Look Who’s Talking: Whose followers tweet more about this election, Trump’s or Clinton’s?",
-		publication: "Medium",
-		date: "2016-08-12",
-		author: "Andrew Heyward, Uzra Khan, Soroush Vosoughi (LSM)"
+		"link": "https://medium.com/@socialmachines/look-whos-talking-72c3c3d160b#.w2vso1vii",
+		"title": "Look Who’s Talking: Whose followers tweet more about this election, Trump’s or Clinton’s?",
+		"publication": "Medium",
+		"date": "2016-08-12",
+		"author": "Andrew Heyward, Uzra Khan, Soroush Vosoughi (LSM)"
 	},
 	{
-		link: "http://socialmachines.media.mit.edu/wp-content/uploads/sites/27/2016/08/cnn2.pdf",
-		title: "Who sparks more UNcivil conversations on Twitter — Trump or Clinton?",
-		publication: "CNN Politics App",
-		date: "2016-08-05"
+		"link": "http://socialmachines.media.mit.edu/wp-content/uploads/sites/27/2016/08/cnn2.pdf",
+		"title": "Who sparks more UNcivil conversations on Twitter — Trump or Clinton?",
+		"publication": "CNN Politics App",
+		"date": "2016-08-05"
 	},
 	{
-		link: "https://medium.com/mit-media-lab/rude-awakening-7ade037a8600#.6cjlsqkln",
-		title: "Rude Awakening: Who sparks more UNcivil conversations on Twitter — Trump or Clinton?",
-		publication: "Medium",
-		date: "2016-08-05",
-		author: "Andrew Heyward and Uzra Khan (LSM)"
+		"link": "https://medium.com/mit-media-lab/rude-awakening-7ade037a8600#.6cjlsqkln",
+		"title": "Rude Awakening: Who sparks more UNcivil conversations on Twitter — Trump or Clinton?",
+		"publication": "Medium",
+		"date": "2016-08-05",
+		"author": "Andrew Heyward and Uzra Khan (LSM)"
 	},
 	{
-		link: "http://socialmachines.media.mit.edu/wp-content/uploads/sites/27/2015/10/cnn4.pdf",
-		title: "Clinton followers turn to national security",
-		publication: "CNN Politics App",
-		date: "2016-07-29"
+		"link": "http://socialmachines.media.mit.edu/wp-content/uploads/sites/27/2015/10/cnn4.pdf",
+		"title": "Clinton followers turn to national security",
+		"publication": "CNN Politics App",
+		"date": "2016-07-29"
 	},
 	{
-		link: "https://medium.com/@socialmachines/its-national-security-stupid-42fb0893e60c#.3ls7z3sey",
-		title: "It’s national security, stupid",
-		publication: "Medium",
-		date: "2016-07-29",
-		author: "Andrew Heyward and Uzra Khan (LSM)"
+		"link": "https://medium.com/@socialmachines/its-national-security-stupid-42fb0893e60c#.3ls7z3sey",
+		"title": "It’s national security, stupid",
+		"publication": "Medium",
+		"date": "2016-07-29",
+		"author": "Andrew Heyward and Uzra Khan (LSM)"
 	},
 	{
-		link: "https://medium.com/@socialmachines/twitter-talks-kaine-942dfcc6bb31#.jdns4zkxc",
-		title: "Twitter Talks Kaine",
-		publication: "Medium",
-		date: "2016-07-28",
-		author: "Uzra Khan (LSM)"
+		"link": "https://medium.com/@socialmachines/twitter-talks-kaine-942dfcc6bb31#.jdns4zkxc",
+		"title": "Twitter Talks Kaine",
+		"publication": "Medium",
+		"date": "2016-07-28",
+		"author": "Uzra Khan (LSM)"
 	},
 	{
-		link: "http://socialmachines.media.mit.edu/wp-content/uploads/sites/27/2016/07/cnn_politics_1.pdf",
-		title: "The Top Issues for Trump and Clinton Supporters",
-		publication: "CNN Politics App",
-		date: "2016-07-23"
+		"link": "http://socialmachines.media.mit.edu/wp-content/uploads/sites/27/2016/07/cnn_politics_1.pdf",
+		"title": "The Top Issues for Trump and Clinton Supporters",
+		"publication": "CNN Politics App",
+		"date": "2016-07-23"
 	},
 	{
-		link: "https://medium.com/@socialmachines/2016-election-topical-storms-845f1edb50b9#.i2da95oxf",
-		title: "2016 Election: Topical Storms. The Top Issues for Trump and Clinton Supporters",
-		publication: "Medium",
-		date: "2016-07-22",
-		author: "Andrew Heyward and Uzra Khan (LSM)"
+		"link": "https://medium.com/@socialmachines/2016-election-topical-storms-845f1edb50b9#.i2da95oxf",
+		"title": "2016 Election: Topical Storms. The Top Issues for Trump and Clinton Supporters",
+		"publication": "Medium",
+		"date": "2016-07-22",
+		"author": "Andrew Heyward and Uzra Khan (LSM)"
 	},
 	{
-		link: "https://medium.com/@socialmachines/a-trump-pence-chat-scan-5090812176ac#.yy9j5v5ls",
-		title: "A Trump-Pence ‘chat-scan’. What’s Twitter saying about the ticket?",
-		publication: "Medium",
-		date: "2016-07-20",
-		author: "Uzra Khan (LSM)"
+		"link": "https://medium.com/@socialmachines/a-trump-pence-chat-scan-5090812176ac#.yy9j5v5ls",
+		"title": "A Trump-Pence ‘chat-scan’. What’s Twitter saying about the ticket?",
+		"publication": "Medium",
+		"date": "2016-07-20",
+		"author": "Uzra Khan (LSM)"
 	},
 	{
-		link: "https://medium.com/@socialmachines/veepstakes-visualized-7e17a3f7325c#.ev6k4epxw",
-		title: "VEEPSTAKES, VISUALIZED",
-		publication: "Medium",
-		date: "2016-07-09",
-		author: "William Powers and Soroush Vosoughi (LSM)"
+		"link": "https://medium.com/@socialmachines/veepstakes-visualized-7e17a3f7325c#.ev6k4epxw",
+		"title": "VEEPSTAKES, VISUALIZED",
+		"publication": "Medium",
+		"date": "2016-07-09",
+		"author": "William Powers and Soroush Vosoughi (LSM)"
 	},
 	{
-		link: "https://www.washingtonpost.com/news/the-fix/wp/2016/06/18/how-the-orlando-attack-showed-the-potential-of-an-october-surprise/",
-		title: "How the Orlando attack showed the potential of an October Surprise",
-		publication: "Washington Post",
-		date: "2016-06-18"
+		"link": "https://www.washingtonpost.com/news/the-fix/wp/2016/06/18/how-the-orlando-attack-showed-the-potential-of-an-october-surprise/",
+		"title": "How the Orlando attack showed the potential of an October Surprise",
+		"publication": "Washington Post",
+		"date": "2016-06-18"
 	},
 	{
-		link: "http://fusion.net/story/307056/donald-trump-twitter-and-immigration/",
-		title: "Here’s evidence that Donald Trump has made us dumber as a country on immigration",
-		publication: "Fusion",
-		date: "2016-06-16"
+		"link": "http://fusion.net/story/307056/donald-trump-twitter-and-immigration/",
+		"title": "Here’s evidence that Donald Trump has made us dumber as a country on immigration",
+		"publication": "Fusion",
+		"date": "2016-06-16"
 	},
 	{
-		link: "http://fusion.net/story/304384/election-incivility-on-twitter/",
-		title: "Warning: This election contains language some people may find offensive",
-		publication: "Fusion",
-		date: "2016-05-25"
+		"link": "http://fusion.net/story/304384/election-incivility-on-twitter/",
+		"title": "Warning: This election contains language some people may find offensive",
+		"publication": "Fusion",
+		"date": "2016-05-25"
 	},
 	{
-		link: "http://www.bloomberg.com/politics/articles/2016-05-02/missing-from-2016-race-sense-of-urgency-over-u-s-budget-gaps",
-		title: "Missing From 2016 Race: Sense of Urgency Over U.S. Budget Gaps",
-		publication: "Bloomberg Politics",
-		date: "2016-05-02"
+		"link": "http://www.bloomberg.com/politics/articles/2016-05-02/missing-from-2016-race-sense-of-urgency-over-u-s-budget-gaps",
+		"title": "Missing From 2016 Race: Sense of Urgency Over U.S. Budget Gaps",
+		"publication": "Bloomberg Politics",
+		"date": "2016-05-02"
 	},
 	{
-		link: "http://www.pri.org/stories/2016-04-29/just-how-uncivil-election-2016-mits-media-lab-has-some-charts-you-should-see",
-		title: "Just how uncivil is Election 2016? MIT’s Media Lab has some charts you should see",
-		publication: "PRI",
-		date: "2016-04-29"
+		"link": "http://www.pri.org/stories/2016-04-29/just-how-uncivil-election-2016-mits-media-lab-has-some-charts-you-should-see",
+		"title": "Just how uncivil is Election 2016? MIT’s Media Lab has some charts you should see",
+		"publication": "PRI",
+		"date": "2016-04-29"
 	},
 	{
-		link: "https://medium.com/mit-media-lab/introducing-tonar-3bf161cba369#.9u7z8iqpj",
-		title: "Introducing ‘Tonar’ — An Incivility Index for Election 2016",
-		publication: "Medium",
-		date: "2016-04-25",
-		author: "Andrew Heyward (LSM)"
+		"link": "https://medium.com/mit-media-lab/introducing-tonar-3bf161cba369#.9u7z8iqpj",
+		"title": "Introducing ‘Tonar’ — An Incivility Index for Election 2016",
+		"publication": "Medium",
+		"date": "2016-04-25",
+		"author": "Andrew Heyward (LSM)"
 	},
 	{
-		link: "https://www.washingtonpost.com/news/post-politics/wp/2016/03/20/twitter-users-definitely-see-the-supreme-court-vacancy-as-an-election-issue/",
-		title: "Twitter users definitely see the Supreme Court vacancy as an election issue",
-		publication: "Washington Post",
-		date: "2016-03-20"
+		"link": "https://www.washingtonpost.com/news/post-politics/wp/2016/03/20/twitter-users-definitely-see-the-supreme-court-vacancy-as-an-election-issue/",
+		"title": "Twitter users definitely see the Supreme Court vacancy as an election issue",
+		"publication": "Washington Post",
+		"date": "2016-03-20"
 	},
 	{
-		link: "https://www.washingtonpost.com/news/the-fix/wp/2016/03/13/the-political-debate-on-twitter-focuses-on-much-different-issues-than-americans-at-large/",
-		title: "Twitter’s political debate focuses on much different issues than Americans at large do",
-		publication: "Washington Post",
-		date: "2016-03-13"
+		"link": "https://www.washingtonpost.com/news/the-fix/wp/2016/03/13/the-political-debate-on-twitter-focuses-on-much-different-issues-than-americans-at-large/",
+		"title": "Twitter’s political debate focuses on much different issues than Americans at large do",
+		"publication": "Washington Post",
+		"date": "2016-03-13"
 	},
 	{
-		link: "http://blogs.wsj.com/washwire/2016/03/01/2016-front-runners-top-list-of-election-influencers-on-social-media/",
-		title: "2016 Front-Runners Top List of Influencers on Social Media",
-		publication: "Wall Street Journal",
-		date: "2016-03-01"
+		"link": "http://blogs.wsj.com/washwire/2016/03/01/2016-front-runners-top-list-of-election-influencers-on-social-media/",
+		"title": "2016 Front-Runners Top List of Influencers on Social Media",
+		"publication": "Wall Street Journal",
+		"date": "2016-03-01"
 	},
 	{
-		link: "https://medium.com/mit-media-lab/who-s-influencing-election-2016-8bed68ddecc3#.rph8kcv68",
-		title: "Who’s Influencing Election 2016?",
-		publication: "Medium",
-		date: "2016-02-23",
-		author: "William Powers (LSM)"
+		"link": "https://medium.com/mit-media-lab/who-s-influencing-election-2016-8bed68ddecc3#.rph8kcv68",
+		"title": "Who’s Influencing Election 2016?",
+		"publication": "Medium",
+		"date": "2016-02-23",
+		"author": "William Powers (LSM)"
 	},
 	{
-		link: "https://medium.com/@andrewheyward/time-to-check-your-candidate-s-chat-scan-1daa5a7bdcfe#.ekqk0damg",
-		title: "Time to check your candidate’s ‘chat-scan",
-		publication: "Medium",
-		date: "2016-02-01",
-		author: "Andrew Heyward (LSM)"
+		"link": "https://medium.com/@andrewheyward/time-to-check-your-candidate-s-chat-scan-1daa5a7bdcfe#.ekqk0damg",
+		"title": "Time to check your candidate’s ‘chat-scan",
+		"publication": "Medium",
+		"date": "2016-02-01",
+		"author": "Andrew Heyward (LSM)"
 	},
 	{
-		link: "http://fusion.net/story/256046/iowa-brown-black-forum-twitter-reaction/",
-		title: "Here’s how Twitter reacted to the Iowa Brown & Black Forum",
-		publication: "Fusion",
-		date: "2016-01-15"
+		"link": "http://fusion.net/story/256046/iowa-brown-black-forum-twitter-reaction/",
+		"title": "Here’s how Twitter reacted to the Iowa Brown & Black Forum",
+		"publication": "Fusion",
+		"date": "2016-01-15"
 	},
 	{
-		link: "https://medium.com/mit-media-lab/enter-the-electome-11ed325babcf#.ifmyzehz1",
-		title: "Enter the Electome",
-		publication: "Medium",
-		date: "2015-12-28"
+		"link": "https://medium.com/mit-media-lab/enter-the-electome-11ed325babcf#.ifmyzehz1",
+		"title": "Enter the Electome",
+		"publication": "Medium",
+		"date": "2015-12-28"
 	},
 	{
-		link: "https://www.washingtonpost.com/news/the-fix/wp/2015/12/15/the-ever-changing-issues-of-the-2016-campaign-visualized-by-twitter/",
-		title: "The ever-changing issues of the 2016 campaign, as seen on Twitter",
-		publication: "Washington Post",
-		date: "2015-12-15"
+		"link": "https://www.washingtonpost.com/news/the-fix/wp/2015/12/15/the-ever-changing-issues-of-the-2016-campaign-visualized-by-twitter/",
+		"title": "The ever-changing issues of the 2016 campaign, as seen on Twitter",
+		"publication": "Washington Post",
+		"date": "2015-12-15"
 	},
 	{
-		link: "http://knightfoundation.org/blogs/knightblog/2015/10/29/laboratory-social-machines-building-alternative-horse-race-journalism/",
-		title: "Laboratory for Social Machines building an alternative to horse-race journalism",
-		publication: "KnightBlog",
-		date: "2015-10-29",
-		author: "William Powers (LSM)"
+		"link": "http://knightfoundation.org/blogs/knightblog/2015/10/29/laboratory-social-machines-building-alternative-horse-race-journalism/",
+		"title": "Laboratory for Social Machines building an alternative to horse-race journalism",
+		"publication": "KnightBlog",
+		"date": "2015-10-29",
+		"author": "William Powers (LSM)"
 	}
 ]
