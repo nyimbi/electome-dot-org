@@ -133,6 +133,20 @@ $home-text-link-color: #1E88E5;
 	}
 	.card-list {
 		margin-top: 3rem;
+		overflow: hidden;
+		&[data-expanded="true"] {
+			
+		}
+		&[data-expanded="false"] {
+			max-height: 50rem;
+		}
+	}
+	.toggle {
+		text-align: center;
+		@extend %header;
+		color: $home-text-link-color;
+		cursor: pointer;
+		margin-top: 2rem;
 	}
 	.card {
 		transition: all $transition-duration;
