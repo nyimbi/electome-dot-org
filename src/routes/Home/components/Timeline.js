@@ -9,7 +9,8 @@ const params = {
 	step: 5,
 	cameraX: 2,
 	cameraY: 20,
-	cameraZ: 150
+	cameraZ: 150,
+	cameraFOV: 45
 }
 
 export const Timeline = React.createClass({
@@ -74,6 +75,7 @@ export const Timeline = React.createClass({
 		gui.add(params, "cameraX").min(0).max(200).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraY").min(0).max(200).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraZ").min(0).max(200).step(2).onFinishChange(this.renderViz)
+		gui.add(params, "cameraFOV").min(0).max(180).step(2).onFinishChange(this.renderViz)
 	},
 
 	initViz() {
@@ -81,7 +83,7 @@ export const Timeline = React.createClass({
 		const WIDTH = window.innerWidth
 		const HEIGHT = node.offsetHeight
 
-		const VIEW_ANGLE = 30
+		const VIEW_ANGLE = params.cameraFOV
 		const ASPECT = WIDTH / HEIGHT
 		const NEAR = 1
 		const FAR = 200
@@ -102,6 +104,10 @@ export const Timeline = React.createClass({
 		this.drawDebugGrid()
 
 		camera.position.set(params.cameraX, params.cameraY, params.cameraZ)
+
+		camera.fov = params.cameraFOV
+
+		camera.updateProjectionMatrix()
 
 		this.drawCurve()
 
