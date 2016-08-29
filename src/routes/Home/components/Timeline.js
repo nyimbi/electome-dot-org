@@ -10,7 +10,10 @@ const params = {
 	cameraX: 2,
 	cameraY: 20,
 	cameraZ: 150,
-	cameraFOV: 45
+	cameraFOV: 45,
+	cameraLAX: 0,
+	cameraLAY: 0,
+	cameraLAZ: 0
 }
 
 export const Timeline = React.createClass({
@@ -75,6 +78,9 @@ export const Timeline = React.createClass({
 		gui.add(params, "cameraX").min(0).max(200).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraY").min(0).max(200).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraZ").min(0).max(200).step(2).onFinishChange(this.renderViz)
+		gui.add(params, "cameraLAX").min(0).max(200).step(2).onFinishChange(this.renderViz)
+		gui.add(params, "cameraLAY").min(0).max(200).step(2).onFinishChange(this.renderViz)
+		gui.add(params, "cameraLAZ").min(0).max(200).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraFOV").min(0).max(180).step(2).onFinishChange(this.renderViz)
 	},
 
@@ -103,11 +109,13 @@ export const Timeline = React.createClass({
 	renderViz() {
 		this.drawDebugGrid()
 
-		camera.position.set(params.cameraX, params.cameraY, params.cameraZ)
-
 		camera.fov = params.cameraFOV
 
 		camera.updateProjectionMatrix()
+
+		camera.position.set(params.cameraX, params.cameraY, params.cameraZ)
+
+		camera.lookAt(new THREE.Vector3(params.cameraLAX, params.cameraLAY, params.cameraLAZ))
 
 		this.drawCurve()
 
