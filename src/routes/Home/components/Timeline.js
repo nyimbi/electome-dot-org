@@ -8,13 +8,31 @@ export const Timeline = React.createClass({
 		return {}
 	},
 
+	drawDebugGrid() {
+		const size = 50
+		const step = 1
+		const geometry = new THREE.Geometry()
+		const material = new THREE.LineBasicMaterial({ color: "red" })
+
+		for (let i = - size; i <= size; i+= step) {
+			geometry.vertices.push(new THREE.Vector3(-size, -0.04, i))
+			geometry.vertices.push(new THREE.Vector3(size, -0.04, i))
+
+			geometry.vertices.push(new THREE.Vector3(i, -0.04, -size))
+			geometry.vertices.push(new THREE.Vector3(i, -0.04, size))
+		}
+
+		const line = new THREE.Line(geometry, material, THREE.LinePieces)
+		scene.add(line)
+	},
+
 	drawCurve() {
 		const subdivisions = 20
 
 		const points = [
 			new THREE.Vector3(10, 10, 10),
-			new THREE.Vector3(100, 100, 100),
-			new THREE.Vector3(50, 50, 50)
+			new THREE.Vector3(50, 100, 10),
+			new THREE.Vector3(20, 30, 10)
 		]
 
 		const spline = new THREE.Spline(points)
@@ -39,7 +57,7 @@ export const Timeline = React.createClass({
 		const WIDTH = window.innerWidth
 		const HEIGHT = node.offsetHeight
 
-		const VIEW_ANGLE = 60
+		const VIEW_ANGLE = 30
 		const ASPECT = WIDTH / HEIGHT
 		const NEAR = 1
 		const FAR = 200
@@ -51,11 +69,13 @@ export const Timeline = React.createClass({
 
 		scene.add(camera)
 
-		camera.position.z = 150
+		camera.position.set(2, 20, 150)
 
 		renderer.setSize(WIDTH, HEIGHT)
 
 		node.appendChild(renderer.domElement)
+
+		this.drawDebugGrid()
 
 		this.drawCurve()
 
