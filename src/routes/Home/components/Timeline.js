@@ -13,7 +13,7 @@ const yMax = 50
 
 const params = {
 	cameraX: 68,
-	cameraY: 200,
+	cameraY: 102,
 	cameraZ: 176,
 	cameraLAX: 138,
 	cameraLAY: -48,
