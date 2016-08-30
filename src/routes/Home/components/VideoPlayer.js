@@ -7,13 +7,16 @@ export const VideoPlayer = React.createClass({
 		}
 	},
 
+	closeVideo() {
+		this.setState({ videoShowing: false })
+	},
+
 	render() {
 		return (
 			<div data-video-showing={this.state.videoShowing} className="video-player">
+				<div className="blackout" onClick={this.closeVideo}></div>
 				<div className="iframe-wrapper">
-					<div className="close" onClick={() => {
-						this.setState({ videoShowing: false })
-					}}>
+					<div className="close" onClick={this.closeVideo}>
 						<i className="material-icons">clear</i>
 					</div>
 					<div className="fixed-aspect-ratio-wrapper">

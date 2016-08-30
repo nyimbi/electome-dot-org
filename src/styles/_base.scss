@@ -78,6 +78,7 @@ $home-text-link-color: #1E88E5;
 .video-player {
 	display: inline-block;
 	&[data-video-showing="true"] {
+		z-index: 2;
 		.iframe-wrapper {
 			display: block;
 			top: 50vh;
@@ -85,12 +86,27 @@ $home-text-link-color: #1E88E5;
 			transform: translate3d(-50%, -50%, 0);
 			z-index: 1;
 		}
+		.blackout {
+			display: block;
+			z-index: 1;
+			pointer-events: auto;
+		}
+	}
+	.blackout {
+		display: none;
+		pointer-events: none;
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		top: 0;
+		background: rgba(black, .8);
 	}
 	.iframe-wrapper {
 		position: fixed;
 		display: none;
 		.fixed-aspect-ratio-wrapper {
-			width: 50vw;
+			width: 60vw;
 			padding-top: 75%;
 			position: relative;
 			iframe {
