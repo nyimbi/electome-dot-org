@@ -149,9 +149,9 @@ export const Timeline = React.createClass({
 			for(let i=0; i<range; i++) {
 				d.sparkline.push(current)
 				if(i < peakIndex) {
-					current = Math.min(yMax, current + Math.random() * (yMax - current))
+					current = Math.min(yMax, current + Math.random() * Math.max(0, yMax - current) / (peakIndex - i))
 				} else {
-					current = Math.max(yMin, current - Math.random() * (current - yMin))
+					current = Math.max(yMin, current - Math.random() * Math.max(0, current - yMin) / Math.max(1, i - peakIndex))
 				}
 			}
 
