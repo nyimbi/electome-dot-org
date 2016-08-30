@@ -14,13 +14,13 @@ const yMax = 50
 const params = {
 	size: 50,
 	step: 5,
-	cameraX: -50,
-	cameraY: 96,
+	cameraX: 68,
+	cameraY: 200,
 	cameraZ: 150,
-	cameraFOV: 36,
-	cameraLAX: 112,
+	cameraFOV: 56,
+	cameraLAX: 120,
 	cameraLAY: -48,
-	cameraLAZ: -74
+	cameraLAZ: 14
 }
 
 export const Timeline = React.createClass({
@@ -49,11 +49,11 @@ export const Timeline = React.createClass({
 		scene.add(axisHelper)
 	},
 
-	drawCurve() {
+	drawCurve(points, index) {
 		const subdivisions = 20
 
-		const points = clusters[8].sparkline.map((d, i) =>
-			new THREE.Vector3(10, Math.round(d), 10 + (i * 10)))
+		points = points.map((d, i) =>
+			new THREE.Vector3(20 * index, Math.round(d), (10 * index) + (i * 10)))
 
 		const spline = new THREE.Spline(points)
 		const geometrySpline = new THREE.Geometry()
@@ -80,7 +80,7 @@ export const Timeline = React.createClass({
 		gui.add(params, "cameraZ").min(0).max(200).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraLAX").min(-200).max(200).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraLAY").min(-200).max(200).step(2).onFinishChange(this.renderViz)
-		gui.add(params, "cameraLAZ").min(-200).max(200).step(2).onFinishChange(this.renderViz)
+		gui.add(params, "cameraLAZ").min(-200).max(400).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraFOV").min(0).max(180).step(2).onFinishChange(this.renderViz)
 	},
 
@@ -117,7 +117,7 @@ export const Timeline = React.createClass({
 
 		camera.lookAt(new THREE.Vector3(params.cameraLAX, params.cameraLAY, params.cameraLAZ))
 
-		this.drawCurve()
+		clusters.slice(0, 9).map(d => d.sparkline).forEach(this.drawCurve)
 
 		renderer.render(scene, camera)
 	},
