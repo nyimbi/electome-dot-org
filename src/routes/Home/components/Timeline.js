@@ -14,10 +14,16 @@ const yMax = 50
 const params = {
 	cameraX: 68,
 	cameraY: 200,
-	cameraZ: 150,
-	cameraLAX: 120,
+	cameraZ: 176,
+	cameraLAX: 138,
 	cameraLAY: -48,
-	cameraLAZ: 14
+	cameraLAZ: 14,
+	cameraLeft: -178,
+	cameraRight: 400,
+	cameraTop: 62,
+	cameraBottom: -156,
+	cameraNear: 1,
+	cameraFar: 10000
 }
 
 export const Timeline = React.createClass({
@@ -77,6 +83,12 @@ export const Timeline = React.createClass({
 		gui.add(params, "cameraLAX").min(-200).max(200).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraLAY").min(-200).max(200).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraLAZ").min(-200).max(400).step(2).onFinishChange(this.renderViz)
+		gui.add(params, "cameraLeft").min(-1000).max(1000).step(2).onFinishChange(this.renderViz)
+		gui.add(params, "cameraRight").min(-1000).max(1000).step(2).onFinishChange(this.renderViz)
+		gui.add(params, "cameraTop").min(-1000).max(1000).step(2).onFinishChange(this.renderViz)
+		gui.add(params, "cameraBottom").min(-1000).max(1000).step(2).onFinishChange(this.renderViz)
+		gui.add(params, "cameraNear").min(-1000).max(1000).step(2).onFinishChange(this.renderViz)
+		gui.add(params, "cameraFar").min(0).max(10000).step(2).onFinishChange(this.renderViz)
 	},
 
 	initViz() {
@@ -89,7 +101,7 @@ export const Timeline = React.createClass({
 		const FAR = 10000
 
 		renderer = new THREE.WebGLRenderer()
-		camera = new THREE.OrthographicCamera(-400, 400, 400, -400, NEAR, FAR)
+		camera = new THREE.OrthographicCamera(params.cameraLeft, params.cameraRight, params.cameraTop, params.cameraBottom, params.cameraNear, params.cameraFar)
 
 		scene = new THREE.Scene()
 
@@ -103,13 +115,20 @@ export const Timeline = React.createClass({
 	renderViz() {
 		this.drawDebugGrid()
 
+		camera.left = params.cameraLeft
+		camera.right = params.cameraRight
+		camera.top = params.cameraTop
+		camera.bottom = params.cameraBottom
+		camera.near = params.cameraNear
+		camera.far = params.cameraFar
+
 		camera.updateProjectionMatrix()
 
 		camera.position.set(params.cameraX, params.cameraY, params.cameraZ)
 
 		camera.lookAt(new THREE.Vector3(params.cameraLAX, params.cameraLAY, params.cameraLAZ))
 
-		clusters.slice(0, 9).map(d => clusters[8].sparkline).forEach(this.drawCurve)
+		clusters.slice(0, 9).map(d => d.sparkline).forEach(this.drawCurve)
 
 		renderer.render(scene, camera)
 	},
