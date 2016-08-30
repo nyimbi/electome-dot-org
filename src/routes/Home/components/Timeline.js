@@ -103,12 +103,20 @@ export const Timeline = React.createClass({
 		const shape = new THREE.Shape()
 
 		shape.moveTo(0, 0)
-		shape.lineTo(0, 20)
-		shape.lineTo(20, 20)
-		shape.lineTo(20, 0)
+
+		const points = clusters[0].sparkline
+
+		points.forEach((d, i) => {
+			shape.lineTo(i * dayHeight, Math.round(d))
+
+			if(i === points.length - 1) {
+				shape.lineTo(i * dayHeight, 0)
+			}
+		})
+
 		shape.lineTo(0, 0)
 
-		this.addShape(shape, 0, 0, 20)
+		this.addShape(shape, 0, 0, (points.length - 1) * dayHeight)
 	},
 
 	drawCurve(data, index) {
