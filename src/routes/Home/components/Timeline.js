@@ -9,7 +9,7 @@ let camera = null
 let gui = null
 
 const yMin = 0
-const yMax = 100
+const yMax = 50
 
 const params = {
 	size: 50,
@@ -52,11 +52,8 @@ export const Timeline = React.createClass({
 	drawCurve() {
 		const subdivisions = 20
 
-		const points = [
-			new THREE.Vector3(10, 10, 10),
-			new THREE.Vector3(30, 50, 10),
-			new THREE.Vector3(50, 30, 10)
-		]
+		const points = clusters[8].sparkline.map((d, i) =>
+			new THREE.Vector3(10 + (i * 10), Math.round(d), 10))
 
 		const spline = new THREE.Spline(points)
 		const geometrySpline = new THREE.Geometry()
