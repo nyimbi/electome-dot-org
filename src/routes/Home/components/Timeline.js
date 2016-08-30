@@ -71,7 +71,7 @@ export const Timeline = React.createClass({
 
 	drawDebugGrid() {
 		const size = zMax
-		const step = 5
+		const step = 10
 
 		const geometry = new THREE.Geometry()
 		const material = new THREE.LineBasicMaterial({ color: "#CFD8DC" })
