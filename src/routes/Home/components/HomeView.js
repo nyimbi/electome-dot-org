@@ -26,6 +26,16 @@ export const HomeView = React.createClass({
 		  			<div className="viewdemo">View demo</div>
 		  			<div className="enter">Enter</div>
 		  		</div>
+		  		<div className="browser">
+		  			<div className="controls">
+		  				<div className="red"></div>
+		  				<div className="yellow"></div>
+		  				<div className="green"></div>
+		  			</div>
+		  			<div className="ui">
+		  				<div className="image-container"></div>
+		  			</div>
+		  		</div>
 		  	</div>
 		  	<div className="info">
 		  		<div className="info-label">Who we are</div>
