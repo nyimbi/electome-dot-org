@@ -11,6 +11,8 @@ let previousPos = null
 
 const yMin = 0
 const yMax = 50
+const zMin = 0
+const zMax = 5000
 
 const params = {
 	cameraX: 108,
@@ -104,7 +106,9 @@ export const Timeline = React.createClass({
 
 		geometrySpline.computeLineDistances()
 
-		const object = new THREE.Line( geometrySpline, new THREE.LineBasicMaterial({ color: 0xffffff }))
+		const material = new THREE.LineBasicMaterial({ color: 0xffffff })
+
+		const object = new THREE.Line( geometrySpline, material)
 
 		scene.add(object)
 	},
@@ -171,7 +175,20 @@ export const Timeline = React.createClass({
 			height: 300
 		})
 
-		clusters = clusters.map(d => {
+		clusters = clusters.sort((a, b) => {
+			const aStartMoment = moment(a.start_time)
+			const bStartMoment = moment(b.start_time)
+			if(moment(aStartMoment.format('YYYY-MM-DD')).isBefore(moment(bStartMoment.format('YYYY-MM-DD')))) {
+				return -1
+			}
+			if(moment(aStartMoment.format('YYYY-MM-DD')).isAfter(bStartMoment.format('YYYY-MM-DD'))) {
+				return 1
+			}
+			if(moment(a.end_time).isBefore(b.end_time)) {
+				return -1
+			}
+			return 1
+		}).map(d => {
 			const startMoment = moment(d.start_time)
 			const endMoment = moment(d.end_time)
 			const range = Math.abs(startMoment.diff(endMoment, 'days'))
