@@ -75,6 +75,14 @@ $home-text-link-color: #1E88E5;
 	}
 }
 
+.video-player {
+	display: inline-block;
+	.iframe-wrapper {
+		position: absolute;
+		display: none;
+	}
+}
+
 .hero {
 	border-bottom: solid 1px $home-divider-color;
 	padding: 7rem $home-h-padding;

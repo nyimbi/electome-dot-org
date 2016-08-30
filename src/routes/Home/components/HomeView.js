@@ -1,5 +1,6 @@
 import React from 'react'
 import Timeline from './Timeline'
+import VideoPlayer from './VideoPlayer'
 const media = require('../media.json')
 
 export const HomeView = React.createClass({
@@ -12,6 +13,7 @@ export const HomeView = React.createClass({
 	render() {
 		return (
 			<div className="home">
+				
 		  	<div className="header">
 		  		<div className="title">Electome</div>
 			  	<div className="authentication-ctas">
@@ -23,7 +25,7 @@ export const HomeView = React.createClass({
 		  		<h1>Enter the Electome</h1>
 		  		<div className="description">Sub-orbital BASE jump 8-bit denim digital nodality San Francisco stimulate 3D-printed semiotics office urban.</div>
 		  		<div className="ctas">
-		  			<div className="viewdemo">View demo</div>
+		  			<VideoPlayer />
 		  			<div className="enter">Enter</div>
 		  		</div>
 		  		<div className="browser">

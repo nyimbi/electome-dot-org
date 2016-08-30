@@ -119,6 +119,7 @@ export const Timeline = React.createClass({
 	},
 
 	configureDATGUI() {
+		return
 		gui.add(params, "cameraX").min(-200).max(200).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraY").min(0).max(200).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraZ").min(0).max(200).step(2).onFinishChange(this.renderViz)
@@ -184,9 +185,9 @@ export const Timeline = React.createClass({
 	},
 
 	componentDidMount() {
-		gui = new dat.GUI({
-			height: 300
-		})
+		// gui = new dat.GUI({
+		// 	height: 300
+		// })
 
 		clusters = clusters.sort((a, b) => {
 			const aStartMoment = moment(a.start_time)
