@@ -27,7 +27,7 @@ const params = {
 	cameraLeft: -178,
 	cameraRight: 400,
 	cameraTop: 62,
-	cameraBottom: -156,
+	cameraBottom: -128,
 	cameraNear: 1,
 	cameraFar: 10000
 }
@@ -70,22 +70,22 @@ export const Timeline = React.createClass({
 	},
 
 	drawDebugGrid() {
-		const size = 50
+		const size = zMax
 		const step = 5
 
 		const geometry = new THREE.Geometry()
-		const material = new THREE.LineBasicMaterial({ color: "white" })
+		const material = new THREE.LineBasicMaterial({ color: "#CFD8DC" })
 
 		for (let i = - size; i <= size; i+= step) {
-			geometry.vertices.push(new THREE.Vector3(-size, -0.04, i))
-			geometry.vertices.push(new THREE.Vector3(size, -0.04, i))
+			geometry.vertices.push(new THREE.Vector3(-size, -0.1, i))
+			geometry.vertices.push(new THREE.Vector3(size, -0.1, i))
 
-			geometry.vertices.push(new THREE.Vector3(i, -0.04, -size))
-			geometry.vertices.push(new THREE.Vector3(i, -0.04, size))
+			geometry.vertices.push(new THREE.Vector3(i, -0.1, -size))
+			geometry.vertices.push(new THREE.Vector3(i, -0.1, size))
 		}
 
 		const line = new THREE.Line(geometry, material, THREE.LinePieces)
-		// scene.add(line)
+		scene.add(line)
 
 		const axisHelper = new THREE.AxisHelper(50)
 		scene.add(axisHelper)
@@ -110,7 +110,7 @@ export const Timeline = React.createClass({
 
 		geometrySpline.computeLineDistances()
 
-		const material = new THREE.LineBasicMaterial({ color: 0xffffff })
+		const material = new THREE.LineBasicMaterial({ color: 0x4CAF50 })
 
 		const object = new THREE.Line( geometrySpline, material)
 
@@ -145,6 +145,8 @@ export const Timeline = React.createClass({
 		camera = new THREE.OrthographicCamera(params.cameraLeft, params.cameraRight, params.cameraTop, params.cameraBottom, params.cameraNear, params.cameraFar)
 
 		scene = new THREE.Scene()
+
+		scene.background = new THREE.Color(0xECEFF1)
 
 		scene.add(camera)
 
