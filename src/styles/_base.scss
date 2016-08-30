@@ -105,8 +105,19 @@ $home-text-link-color: #1E88E5;
 		}
 		.close {
 			position: absolute;
-			bottom: 100%;
-			right: 100%;
+			bottom: calc(100% - 1rem);
+			left: calc(100% - 1rem);
+			background: white;
+			@extend %material-design-shadow;
+			border-radius: 50%;
+			width: 2.5rem;
+			height: 2.5rem;
+			text-align: center;
+			z-index: 1;
+			i {
+				font-size: 1.4rem;
+				line-height: 2.5rem;
+			}
 		}
 	}
 	.close {
