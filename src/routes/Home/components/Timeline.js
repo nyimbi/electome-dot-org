@@ -15,12 +15,12 @@ const params = {
 	size: 50,
 	step: 5,
 	cameraX: -50,
-	cameraY: 20,
+	cameraY: 96,
 	cameraZ: 150,
-	cameraFOV: 45,
-	cameraLAX: 50,
-	cameraLAY: 0,
-	cameraLAZ: 0
+	cameraFOV: 36,
+	cameraLAX: 112,
+	cameraLAY: -48,
+	cameraLAZ: -74
 }
 
 export const Timeline = React.createClass({
@@ -82,8 +82,8 @@ export const Timeline = React.createClass({
 		gui.add(params, "cameraY").min(0).max(200).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraZ").min(0).max(200).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraLAX").min(-200).max(200).step(2).onFinishChange(this.renderViz)
-		gui.add(params, "cameraLAY").min(0).max(200).step(2).onFinishChange(this.renderViz)
-		gui.add(params, "cameraLAZ").min(0).max(200).step(2).onFinishChange(this.renderViz)
+		gui.add(params, "cameraLAY").min(-200).max(200).step(2).onFinishChange(this.renderViz)
+		gui.add(params, "cameraLAZ").min(-200).max(200).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraFOV").min(0).max(180).step(2).onFinishChange(this.renderViz)
 	},
 
@@ -94,8 +94,8 @@ export const Timeline = React.createClass({
 
 		const VIEW_ANGLE = params.cameraFOV
 		const ASPECT = WIDTH / HEIGHT
-		const NEAR = 1
-		const FAR = 200
+		const NEAR = 0.1
+		const FAR = 10000
 
 		renderer = new THREE.WebGLRenderer()
 		camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR)
