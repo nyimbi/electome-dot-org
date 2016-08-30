@@ -93,7 +93,7 @@ export const Timeline = React.createClass({
 
 	addShape(shape, x, y, z) {
 		const geometry = new THREE.ShapeGeometry(shape)
-		const mesh = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({ color: "red", side: THREE.DoubleSide }))
+		const mesh = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({ color: 0xff0000, side: THREE.DoubleSide }))
 		mesh.rotation.set(0, Math.PI / 2, 0)
 		mesh.position.set(x, y, z)
 		scene.add(mesh)
@@ -162,6 +162,7 @@ export const Timeline = React.createClass({
 		const FAR = 10000
 
 		renderer = new THREE.WebGLRenderer()
+
 		camera = new THREE.OrthographicCamera(params.cameraLeft, params.cameraRight, params.cameraTop, params.cameraBottom, params.cameraNear, params.cameraFar)
 
 		scene = new THREE.Scene()
@@ -169,6 +170,11 @@ export const Timeline = React.createClass({
 		scene.background = new THREE.Color(0xECEFF1)
 
 		scene.add(camera)
+
+		const light = new THREE.DirectionalLight( 0xffffff )
+		light.position.set(-1, 1, 0).normalize()
+
+		scene.add(light)
 
 		renderer.setSize(WIDTH, HEIGHT)
 
