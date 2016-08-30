@@ -16,7 +16,9 @@ export const VideoPlayer = React.createClass({
 					}}>
 						<i className="material-icons">clear</i>
 					</div>
-					<iframe width="420" height="315" src="https://www.youtube.com/embed/g8gJOCwBuFc" frameborder="0" allowfullscreen></iframe>
+					<div className="fixed-aspect-ratio-wrapper">
+						<iframe src="https://www.youtube.com/embed/g8gJOCwBuFc" frameBorder="0" allowFullScreen></iframe>
+					</div>
 				</div>
 				<div onClick={() => {
 					this.setState({ videoShowing: true })
