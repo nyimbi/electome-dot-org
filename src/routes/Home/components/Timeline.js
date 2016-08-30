@@ -91,6 +91,26 @@ export const Timeline = React.createClass({
 		scene.add(axisHelper)
 	},
 
+	addShape(shape, x, y, z) {
+		const geometry = new THREE.ShapeGeometry(shape)
+		const mesh = new THREE.Mesh(geometry, new THREE.MeshPhongMaterial({ color: "red", side: THREE.DoubleSide }))
+		mesh.rotation.set(0, Math.PI / 2, 0)
+		mesh.position.set(x, y, z)
+		scene.add(mesh)
+	},
+
+	createShape(data, index) {
+		const shape = new THREE.Shape()
+
+		shape.moveTo(0, 0)
+		shape.lineTo(0, 20)
+		shape.lineTo(20, 20)
+		shape.lineTo(20, 0)
+		shape.lineTo(0, 0)
+
+		this.addShape(shape, 0, 0, 20)
+	},
+
 	drawCurve(data, index) {
 		const subdivisions = 20
 		const dateOffset = moment(data.start_time).diff(minDate, 'days')
@@ -172,6 +192,8 @@ export const Timeline = React.createClass({
 		camera.lookAt(new THREE.Vector3(params.cameraLAX, params.cameraLAY, params.cameraLAZ))
 
 		clusters.forEach(this.drawCurve)
+
+		this.createShape()
 
 		renderer.render(scene, camera)
 	},
