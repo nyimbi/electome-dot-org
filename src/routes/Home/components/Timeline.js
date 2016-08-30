@@ -15,10 +15,10 @@ let dayHeight = 0
 const yMin = 0
 const yMax = 50
 const zMin = 0
-const zMax = 1000
+const zMax = 1500
 
 const params = {
-	cameraX: 108,
+	cameraX: 34,
 	cameraY: 102,
 	cameraZ: 176,
 	cameraLAX: 138,
