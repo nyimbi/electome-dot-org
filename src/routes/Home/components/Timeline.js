@@ -14,11 +14,11 @@ const yMax = 100
 const params = {
 	size: 50,
 	step: 5,
-	cameraX: 2,
+	cameraX: -50,
 	cameraY: 20,
 	cameraZ: 150,
 	cameraFOV: 45,
-	cameraLAX: 0,
+	cameraLAX: 50,
 	cameraLAY: 0,
 	cameraLAZ: 0
 }
@@ -54,8 +54,8 @@ export const Timeline = React.createClass({
 
 		const points = [
 			new THREE.Vector3(10, 10, 10),
-			new THREE.Vector3(50, 100, 10),
-			new THREE.Vector3(20, 30, 10)
+			new THREE.Vector3(30, 50, 10),
+			new THREE.Vector3(50, 30, 10)
 		]
 
 		const spline = new THREE.Spline(points)
@@ -78,10 +78,10 @@ export const Timeline = React.createClass({
 	configureDATGUI() {
 		gui.add(params, "size").onFinishChange(this.renderViz)
 		gui.add(params, "step").onFinishChange(this.renderViz)
-		gui.add(params, "cameraX").min(0).max(200).step(2).onFinishChange(this.renderViz)
+		gui.add(params, "cameraX").min(-200).max(200).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraY").min(0).max(200).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraZ").min(0).max(200).step(2).onFinishChange(this.renderViz)
-		gui.add(params, "cameraLAX").min(0).max(200).step(2).onFinishChange(this.renderViz)
+		gui.add(params, "cameraLAX").min(-200).max(200).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraLAY").min(0).max(200).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraLAZ").min(0).max(200).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraFOV").min(0).max(180).step(2).onFinishChange(this.renderViz)
