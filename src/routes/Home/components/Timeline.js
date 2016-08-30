@@ -1,9 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-const clusters = require('../clusters.json')
+import moment from 'moment'
+
+let clusters = require('../clusters.json')
 let scene = null
 let renderer = null
 let camera = null
+let gui = null
+
+const yMin = 0
+const yMax = 100
+
 const params = {
 	size: 50,
 	step: 5,
@@ -68,11 +75,7 @@ export const Timeline = React.createClass({
 		scene.add(object)
 	},
 
-	renderDATGUI() {
-		const gui = new dat.GUI({
-			height: 300
-		})
-
+	configureDATGUI() {
 		gui.add(params, "size").onFinishChange(this.renderViz)
 		gui.add(params, "step").onFinishChange(this.renderViz)
 		gui.add(params, "cameraX").min(0).max(200).step(2).onFinishChange(this.renderViz)
@@ -123,10 +126,34 @@ export const Timeline = React.createClass({
 	},
 
 	componentDidMount() {
+		gui = new dat.GUI({
+			height: 300
+		})
+
+		clusters = clusters.map(d => {
+			const startMoment = moment(d.start_time)
+			const endMoment = moment(d.end_time)
+			const range = Math.abs(startMoment.diff(endMoment, 'days'))
+			let current = yMin + Math.random() * (yMax - yMin) / 2
+			const peakIndex = 1 + Math.round(Math.random() * (range - 2))
+
+			d.sparkline = []
+			for(let i=0; i<range; i++) {
+				d.sparkline.push(current)
+				if(i < peakIndex) {
+					current = Math.min(yMax, current + Math.random() * (yMax - current))
+				} else {
+					current = Math.max(yMin, current - Math.random() * (current - yMin))
+				}
+			}
+
+			return d
+		})
+
 		setTimeout(() => {
 			this.initViz()
 			this.renderViz()
-			this.renderDATGUI()
+			this.configureDATGUI()
 		}, 100)
 	},
 

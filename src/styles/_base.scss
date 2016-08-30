@@ -11,6 +11,11 @@ For example:
 @import './themes/default';
 */
 
+// DAT GUI
+.dg.ac {
+	z-index: 1 !important;
+}
+
 $header-height: 7rem;
 $home-h-padding: 10vw;
 $home-module-v-padding: 5rem;
