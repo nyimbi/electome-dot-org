@@ -100,49 +100,22 @@ export const Timeline = React.createClass({
 	},
 
 	createShape(data, index) {
+		const dateOffset = moment(data.start_time).diff(minDate, 'days')
 		const shape = new THREE.Shape()
 
 		shape.moveTo(0, 0)
 
-		const points = clusters[0].sparkline
-
-		points.forEach((d, i) => {
+		data.sparkline.forEach((d, i) => {
 			shape.lineTo(i * dayHeight, Math.round(d))
 
-			if(i === points.length - 1) {
+			if(i === data.sparkline.length - 1) {
 				shape.lineTo(i * dayHeight, 0)
 			}
 		})
 
 		shape.lineTo(0, 0)
 
-		this.addShape(shape, 0, 0, (points.length - 1) * dayHeight)
-	},
-
-	drawCurve(data, index) {
-		const subdivisions = 20
-		const dateOffset = moment(data.start_time).diff(minDate, 'days')
-
-		const points = data.sparkline.map((d, i) =>
-			new THREE.Vector3(20 * index, Math.round(d), (dateOffset * dayHeight) + (i * dayHeight)))
-
-		const spline = new THREE.Spline(points)
-		const geometrySpline = new THREE.Geometry()
-
-		for(let i=0; i<points.length * subdivisions; i++) {
-			let index = i / (points.length * subdivisions)
-			let position = spline.getPoint(index)
-
-			geometrySpline.vertices[ i ] = new THREE.Vector3( position.x, position.y, position.z )
-		}
-
-		geometrySpline.computeLineDistances()
-
-		const material = new THREE.LineBasicMaterial({ color: 0x4CAF50 })
-
-		const object = new THREE.Line( geometrySpline, material)
-
-		scene.add(object)
+		this.addShape(shape, 20 * index, 0, (dateOffset * dayHeight) + (data.sparkline.length - 1) * dayHeight)
 	},
 
 	configureDATGUI() {
@@ -205,9 +178,7 @@ export const Timeline = React.createClass({
 
 		camera.lookAt(new THREE.Vector3(params.cameraLAX, params.cameraLAY, params.cameraLAZ))
 
-		clusters.forEach(this.drawCurve)
-
-		this.createShape()
+		clusters.forEach(this.createShape)
 
 		renderer.render(scene, camera)
 	},
