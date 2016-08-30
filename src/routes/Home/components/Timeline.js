@@ -12,12 +12,9 @@ const yMin = 0
 const yMax = 50
 
 const params = {
-	size: 50,
-	step: 5,
 	cameraX: 68,
 	cameraY: 200,
 	cameraZ: 150,
-	cameraFOV: 56,
 	cameraLAX: 120,
 	cameraLAY: -48,
 	cameraLAZ: 14
@@ -29,7 +26,8 @@ export const Timeline = React.createClass({
 	},
 
 	drawDebugGrid() {
-		const { size, step } = params
+		const size = 50
+		const step = 5
 
 		const geometry = new THREE.Geometry()
 		const material = new THREE.LineBasicMaterial({ color: "white" })
@@ -43,7 +41,7 @@ export const Timeline = React.createClass({
 		}
 
 		const line = new THREE.Line(geometry, material, THREE.LinePieces)
-		scene.add(line)
+		// scene.add(line)
 
 		const axisHelper = new THREE.AxisHelper(50)
 		scene.add(axisHelper)
@@ -73,15 +71,12 @@ export const Timeline = React.createClass({
 	},
 
 	configureDATGUI() {
-		gui.add(params, "size").onFinishChange(this.renderViz)
-		gui.add(params, "step").onFinishChange(this.renderViz)
 		gui.add(params, "cameraX").min(-200).max(200).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraY").min(0).max(200).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraZ").min(0).max(200).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraLAX").min(-200).max(200).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraLAY").min(-200).max(200).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraLAZ").min(-200).max(400).step(2).onFinishChange(this.renderViz)
-		gui.add(params, "cameraFOV").min(0).max(180).step(2).onFinishChange(this.renderViz)
 	},
 
 	initViz() {
@@ -89,13 +84,12 @@ export const Timeline = React.createClass({
 		const WIDTH = window.innerWidth
 		const HEIGHT = node.offsetHeight
 
-		const VIEW_ANGLE = params.cameraFOV
 		const ASPECT = WIDTH / HEIGHT
-		const NEAR = 0.1
+		const NEAR = 1
 		const FAR = 10000
 
 		renderer = new THREE.WebGLRenderer()
-		camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR)
+		camera = new THREE.OrthographicCamera(-400, 400, 400, -400, NEAR, FAR)
 
 		scene = new THREE.Scene()
 
@@ -109,15 +103,13 @@ export const Timeline = React.createClass({
 	renderViz() {
 		this.drawDebugGrid()
 
-		camera.fov = params.cameraFOV
-
 		camera.updateProjectionMatrix()
 
 		camera.position.set(params.cameraX, params.cameraY, params.cameraZ)
 
 		camera.lookAt(new THREE.Vector3(params.cameraLAX, params.cameraLAY, params.cameraLAZ))
 
-		clusters.slice(0, 9).map(d => d.sparkline).forEach(this.drawCurve)
+		clusters.slice(0, 9).map(d => clusters[8].sparkline).forEach(this.drawCurve)
 
 		renderer.render(scene, camera)
 	},
