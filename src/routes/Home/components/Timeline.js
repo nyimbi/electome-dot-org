@@ -8,6 +8,9 @@ let renderer = null
 let camera = null
 let gui = null
 let previousPos = null
+let minDate = null
+let maxDate = null
+let dayHeight = 0
 
 const yMin = 0
 const yMax = 50
@@ -207,6 +210,17 @@ export const Timeline = React.createClass({
 
 			return d
 		})
+
+		clusters.forEach(d => {
+			if(!minDate || moment(d.start_time).isBefore(minDate)) {
+				minDate = moment(d.start_time)
+			}
+			if(!maxDate || moment(d.end_time).isAfter(maxDate)) {
+				maxDate = moment(d.end_time)
+			}
+		})
+
+		dayHeight = (zMax - zMin) / Math.abs(minDate.diff(maxDate, 'days'))
 
 		setTimeout(() => {
 			this.initViz()
