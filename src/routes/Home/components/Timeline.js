@@ -7,7 +7,7 @@ let scene = null
 let renderer = null
 let camera = null
 let gui = null
-let previousX = null
+let previousPos = null
 
 const yMin = 0
 const yMax = 50
@@ -43,19 +43,25 @@ export const Timeline = React.createClass({
 	},
 
 	onMouseMove(e) {
-		let diff = null
-		if(previousX !== null) {
-			diff = e.clientX - previousX
+		let diffX = null
+		let diffY = null
+
+		if(previousPos !== null) {
+			diffX = e.clientX - previousPos.x
+			diffY = e.clientY - previousPos.y
 
 			if(this.state.dragging) {
-				params.cameraX -= diff
-				params.cameraLAX -= diff
+				params.cameraX -= diffX
+				params.cameraLAX -= diffX
+
+				params.cameraZ -= diffY
+				params.cameraLAZ -= diffY
 
 				this.renderViz()				
 			}
 		}
 
-		previousX = e.clientX
+		previousPos = { x: e.clientX, y: e.clientY }
 	},
 
 	drawDebugGrid() {
