@@ -53,7 +53,7 @@ export const Timeline = React.createClass({
 		const subdivisions = 20
 
 		const points = clusters[8].sparkline.map((d, i) =>
-			new THREE.Vector3(10 + (i * 10), Math.round(d), 10))
+			new THREE.Vector3(10, Math.round(d), 10 + (i * 10)))
 
 		const spline = new THREE.Spline(points)
 		const geometrySpline = new THREE.Geometry()
