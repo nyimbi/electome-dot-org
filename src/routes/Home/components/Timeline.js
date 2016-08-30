@@ -15,7 +15,7 @@ let dayHeight = 0
 const yMin = 0
 const yMax = 50
 const zMin = 0
-const zMax = 5000
+const zMax = 1000
 
 const params = {
 	cameraX: 108,
@@ -91,11 +91,12 @@ export const Timeline = React.createClass({
 		scene.add(axisHelper)
 	},
 
-	drawCurve(points, index) {
+	drawCurve(data, index) {
 		const subdivisions = 20
+		const dateOffset = moment(data.start_time).diff(minDate, 'days')
 
-		points = points.map((d, i) =>
-			new THREE.Vector3(20 * index, Math.round(d), (10 * index) + (i * 10)))
+		const points = data.sparkline.map((d, i) =>
+			new THREE.Vector3(20 * index, Math.round(d), (dateOffset * dayHeight) + (i * dayHeight)))
 
 		const spline = new THREE.Spline(points)
 		const geometrySpline = new THREE.Geometry()
@@ -168,7 +169,7 @@ export const Timeline = React.createClass({
 
 		camera.lookAt(new THREE.Vector3(params.cameraLAX, params.cameraLAY, params.cameraLAZ))
 
-		clusters.map(d => d.sparkline).forEach(this.drawCurve)
+		clusters.forEach(this.drawCurve)
 
 		renderer.render(scene, camera)
 	},
