@@ -12,7 +12,7 @@ const yMin = 0
 const yMax = 50
 
 const params = {
-	cameraX: 68,
+	cameraX: 108,
 	cameraY: 102,
 	cameraZ: 176,
 	cameraLAX: 138,
@@ -128,7 +128,7 @@ export const Timeline = React.createClass({
 
 		camera.lookAt(new THREE.Vector3(params.cameraLAX, params.cameraLAY, params.cameraLAZ))
 
-		clusters.slice(0, 9).map(d => d.sparkline).forEach(this.drawCurve)
+		clusters.map(d => d.sparkline).forEach(this.drawCurve)
 
 		renderer.render(scene, camera)
 	},
