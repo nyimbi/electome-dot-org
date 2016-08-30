@@ -7,6 +7,7 @@ let scene = null
 let renderer = null
 let camera = null
 let gui = null
+let previousX = null
 
 const yMin = 0
 const yMax = 50
@@ -28,7 +29,33 @@ const params = {
 
 export const Timeline = React.createClass({
 	getInitialState() {
-		return {}
+		return {
+			dragging: false
+		}
+	},
+
+	onMouseDown() {
+		this.setState({ dragging: true })
+	},
+
+	onMouseUp() {
+		this.setState({ dragging: false })
+	},
+
+	onMouseMove(e) {
+		let diff = null
+		if(previousX !== null) {
+			diff = e.clientX - previousX
+
+			if(this.state.dragging) {
+				params.cameraX -= diff
+				params.cameraLAX -= diff
+
+				this.renderViz()				
+			}
+		}
+
+		previousX = e.clientX
 	},
 
 	drawDebugGrid() {
@@ -167,7 +194,11 @@ export const Timeline = React.createClass({
 
 	render() {
 		return (
-			<div className="timeline"></div>
+			<div 
+				onMouseMove={this.onMouseMove}
+				onMouseDown={this.onMouseDown}
+				onMouseUp={this.onMouseUp}
+				className="timeline"></div>
 		)
 	}
 })
