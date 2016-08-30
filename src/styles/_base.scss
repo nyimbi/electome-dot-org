@@ -77,6 +77,11 @@ $home-text-link-color: #1E88E5;
 
 .video-player {
 	display: inline-block;
+	&[data-video-showing="true"] {
+		.iframe-wrapper {
+			display: block;
+		}
+	}
 	.iframe-wrapper {
 		position: absolute;
 		display: none;
