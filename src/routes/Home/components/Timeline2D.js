@@ -7,11 +7,15 @@ let clusters = require('../clusters.json')
 const eventWidth = 200
 const dayHeight = 50
 
-const sample = [
-	[0, 10],
-	[10, 30],
-	[30, 100]
-]
+const minDate = clusters.reduce((acc, curr) => {
+	if(!acc || moment(curr.start_time).isBefore(acc)) {
+		return moment(curr.start_time, 'YYYY-MM-DD')
+	}
+	return acc
+})
+
+const clusterOffsets = clusters.map(d =>
+	moment(d.start_time, 'YYYY-MM-DD').diff(minDate, 'days') * dayHeight)
 
 const lerp = (start, finish, amount) => {
 	return amount * (finish - start)
@@ -20,13 +24,6 @@ const lerp = (start, finish, amount) => {
 const createScale = (domain, range) => amount => {
 
 }
-
-const minDate = clusters.reduce((acc, curr) => {
-	if(!acc || moment(curr.start_time).isBefore(acc)) {
-		return moment(curr.start_time, 'YYYY-MM-DD')
-	}
-	return acc
-})
 
 export const Timeline = React.createClass({
 	getInitialState() {
@@ -66,14 +63,13 @@ export const Timeline = React.createClass({
 			<div onWheel={this.onWheel} className="timeline">
 				<div className="events">
 					{clusters.map((c, i) => {
-						const dayOffset = moment(c.start_time, 'YYYY-MM-DD').diff(minDate, 'days')
 						const words = c.top_scoring_terms.map(w =>
 							<div key={w[0]} className="word">{w[0]}</div>)
 
 						return <div key={i} className="event"
 							style={{
 								width: eventWidth + 'px',
-								top: (dayOffset * dayHeight) + 'px',
+								top: clusterOffsets[i] + 'px',
 								left: (eventWidth * i) + 'px'
 							}}>
 							<div>{i}</div>
