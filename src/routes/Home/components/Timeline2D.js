@@ -104,7 +104,9 @@ export const Timeline = React.createClass({
 				<div className="date-picker">
 					<div className="global">{globalDates}</div>
 					<div className="local">{localDates}</div>
-					<div className="brush"></div>
+					<div className="brush" style={{
+						height: (globalDayHeight * (this.nodeHeight / dayHeight)) + 'px'
+					}}></div>
 				</div>
 				<div onWheel={this.onWheel} className="events">
 					{clusters.map((c, i) => {

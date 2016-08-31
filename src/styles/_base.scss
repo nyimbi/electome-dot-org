@@ -346,6 +346,13 @@ $home-text-link-color: #1E88E5;
 			overflow: scroll;
 			margin-left: -3px;
 		}
+		.brush {
+			position: absolute;
+			width: 1rem;
+			background: red;
+			right: 51%;
+			top: 0;
+		}
 	}
 }
 
