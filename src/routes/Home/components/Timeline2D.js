@@ -5,6 +5,7 @@ import moment from 'moment'
 let clusters = require('../clusters.json')
 
 const eventWidth = 200
+const approximateEventHeight = 300
 const dayHeight = 50
 
 const minDate = clusters.reduce((acc, curr) => {
@@ -29,6 +30,7 @@ export const Timeline = React.createClass({
 		this.node = ReactDOM.findDOMNode(this)
 		this.windowWidth = window.innerWidth
 		this.nodeWidth = eventWidth * clusters.length
+		this.nodeHeight = this.node.offsetHeight
 	},
 
 	onWheel(e) {
@@ -43,7 +45,7 @@ export const Timeline = React.createClass({
 		}, () => {
 			const offset = (this.state.left + (this.windowWidth / 2)) - (this.state.eventIndex * eventWidth)
 
-			const yPos = clusterOffsets[this.state.eventIndex] + (offset / eventWidth) * (clusterOffsets[this.state.eventIndex + 1] - (clusterOffsets[this.state.eventIndex]))
+			const yPos = clusterOffsets[this.state.eventIndex] + (offset / eventWidth) * (clusterOffsets[this.state.eventIndex + 1] - (clusterOffsets[this.state.eventIndex])) - 0.5 * (this.nodeHeight - approximateEventHeight)
 
 			this.node.scrollLeft = this.state.left
 			this.node.scrollTop = yPos
