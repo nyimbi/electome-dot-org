@@ -7,6 +7,7 @@ let clusters = require('../clusters.json')
 const eventWidth = 200
 const approximateEventHeight = 300
 const dayHeight = 50
+let globalDayHeight = 0
 
 const minDate = clusters.reduce((acc, curr) => {
 	if(!acc || moment(curr.start_time).isBefore(acc)) {
@@ -40,6 +41,10 @@ export const Timeline = React.createClass({
 			this.windowWidth = window.innerWidth
 			this.nodeWidth = eventWidth * clusters.length
 			this.nodeHeight = this.node.offsetHeight
+			this.datePickerHeight = this.node.querySelector(".date-picker").offsetHeight
+			globalDayHeight = this.datePickerHeight / Math.abs(minDate.diff(maxDate, 'days'))
+
+			this.forceUpdate()
 		}, 0)
 	},
 
