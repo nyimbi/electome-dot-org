@@ -71,6 +71,10 @@ export const Timeline = React.createClass({
 		}, 0)
 	},
 
+	onDatePickerWheel(e) {
+		this.updateWindow('datePicker', this.components.datePicker.node.scrollTop / (dayHeight * dateRange))
+	},
+
 	onEventsWrapperWheel(e) {
 		e.preventDefault()
 		const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
@@ -89,7 +93,7 @@ export const Timeline = React.createClass({
 				this.components.eventsWrapper.node.scrollLeft = this.state.left
 				this.components.eventsWrapper.node.scrollTop = yPos
 
-				this.updateWindow('eventsWrapper', clusters[this.state.eventIndex].start_time)				
+				this.updateWindow('eventsWrapper', moment(clusters[this.state.eventIndex].start_time).diff(minDate, 'days') / dateRange)
 			}
 		})
 
@@ -98,7 +102,7 @@ export const Timeline = React.createClass({
 	updateWindow(exclude, amount) {
 		Object.keys(this.components)
 			.filter(d => d !== exclude)
-			.forEach(d => this.components[d].update((moment(amount).diff(minDate, 'days') / dateRange)))
+			.forEach(d => this.components[d].update(amount))
 	},
 
 	shouldComponentUpdate() {
@@ -136,7 +140,7 @@ export const Timeline = React.createClass({
 			<div className="timeline">
 				<div className="date-picker">
 					<div className="global">{globalDates}</div>
-					<div className="local">{localDates}</div>
+					<div onWheel={this.onDatePickerWheel} className="local">{localDates}</div>
 					<div className="brush" style={{
 						height: (globalDayHeight * (nodeHeight / dayHeight)) + 'px'
 					}}></div>
