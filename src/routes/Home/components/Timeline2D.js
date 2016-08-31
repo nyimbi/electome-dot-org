@@ -13,7 +13,14 @@ const minDate = clusters.reduce((acc, curr) => {
 		return moment(curr.start_time, 'YYYY-MM-DD')
 	}
 	return acc
-})
+}, null)
+
+const maxDate = clusters.reduce((acc, curr) => {
+	if(!acc || moment(curr.end_time).isAfter(acc)) {
+		return moment(curr.end_time, 'YYYY-MM-DD')
+	}
+	return acc
+}, null)
 
 const clusterOffsets = clusters.map(d =>
 	moment(d.start_time, 'YYYY-MM-DD').diff(minDate, 'days') * dayHeight)
@@ -61,11 +68,21 @@ export const Timeline = React.createClass({
 	},
 
 	render() {
+		const localDates = []
+		for(let i=0; i<Math.abs(minDate.diff(maxDate, 'days')); i++) {
+			localDates.push(<div 
+				key={i} 
+				style={{height: dayHeight + 'px'}}
+				className="local-date">
+				{minDate.clone().add(i, 'days').format('M DD')}
+			</div>)
+		}
+
 		return (
 			<div className="timeline">
 				<div className="date-picker">
 					<div className="global"></div>
-					<div className="local"></div>
+					<div className="local">{localDates}</div>
 					<div className="brush"></div>
 				</div>
 				<div onWheel={this.onWheel} className="events">
