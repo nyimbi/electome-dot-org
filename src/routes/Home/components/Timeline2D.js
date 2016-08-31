@@ -27,10 +27,13 @@ export const Timeline = React.createClass({
 	},
 
 	componentDidMount() {
-		this.node = ReactDOM.findDOMNode(this)
-		this.windowWidth = window.innerWidth
-		this.nodeWidth = eventWidth * clusters.length
-		this.nodeHeight = this.node.offsetHeight
+		setTimeout(() => {
+			this.node = ReactDOM.findDOMNode(this)
+			this.eventsWrapper = this.node.querySelector(".events")
+			this.windowWidth = window.innerWidth
+			this.nodeWidth = eventWidth * clusters.length
+			this.nodeHeight = this.node.offsetHeight
+		}, 0)
 	},
 
 	onWheel(e) {
@@ -47,8 +50,8 @@ export const Timeline = React.createClass({
 
 			const yPos = clusterOffsets[this.state.eventIndex] + (offset / eventWidth) * (clusterOffsets[this.state.eventIndex + 1] - (clusterOffsets[this.state.eventIndex])) - 0.5 * (this.nodeHeight - approximateEventHeight)
 
-			this.node.scrollLeft = this.state.left
-			this.node.scrollTop = yPos
+			this.eventsWrapper.scrollLeft = this.state.left
+			this.eventsWrapper.scrollTop = yPos
 		})
 
 	},
@@ -59,8 +62,13 @@ export const Timeline = React.createClass({
 
 	render() {
 		return (
-			<div onWheel={this.onWheel} className="timeline">
-				<div className="events">
+			<div className="timeline">
+				<div className="date-picker">
+					<div className="global"></div>
+					<div className="local"></div>
+					<div className="brush"></div>
+				</div>
+				<div onWheel={this.onWheel} className="events">
 					{clusters.map((c, i) => {
 						const words = c.top_scoring_terms.map(w =>
 							<div key={w[0]} className="word">{w[0]}</div>)
