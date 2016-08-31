@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import moment from 'moment'
+import { findIndex } from 'underscore'
 
 let clusters = require('../clusters.json')
 
@@ -49,6 +50,12 @@ export const Timeline = React.createClass({
 					node: this.node.querySelector(".events"),
 					update: function(amount) {
 						const date = minDate.clone().add(Math.floor(amount * dateRange), 'days')
+						const eventIndex = findIndex(clusters, d => moment(d.start_time).isSameOrAfter(date))
+
+						this.setState({
+							eventIndex,
+							left: eventIndex * eventWidth
+						}, this.setEventsScroll)
 					}
 				},
 				datePicker: {
@@ -111,7 +118,7 @@ export const Timeline = React.createClass({
 	updateWindow(exclude, amount) {
 		Object.keys(this.components)
 			.filter(d => d !== exclude)
-			.forEach(d => this.components[d].update(amount))
+			.forEach(d => this.components[d].update.call(this, amount))
 	},
 
 	shouldComponentUpdate() {
@@ -188,6 +195,7 @@ export const Timeline = React.createClass({
 								left: (eventWidth * i) + 'px'
 							}}>
 							<div>{i}</div>
+							<div>{moment(c.start_time).format('M DD') + ' ' + moment(c.end_time).format('M DD')}</div>
 							{words}
 							<div>{c.headline_tweet.tweet}</div>
 						</div>
