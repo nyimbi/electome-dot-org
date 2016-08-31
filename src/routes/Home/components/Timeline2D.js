@@ -17,14 +17,6 @@ const minDate = clusters.reduce((acc, curr) => {
 const clusterOffsets = clusters.map(d =>
 	moment(d.start_time, 'YYYY-MM-DD').diff(minDate, 'days') * dayHeight)
 
-const lerp = (start, finish, amount) => {
-	return amount * (finish - start)
-}
-
-const createScale = (domain, range) => amount => {
-
-}
-
 export const Timeline = React.createClass({
 	getInitialState() {
 		return {
@@ -49,8 +41,12 @@ export const Timeline = React.createClass({
 			left: newLeft,
 			eventIndex: Math.floor(((newLeft + this.windowWidth / 2) / this.nodeWidth) * clusters.length)
 		}, () => {
-			this.node.scrollLeft = this.state.left
 			const offset = (this.state.left + (this.windowWidth / 2)) - (this.state.eventIndex * eventWidth)
+
+			const yPos = clusterOffsets[this.state.eventIndex] + (offset / eventWidth) * (clusterOffsets[this.state.eventIndex + 1] - (clusterOffsets[this.state.eventIndex]))
+
+			this.node.scrollLeft = this.state.left
+			this.node.scrollTop = yPos
 		})
 
 	},
