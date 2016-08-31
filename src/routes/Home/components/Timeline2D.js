@@ -49,14 +49,14 @@ export const Timeline = React.createClass({
 				},
 				datePicker: {
 					node: this.node.querySelector(".date-picker .local"),
-					update: function(date) {
-						this.node.scrollTop = (moment(date).diff(minDate, 'days') / dateRange) * dateRange * dayHeight
+					update: function(amount) {
+						this.node.scrollTop = amount * dateRange * dayHeight
 					}
 				},
 				brush: {
 					node: this.node.querySelector(".date-picker .brush"),
-					update: function(date) {
-						this.node.style.top = ((moment(date).diff(minDate, 'days') / dateRange) * (datePickerHeight - ((nodeHeight / dayHeight) * globalDayHeight))) + 'px'
+					update: function(amount) {
+						this.node.style.top = (amount * (datePickerHeight - ((nodeHeight / dayHeight) * globalDayHeight))) + 'px'
 					}
 				}
 			}
@@ -98,7 +98,7 @@ export const Timeline = React.createClass({
 	updateWindow(exclude, amount) {
 		Object.keys(this.components)
 			.filter(d => d !== exclude)
-			.forEach(d => this.components[d].update(amount))
+			.forEach(d => this.components[d].update((moment(amount).diff(minDate, 'days') / dateRange)))
 	},
 
 	shouldComponentUpdate() {
