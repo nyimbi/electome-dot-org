@@ -312,7 +312,11 @@ $home-text-link-color: #1E88E5;
 }
 
 .timeline {
-
+	overflow: scroll;
+	position: relative;
+	.event {
+		position: absolute;
+	}
 }
 
 .partnerships {
