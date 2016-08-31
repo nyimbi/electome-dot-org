@@ -10,6 +10,8 @@ const dayHeight = 50
 let globalDayHeight = 0
 let datePickerHeight = 0
 let nodeHeight = 0
+let brushOffsetTop = 0
+let pageY = 0
 
 const minDate = clusters.reduce((acc, curr) => {
 	if(!acc || moment(curr.start_time).isBefore(acc)) {
@@ -62,11 +64,13 @@ export const Timeline = React.createClass({
 				}
 			}
 
+			pageY = this.node.getBoundingClientRect().top + document.body.scrollTop
 			this.windowWidth = window.innerWidth
 			this.nodeWidth = eventWidth * clusters.length
 			nodeHeight = this.node.offsetHeight
 			datePickerHeight = this.node.querySelector(".date-picker").offsetHeight
 			globalDayHeight = datePickerHeight / dateRange
+			brushOffsetTop = this.components.datePicker.node.getBoundingClientRect().top - this.components.eventsWrapper.node.getBoundingClientRect().top
 
 			this.forceUpdate()
 		}, 0)
@@ -118,9 +122,9 @@ export const Timeline = React.createClass({
 		this.setState({ brushMouseDown: false })
 	},
 
-	onTimelineMouseMove() {
+	onTimelineMouseMove(e) {
 		if(!this.state.brushMouseDown) { return }
-		console.log("dragging")
+		this.components.brush.node.style.top = (e.pageY - pageY - brushOffsetTop) + 'px'
 	},
 
 	render() {
