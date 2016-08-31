@@ -16,12 +16,19 @@ const minDate = clusters.reduce((acc, curr) => {
 
 export const Timeline = React.createClass({
 	componentDidMount() {
+		this.node = ReactDOM.findDOMNode(this)
+	},
 
+	onWheel(e) {
+		e.preventDefault()
+		const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
+
+		this.node.scrollLeft = this.node.scrollLeft + delta
 	},
 
 	render() {
 		return (
-			<div className="timeline">
+			<div onWheel={this.onWheel} className="timeline">
 				<div className="events">
 					{clusters.map((c, i) => {
 						const dayOffset = moment(c.start_time, 'YYYY-MM-DD').diff(minDate, 'days')
