@@ -71,7 +71,7 @@ export const Timeline = React.createClass({
 		}, 0)
 	},
 
-	onWheel(e) {
+	onEventsWrapperWheel(e) {
 		e.preventDefault()
 		const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
 
@@ -141,7 +141,7 @@ export const Timeline = React.createClass({
 						height: (globalDayHeight * (nodeHeight / dayHeight)) + 'px'
 					}}></div>
 				</div>
-				<div onWheel={this.onWheel} className="events">
+				<div onWheel={this.onEventsWrapperWheel} className="events">
 					{clusters.map((c, i) => {
 						const words = c.top_scoring_terms.map(w =>
 							<div key={w[0]} className="word">{w[0]}</div>)
