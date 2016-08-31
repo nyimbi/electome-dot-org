@@ -47,9 +47,10 @@ export const Timeline = React.createClass({
 
 		this.setState({
 			left: newLeft,
-			eventIndex: Math.round(((newLeft + this.windowWidth / 2) / this.nodeWidth) * clusters.length)
+			eventIndex: Math.floor(((newLeft + this.windowWidth / 2) / this.nodeWidth) * clusters.length)
 		}, () => {
 			this.node.scrollLeft = this.state.left
+			const offset = (this.state.left + (this.windowWidth / 2)) - (this.state.eventIndex * eventWidth)
 		})
 
 	},
