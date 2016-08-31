@@ -47,7 +47,8 @@ export const Timeline = React.createClass({
 			this.components = {
 				eventsWrapper: {
 					node: this.node.querySelector(".events"),
-					update: function(date) {
+					update: function(amount) {
+						const date = minDate.clone().add(Math.floor(amount * dateRange), 'days')
 					}
 				},
 				datePicker: {
