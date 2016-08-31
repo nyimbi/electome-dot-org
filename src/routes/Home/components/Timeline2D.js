@@ -8,6 +8,7 @@ const eventWidth = 200
 const approximateEventHeight = 300
 const dayHeight = 50
 let globalDayHeight = 0
+let datePickerHeight = 0
 
 const minDate = clusters.reduce((acc, curr) => {
 	if(!acc || moment(curr.start_time).isBefore(acc)) {
@@ -23,6 +24,8 @@ const maxDate = clusters.reduce((acc, curr) => {
 	return acc
 }, null)
 
+const dateRange = Math.abs(minDate.diff(maxDate, 'days'))
+
 const clusterOffsets = clusters.map(d =>
 	moment(d.start_time, 'YYYY-MM-DD').diff(minDate, 'days') * dayHeight)
 
@@ -37,12 +40,31 @@ export const Timeline = React.createClass({
 	componentDidMount() {
 		setTimeout(() => {
 			this.node = ReactDOM.findDOMNode(this)
-			this.eventsWrapper = this.node.querySelector(".events")
+			this.components = {
+				eventsWrapper: {
+					node: this.node.querySelector(".events"),
+					update: function(amount) {
+					}
+				},
+				datePicker: {
+					node: this.node.querySelector(".date-picker .local"),
+					update: function(date) {
+						this.node.scrollTop = (moment(date).diff(minDate, 'days') / dateRange) * dateRange * dayHeight
+					}
+				},
+				brush: {
+					node: this.node.querySelector(".date-picker .brush"),
+					update: function(amount) {
+
+					}
+				}
+			}
+
 			this.windowWidth = window.innerWidth
 			this.nodeWidth = eventWidth * clusters.length
 			this.nodeHeight = this.node.offsetHeight
-			this.datePickerHeight = this.node.querySelector(".date-picker").offsetHeight
-			globalDayHeight = this.datePickerHeight / Math.abs(minDate.diff(maxDate, 'days'))
+			datePickerHeight = this.node.querySelector(".date-picker").offsetHeight
+			globalDayHeight = datePickerHeight / dateRange
 
 			this.forceUpdate()
 		}, 0)
@@ -58,14 +80,24 @@ export const Timeline = React.createClass({
 			left: newLeft,
 			eventIndex: Math.floor(((newLeft + this.windowWidth / 2) / this.nodeWidth) * clusters.length)
 		}, () => {
-			const offset = (this.state.left + (this.windowWidth / 2)) - (this.state.eventIndex * eventWidth)
+			if(this.state.eventIndex < clusters.length) {
+				const offset = (this.state.left + (this.windowWidth / 2)) - (this.state.eventIndex * eventWidth)
 
-			const yPos = clusterOffsets[this.state.eventIndex] + (offset / eventWidth) * (clusterOffsets[this.state.eventIndex + 1] - (clusterOffsets[this.state.eventIndex])) - 0.5 * (this.nodeHeight - approximateEventHeight)
+				const yPos = clusterOffsets[this.state.eventIndex] + (offset / eventWidth) * (clusterOffsets[this.state.eventIndex + 1] - (clusterOffsets[this.state.eventIndex])) - 0.5 * (this.nodeHeight - approximateEventHeight)
 
-			this.eventsWrapper.scrollLeft = this.state.left
-			this.eventsWrapper.scrollTop = yPos
+				this.components.eventsWrapper.node.scrollLeft = this.state.left
+				this.components.eventsWrapper.node.scrollTop = yPos
+
+				this.updateWindow('eventsWrapper', clusters[this.state.eventIndex].start_time)				
+			}
 		})
 
+	},
+
+	updateWindow(exclude, amount) {
+		Object.keys(this.components)
+			.filter(d => d !== exclude)
+			.forEach(d => this.components[d].update(amount))
 	},
 
 	shouldComponentUpdate() {
@@ -74,7 +106,7 @@ export const Timeline = React.createClass({
 
 	render() {
 		const localDates = []
-		for(let i=0; i<=Math.abs(minDate.diff(maxDate, 'days')); i++) {
+		for(let i=0; i<=dateRange; i++) {
 			localDates.push(<div 
 				key={i} 
 				style={{height: dayHeight + 'px'}}
