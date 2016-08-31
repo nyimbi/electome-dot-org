@@ -79,13 +79,24 @@ export const Timeline = React.createClass({
 				key={i} 
 				style={{height: dayHeight + 'px'}}
 				className="local-date">
-				{minDate.clone().add(i, 'days').format('M DD')}
-			</div>)
+				{minDate.clone().add(i, 'days').format('M DD')}</div>)
 		}
 
 		const globalDates = []
 		for(let i=0; i<=Math.abs(minDate.diff(maxDate, 'months')); i++) {
-			globalDates.push(<div key={i}>{minDate.clone().add(i, 'months').format('MMM')}</div>)
+			let currentDate = minDate.clone().add(i, 'months')
+			let days = currentDate.daysInMonth()
+
+			// so it's the number of days in that month, minus the number of days offset, if it's the same month as the minDate
+
+			if(currentDate.isSame(minDate, 'month')) {
+				days -= minDate.format('D')
+			}
+
+			globalDates.push(<div 
+				style={{height: (globalDayHeight * days) + 'px'}}
+				key={i}>
+				{currentDate.format('MMM')}</div>)
 		}
 
 		return (
