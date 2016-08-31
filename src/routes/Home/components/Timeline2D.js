@@ -34,7 +34,8 @@ export const Timeline = React.createClass({
 	getInitialState() {
 		return {
 			left: 0,
-			eventIndex: -1
+			eventIndex: -1,
+			brushMouseDown: false
 		}
 	},
 
@@ -109,6 +110,19 @@ export const Timeline = React.createClass({
 		return false
 	},
 
+	onBrushMouseDown() {
+		this.setState({ brushMouseDown: true })
+	},
+
+	onBrushMouseUp() {
+		this.setState({ brushMouseDown: false })
+	},
+
+	onTimelineMouseMove() {
+		if(!this.state.brushMouseDown) { return }
+		console.log("dragging")
+	},
+
 	render() {
 		const localDates = []
 		for(let i=0; i<=dateRange; i++) {
@@ -138,12 +152,18 @@ export const Timeline = React.createClass({
 
 		return (
 			<div className="timeline">
-				<div className="date-picker">
+				<div 
+					onMouseMove={this.onTimelineMouseMove}
+					className="date-picker">
 					<div className="global">{globalDates}</div>
 					<div onWheel={this.onDatePickerWheel} className="local">{localDates}</div>
-					<div className="brush" style={{
-						height: (globalDayHeight * (nodeHeight / dayHeight)) + 'px'
-					}}></div>
+					<div
+						onMouseDown={this.onBrushMouseDown} 
+						onMouseUp={this.onBrushMouseUp} 
+						className="brush" 
+						style={{
+							height: (globalDayHeight * (nodeHeight / dayHeight)) + 'px'
+						}}></div>
 				</div>
 				<div onWheel={this.onEventsWrapperWheel} className="events">
 					{clusters.map((c, i) => {
