@@ -124,7 +124,10 @@ export const Timeline = React.createClass({
 
 	onTimelineMouseMove(e) {
 		if(!this.state.brushMouseDown) { return }
-		this.components.brush.node.style.top = (e.pageY - pageY - brushOffsetTop) + 'px'
+		const top = e.pageY - pageY - brushOffsetTop
+		this.components.brush.node.style.top = top + 'px'
+
+		this.updateWindow('brush', top / datePickerHeight)
 	},
 
 	render() {
