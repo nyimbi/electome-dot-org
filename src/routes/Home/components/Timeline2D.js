@@ -15,15 +15,31 @@ const minDate = clusters.reduce((acc, curr) => {
 })
 
 export const Timeline = React.createClass({
+	getInitialState() {
+		return {
+			left: 0
+		}
+	},
+
 	componentDidMount() {
 		this.node = ReactDOM.findDOMNode(this)
+		this.nodeWidth = eventWidth * clusters.length
 	},
 
 	onWheel(e) {
 		e.preventDefault()
 		const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
 
-		this.node.scrollLeft = this.node.scrollLeft + delta
+		this.setState({
+			left: Math.max(0, Math.min(this.nodeWidth, this.state.left + delta))
+		}, () => {
+			this.node.scrollLeft = this.state.left
+		})
+
+	},
+
+	shouldComponentUpdate() {
+		return false
 	},
 
 	render() {
