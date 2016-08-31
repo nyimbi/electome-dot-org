@@ -69,7 +69,7 @@ export const Timeline = React.createClass({
 
 	render() {
 		const localDates = []
-		for(let i=0; i<Math.abs(minDate.diff(maxDate, 'days')); i++) {
+		for(let i=0; i<=Math.abs(minDate.diff(maxDate, 'days')); i++) {
 			localDates.push(<div 
 				key={i} 
 				style={{height: dayHeight + 'px'}}
@@ -78,10 +78,15 @@ export const Timeline = React.createClass({
 			</div>)
 		}
 
+		const globalDates = []
+		for(let i=0; i<=Math.abs(minDate.diff(maxDate, 'months')); i++) {
+			globalDates.push(<div key={i}>{minDate.clone().add(i, 'months').format('MMM')}</div>)
+		}
+
 		return (
 			<div className="timeline">
 				<div className="date-picker">
-					<div className="global"></div>
+					<div className="global">{globalDates}</div>
 					<div className="local">{localDates}</div>
 					<div className="brush"></div>
 				</div>

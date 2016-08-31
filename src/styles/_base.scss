@@ -336,11 +336,13 @@ $home-text-link-color: #1E88E5;
 	}
 	.date-picker {
 		.global, .local {
+			vertical-align: top;
 			display: inline-block;
 			width: 50%;
 			height: 100%;
 		}
 		.local {
+			border-left: solid 1px $border-color;
 			overflow: scroll;
 			margin-left: -3px;
 		}
