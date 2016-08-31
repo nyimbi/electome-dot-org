@@ -9,6 +9,7 @@ const approximateEventHeight = 300
 const dayHeight = 50
 let globalDayHeight = 0
 let datePickerHeight = 0
+let nodeHeight = 0
 
 const minDate = clusters.reduce((acc, curr) => {
 	if(!acc || moment(curr.start_time).isBefore(acc)) {
@@ -43,7 +44,7 @@ export const Timeline = React.createClass({
 			this.components = {
 				eventsWrapper: {
 					node: this.node.querySelector(".events"),
-					update: function(amount) {
+					update: function(date) {
 					}
 				},
 				datePicker: {
@@ -54,15 +55,15 @@ export const Timeline = React.createClass({
 				},
 				brush: {
 					node: this.node.querySelector(".date-picker .brush"),
-					update: function(amount) {
-
+					update: function(date) {
+						this.node.style.top = ((moment(date).diff(minDate, 'days') / dateRange) * (datePickerHeight - ((nodeHeight / dayHeight) * globalDayHeight))) + 'px'
 					}
 				}
 			}
 
 			this.windowWidth = window.innerWidth
 			this.nodeWidth = eventWidth * clusters.length
-			this.nodeHeight = this.node.offsetHeight
+			nodeHeight = this.node.offsetHeight
 			datePickerHeight = this.node.querySelector(".date-picker").offsetHeight
 			globalDayHeight = datePickerHeight / dateRange
 
@@ -83,7 +84,7 @@ export const Timeline = React.createClass({
 			if(this.state.eventIndex < clusters.length) {
 				const offset = (this.state.left + (this.windowWidth / 2)) - (this.state.eventIndex * eventWidth)
 
-				const yPos = clusterOffsets[this.state.eventIndex] + (offset / eventWidth) * (clusterOffsets[this.state.eventIndex + 1] - (clusterOffsets[this.state.eventIndex])) - 0.5 * (this.nodeHeight - approximateEventHeight)
+				const yPos = clusterOffsets[this.state.eventIndex] + (offset / eventWidth) * (clusterOffsets[this.state.eventIndex + 1] - (clusterOffsets[this.state.eventIndex])) - 0.5 * (nodeHeight - approximateEventHeight)
 
 				this.components.eventsWrapper.node.scrollLeft = this.state.left
 				this.components.eventsWrapper.node.scrollTop = yPos
@@ -137,7 +138,7 @@ export const Timeline = React.createClass({
 					<div className="global">{globalDates}</div>
 					<div className="local">{localDates}</div>
 					<div className="brush" style={{
-						height: (globalDayHeight * (this.nodeHeight / dayHeight)) + 'px'
+						height: (globalDayHeight * (nodeHeight / dayHeight)) + 'px'
 					}}></div>
 				</div>
 				<div onWheel={this.onWheel} className="events">
