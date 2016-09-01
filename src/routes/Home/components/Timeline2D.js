@@ -170,10 +170,14 @@ export const Timeline = React.createClass({
 			brushMouseDown: true,
 			lastBrushTop: this.getBrushTopForMousePosition(e) - (parseInt(this.components.brush.node.style.top) || 0)
 		})
+
+		this.components.brush.node.classList.add("scrolling")
 	},
 
 	onTimelineMouseUp() {
 		this.setState({ brushMouseDown: false })
+
+		this.components.brush.node.classList.remove("scrolling")
 	},
 
 	getBrushTopForMousePosition(e) {

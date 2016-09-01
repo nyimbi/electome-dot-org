@@ -332,7 +332,7 @@ $home-text-link-color: #1E88E5;
 		position: relative;
 		width: 100%;
 		height: 100%;
-		transition: all $transition-duration;
+		transition: all $transition-duration / 2;
 		&.scrolling {
 			transition: none;
 		}
@@ -349,7 +349,7 @@ $home-text-link-color: #1E88E5;
 			border-right: solid 1px $border-color;
 		}
 		.local {
-			transition: all $transition-duration;
+			transition: all $transition-duration / 2;
 			margin-left: -3px;
 			&.scrolling {
 				transition: none;
@@ -361,6 +361,10 @@ $home-text-link-color: #1E88E5;
 			background: red;
 			right: 51%;
 			top: 0;
+			transition: top $transition-duration / 2;
+			&.scrolling {
+				transition: none;
+			}
 		}
 	}
 }
