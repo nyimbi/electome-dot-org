@@ -106,7 +106,7 @@ export const Timeline = React.createClass({
 		}, () => {
 			this.setEventsScroll()
 
-			this.updateWindow('eventsWrapper', moment(clusters[this.state.eventIndex].start_time).diff(minDate, 'days') / dateRange)
+			this.updateWindow('eventsWrapper', moment(clusters[Math.min(clusters.length - 1, Math.floor((newLeft / this.nodeWidth) * clusters.length))].start_time).diff(minDate, 'days') / dateRange)
 		})
 	},
 
