@@ -8,6 +8,8 @@ let clusters = require('../clusters.json')
 const eventWidth = 200
 const approximateEventHeight = 300
 const dayHeight = 50
+const eventsHPadding = 200
+const eventsVPadding = 10
 let globalDayHeight = 0
 let datePickerHeight = 0
 let nodeHeight = 0
@@ -91,7 +93,7 @@ export const Timeline = React.createClass({
 
 			pageY = this.node.getBoundingClientRect().top + document.body.scrollTop
 			this.windowWidth = window.innerWidth
-			this.nodeWidth = eventWidth * clusters.length
+			this.nodeWidth = eventWidth * clusters.length + 2 * eventsHPadding
 			nodeHeight = this.node.offsetHeight
 			datePickerHeight = this.node.querySelector(".date-picker").offsetHeight
 			globalDayHeight = datePickerHeight / dateRange
@@ -235,7 +237,11 @@ export const Timeline = React.createClass({
 							height: (globalDayHeight * visibleDateRange) + 'px'
 						}}></div>
 				</div>
-				<div onWheel={this.onEventsWrapperWheel} className="events">
+				<div 
+					style={{
+						padding: `${eventsVPadding}px ${eventsHPadding}px`
+					}}
+					onWheel={this.onEventsWrapperWheel} className="events">
 					{clusters.map((c, i) => {
 						const words = c.top_scoring_terms.map(w =>
 							<div key={w[0]} className="word">{w[0]}</div>)
@@ -243,8 +249,8 @@ export const Timeline = React.createClass({
 						return <div key={i} className="event"
 							style={{
 								width: eventWidth + 'px',
-								top: clusterOffsets[i] + 'px',
-								left: (eventWidth * i) + 'px'
+								top: (clusterOffsets[i] + eventsVPadding) + 'px',
+								left: ((eventWidth * i) + eventsHPadding) + 'px'
 							}}>
 							<div>{i}</div>
 							<div>{moment(c.start_time).format('M DD') + ' ' + moment(c.end_time).format('M DD')}</div>
