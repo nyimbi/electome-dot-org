@@ -98,17 +98,17 @@ export const Timeline = React.createClass({
 
 		this.setState({
 			left: newLeft,
-			eventIndex: Math.floor(((newLeft + this.windowWidth / 2) / this.nodeWidth) * clusters.length)
+			eventIndex: Math.min(clusters.length - 1, Math.floor(((newLeft + this.windowWidth / 2) / this.nodeWidth) * clusters.length))
 		}, () => {
-			if(this.state.eventIndex < clusters.length) {
-				this.setEventsScroll()
+			this.setEventsScroll()
 
-				this.updateWindow('eventsWrapper', moment(clusters[this.state.eventIndex].start_time).diff(minDate, 'days') / dateRange)
-			}
+			this.updateWindow('eventsWrapper', moment(clusters[this.state.eventIndex].start_time).diff(minDate, 'days') / dateRange)
 		})
 	},
 
 	setEventsScroll() {
+		if(this.state.eventIndex > (clusters.length - 2)) { return }
+
 		const offset = (this.state.left + (this.windowWidth / 2)) - (this.state.eventIndex * eventWidth)
 
 		const yPos = clusterOffsets[this.state.eventIndex] + (offset / eventWidth) * (clusterOffsets[this.state.eventIndex + 1] - (clusterOffsets[this.state.eventIndex])) - 0.5 * (nodeHeight - approximateEventHeight)
