@@ -356,15 +356,83 @@ $home-text-link-color: #1E88E5;
 	}
 }
 
+@mixin logo($width, $ar) {
+	width: $width;
+	height: $ar * $width;
+}
+
 .partnerships {
+	$partnerships-count: 7;
+	$logo-size: 20rem;
 	border-bottom: solid 1px $home-divider-color;
-	padding: $home-module-v-padding 0;
+	padding: $home-module-v-padding $home-h-padding;
+	padding-bottom: $home-module-v-padding + 1rem;
+	overflow: hidden;
 	.partnerships-label {
 		@extend %header;
 		text-align: center;
 	}
 	.logos {
-		padding: 2rem;
+		margin-top: 4.5rem;
+		text-align: center;
+		width: $logo-size * 4;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.logo-wrapper {
+		cursor: pointer;
+		display: block;
+		float: left;
+		width: 20rem;
+		height: 20rem;
+		border: solid 1px $border-color;
+		margin-top: -1px;
+		margin-left: -1px;
+		transition: all $transition-duration;
+		&:hover {
+			background: lighten($smoke, 5%);
+		}
+	}
+	.logo {
+		margin-left: auto;
+		margin-right: auto;
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+		background-size: 100%;
+		background-repeat: no-repeat;
+	}
+	#media-lab-logo {
+		background-image: url('../assets/images/logo_media_lab.png');
+		@include logo(100px, 482 / 895);
+	}
+	#twitter-logo {
+		background-image: url('../assets/images/logo_twitter.png');
+		@include logo(55px, 364 / 446);
+	}
+	#commission-on-presidential-debates-logo {
+		background-image: url('../assets/images/logo_cpd.png');
+		@include logo(125px, 234 / 500);
+	}
+	#washington-post-logo {
+		background-image: url('../assets/images/logo_wapo.png');
+		@include logo(150px, 197 / 1280);
+	}
+	#wsj-logo {
+		background-image: url('../assets/images/logo_wsj.png');
+		@include logo(150px, 170 / 1985);
+	}
+	#fusion-logo {
+		background-image: url('../assets/images/logo_fusion.png');
+		@include logo(50px, 400 / 325);
+	}
+	#roper-center-logo {
+		background-image: url('../assets/images/logo_roper_center.png');
+		@include logo(110px, 166 / 635);
+	}
+	#newseum-logo {
+		background-image: url('../assets/images/logo_newseum.png');
+		@include logo(100px, 337 / 1207);
 	}
 }
 

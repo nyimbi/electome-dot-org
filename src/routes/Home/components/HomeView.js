@@ -47,14 +47,30 @@ export const HomeView = React.createClass({
 		  	<div className="partnerships">
 		  		<div className="partnerships-label">In partnership with</div>
 		  		<div className="logos">
-			  		<div id="media-lab-logo"></div>
-			  		<div id="twitter-logo"></div>
-			  		<div id="commission-on-presidential-debates-logo"></div>
-			  		<div id="washington-post-logo"></div>
-			  		<div id="wsj-logo"></div>
-			  		<div id="fusion-logo"></div>
-			  		<div id="roper-center-logo"></div>
-			  		<div id="newseum-logo"></div>
+		  			<a target="_blank" className="logo-wrapper">
+				  		<div className="logo" id="media-lab-logo"></div>
+		  			</a>
+		  			<a target="_blank" className="logo-wrapper">
+				  		<div className="logo" id="twitter-logo"></div>
+		  			</a>
+		  			<a target="_blank" className="logo-wrapper">
+				  		<div className="logo" id="commission-on-presidential-debates-logo"></div>
+		  			</a>
+		  			<a target="_blank" className="logo-wrapper">
+				  		<div className="logo" id="washington-post-logo"></div>
+		  			</a>
+		  			<a target="_blank" className="logo-wrapper">
+				  		<div className="logo" id="wsj-logo"></div>
+		  			</a>
+		  			<a target="_blank" className="logo-wrapper">
+				  		<div className="logo" id="fusion-logo"></div>
+		  			</a>
+		  			<a target="_blank" className="logo-wrapper">
+				  		<div className="logo" id="roper-center-logo"></div>
+		  			</a>
+		  			<a target="_blank" className="logo-wrapper">
+				  		<div className="logo" id="newseum-logo"></div>
+				  	</a>
 		  		</div>
 		  	</div>
 		  	<div className="media">
