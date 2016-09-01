@@ -335,6 +335,7 @@ $home-text-link-color: #1E88E5;
 		height: 100%;
 	}
 	.date-picker {
+		overflow: hidden;
 		.global, .local {
 			vertical-align: top;
 			display: inline-block;
@@ -342,8 +343,8 @@ $home-text-link-color: #1E88E5;
 			height: 100%;
 		}
 		.local {
+			transition: all $transition-duration;
 			border-left: solid 1px $border-color;
-			overflow: scroll;
 			margin-left: -3px;
 		}
 		.brush {

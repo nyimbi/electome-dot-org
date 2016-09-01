@@ -14,6 +14,7 @@ let nodeHeight = 0
 let brushOffsetTop = 0
 let pageY = 0
 let visibleDateRange = 0
+let datePickerScrollHeight = 0
 
 const minDate = clusters.reduce((acc, curr) => {
 	if(!acc || moment(curr.start_time).isBefore(acc)) {
@@ -39,7 +40,8 @@ export const Timeline = React.createClass({
 		return {
 			left: 0,
 			eventIndex: -1,
-			brushMouseDown: false
+			brushMouseDown: false,
+			localDatesTop: 0
 		}
 	},
 
@@ -66,7 +68,9 @@ export const Timeline = React.createClass({
 				datePicker: {
 					node: this.node.querySelector(".date-picker .local"),
 					update: function(amount) {
-						this.components.datePicker.node.scrollTop = amount * (dateRange * dayHeight - datePickerHeight)
+						this.setState({
+							localDatesTop: amount * datePickerScrollHeight
+						}, this.setDatePickerTransform)
 					}
 				},
 				brush: {
@@ -85,13 +89,25 @@ export const Timeline = React.createClass({
 			globalDayHeight = datePickerHeight / dateRange
 			brushOffsetTop = this.components.datePicker.node.getBoundingClientRect().top - this.components.eventsWrapper.node.getBoundingClientRect().top
 			visibleDateRange = Math.round(nodeHeight / dayHeight)
+			datePickerScrollHeight = dayHeight * dateRange - datePickerHeight
 
 			this.forceUpdate()
 		}, 100) // for styles to show
 	},
 
 	onDatePickerWheel(e) {
-		this.updateWindow('datePicker', this.components.datePicker.node.scrollTop / (dayHeight * dateRange - datePickerHeight))
+		e.preventDefault()
+
+		this.setState({
+			localDatesTop: Math.max(0, Math.min(datePickerScrollHeight, this.state.localDatesTop + e.deltaY))
+		}, () => {
+			this.setDatePickerTransform()
+			this.updateWindow('datePicker', this.state.localDatesTop / datePickerScrollHeight)
+		})
+	},
+
+	setDatePickerTransform() {
+		this.components.datePicker.node.style.transform = "translateY(-" + this.state.localDatesTop + "px)"
 	},
 
 	onEventsWrapperWheel(e) {
