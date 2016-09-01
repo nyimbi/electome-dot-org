@@ -51,7 +51,11 @@ export const Timeline = React.createClass({
 					node: this.node.querySelector(".events"),
 					update: function(amount) {
 						const date = minDate.clone().add(Math.floor(amount * dateRange), 'days')
-						const eventIndex = findIndex(clusters, d => moment(d.start_time).isSameOrAfter(date))
+						let eventIndex = findIndex(clusters, d => moment(d.start_time).isSameOrAfter(date))
+
+						if(eventIndex === -1) {
+							eventIndex = clusters.length - 1
+						}
 
 						this.setState({
 							eventIndex,
