@@ -29,7 +29,7 @@ const maxDate = clusters.reduce((acc, curr) => {
 	return acc
 }, null)
 
-const dateRange = Math.abs(minDate.diff(maxDate, 'days'))
+const dateRange = Math.abs(minDate.diff(maxDate, 'days')) + 1
 
 const clusterOffsets = clusters.map(d =>
 	moment(d.start_time, 'YYYY-MM-DD').diff(minDate, 'days') * dayHeight)
@@ -62,7 +62,7 @@ export const Timeline = React.createClass({
 				datePicker: {
 					node: this.node.querySelector(".date-picker .local"),
 					update: function(amount) {
-						this.components.datePicker.node.scrollTop = amount * dateRange * dayHeight
+						this.components.datePicker.node.scrollTop = amount * (dateRange * dayHeight - datePickerHeight)
 					}
 				},
 				brush: {
@@ -148,12 +148,12 @@ export const Timeline = React.createClass({
 
 		this.components.brush.node.style.top = top + 'px'
 
-		this.updateWindow('brush', top / datePickerHeight)
+		this.updateWindow('brush', top / (datePickerHeight - globalDayHeight * visibleDateRange))
 	},
 
 	render() {
 		const localDates = []
-		for(let i=0; i<=dateRange; i++) {
+		for(let i=0; i<dateRange; i++) {
 			localDates.push(<div 
 				key={i} 
 				style={{height: dayHeight + 'px'}}
