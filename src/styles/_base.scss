@@ -329,10 +329,13 @@ $home-text-link-color: #1E88E5;
 		position: absolute;
 	}
 	.events {
-		overflow: scroll;
 		position: relative;
 		width: 100%;
 		height: 100%;
+		transition: all $transition-duration;
+		&.scrolling {
+			transition: none;
+		}
 	}
 	.date-picker {
 		overflow: hidden;

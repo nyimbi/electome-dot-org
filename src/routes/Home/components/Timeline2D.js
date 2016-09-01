@@ -49,6 +49,10 @@ export const Timeline = React.createClass({
 		this.components.datePicker.node.classList.remove("scrolling")
 	},
 
+	eventsWheelEnd() {
+		this.components.eventsWrapper.node.classList.remove("scrolling")
+	},
+
 	componentDidMount() {
 		setTimeout(() => {
 			this.node = ReactDOM.findDOMNode(this)
@@ -96,6 +100,7 @@ export const Timeline = React.createClass({
 			datePickerScrollHeight = dayHeight * dateRange - datePickerHeight
 
 			this.components.datePicker.node.addEventListener("wheel", debounce(this.datePickerWheelEnd, 150))
+			this.components.eventsWrapper.node.addEventListener("wheel", debounce(this.eventsWheelEnd, 150))
 
 			this.forceUpdate()
 		}, 100) // for styles to show
@@ -120,6 +125,8 @@ export const Timeline = React.createClass({
 
 	onEventsWrapperWheel(e) {
 		e.preventDefault()
+		this.components.eventsWrapper.node.classList.add("scrolling")
+
 		const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
 
 		const newLeft = Math.max(0, Math.min(this.nodeWidth, this.state.left + delta))
@@ -139,10 +146,9 @@ export const Timeline = React.createClass({
 
 		const offset = (this.state.left + (this.windowWidth / 2)) - (this.state.eventIndex * eventWidth)
 
-		const yPos = clusterOffsets[this.state.eventIndex] + (offset / eventWidth) * (clusterOffsets[this.state.eventIndex + 1] - (clusterOffsets[this.state.eventIndex])) - 0.5 * (nodeHeight - approximateEventHeight)
+		const yPos = Math.max(0, clusterOffsets[this.state.eventIndex] + (offset / eventWidth) * (clusterOffsets[this.state.eventIndex + 1] - (clusterOffsets[this.state.eventIndex])) - 0.5 * (nodeHeight - approximateEventHeight))
 
-		this.components.eventsWrapper.node.scrollLeft = this.state.left
-		this.components.eventsWrapper.node.scrollTop = yPos
+		this.components.eventsWrapper.node.style.transform = `translate3d(${-this.state.left}px, ${-yPos}px, 0)`
 	},
 
 	updateWindow(exclude, amount) {
