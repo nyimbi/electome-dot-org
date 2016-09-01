@@ -47,28 +47,28 @@ export const HomeView = React.createClass({
 		  	<div className="partnerships">
 		  		<div className="partnerships-label">In partnership with</div>
 		  		<div className="logos">
-		  			<a target="_blank" className="logo-wrapper">
+		  			<a target="_blank" href="http://media.mit.edu/" className="logo-wrapper">
 				  		<div className="logo" id="media-lab-logo"></div>
 		  			</a>
-		  			<a target="_blank" className="logo-wrapper">
+		  			<a target="_blank" href="https://twitter.com/" className="logo-wrapper">
 				  		<div className="logo" id="twitter-logo"></div>
 		  			</a>
-		  			<a target="_blank" className="logo-wrapper">
+		  			<a target="_blank" href="http://www.debates.org/" className="logo-wrapper">
 				  		<div className="logo" id="commission-on-presidential-debates-logo"></div>
 		  			</a>
-		  			<a target="_blank" className="logo-wrapper">
+		  			<a target="_blank" href="https://www.washingtonpost.com/" className="logo-wrapper">
 				  		<div className="logo" id="washington-post-logo"></div>
 		  			</a>
-		  			<a target="_blank" className="logo-wrapper">
+		  			<a target="_blank" href="http://www.wsj.com/" className="logo-wrapper">
 				  		<div className="logo" id="wsj-logo"></div>
 		  			</a>
-		  			<a target="_blank" className="logo-wrapper">
+		  			<a target="_blank" href="https://fusion.net/" className="logo-wrapper">
 				  		<div className="logo" id="fusion-logo"></div>
 		  			</a>
-		  			<a target="_blank" className="logo-wrapper">
+		  			<a target="_blank" href="https://ropercenter.cornell.edu/" className="logo-wrapper">
 				  		<div className="logo" id="roper-center-logo"></div>
 		  			</a>
-		  			<a target="_blank" className="logo-wrapper">
+		  			<a target="_blank" href="http://www.newseum.org/" className="logo-wrapper">
 				  		<div className="logo" id="newseum-logo"></div>
 				  	</a>
 		  		</div>
