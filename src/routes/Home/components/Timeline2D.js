@@ -13,6 +13,7 @@ let datePickerHeight = 0
 let nodeHeight = 0
 let brushOffsetTop = 0
 let pageY = 0
+let visibleDateRange = 0
 
 const minDate = clusters.reduce((acc, curr) => {
 	if(!acc || moment(curr.start_time).isBefore(acc)) {
@@ -67,7 +68,7 @@ export const Timeline = React.createClass({
 				brush: {
 					node: this.node.querySelector(".date-picker .brush"),
 					update: function(amount) {
-						this.components.brush.node.style.top = (amount * (datePickerHeight - ((nodeHeight / dayHeight) * globalDayHeight))) + 'px'
+						this.components.brush.node.style.top = (amount * (datePickerHeight - (visibleDateRange * globalDayHeight))) + 'px'
 					}
 				}
 			}
@@ -79,6 +80,7 @@ export const Timeline = React.createClass({
 			datePickerHeight = this.node.querySelector(".date-picker").offsetHeight
 			globalDayHeight = datePickerHeight / dateRange
 			brushOffsetTop = this.components.datePicker.node.getBoundingClientRect().top - this.components.eventsWrapper.node.getBoundingClientRect().top
+			visibleDateRange = Math.round(nodeHeight / dayHeight)
 
 			this.forceUpdate()
 		}, 100) // for styles to show
@@ -142,10 +144,9 @@ export const Timeline = React.createClass({
 
 	onTimelineMouseMove(e) {
 		if(!this.state.brushMouseDown) { return }
-		const top = this.getBrushTopForMousePosition(e)
-		const mouseOffset = this.state.lastBrushTop
+		const top = Math.max(0, Math.min(datePickerHeight - (globalDayHeight * visibleDateRange), this.getBrushTopForMousePosition(e) - this.state.lastBrushTop))
 
-		this.components.brush.node.style.top = (top - this.state.lastBrushTop) + 'px'
+		this.components.brush.node.style.top = top + 'px'
 
 		this.updateWindow('brush', top / datePickerHeight)
 	},
@@ -189,7 +190,7 @@ export const Timeline = React.createClass({
 						onMouseDown={this.onBrushMouseDown} 
 						className="brush" 
 						style={{
-							height: (globalDayHeight * (nodeHeight / dayHeight)) + 'px'
+							height: (globalDayHeight * visibleDateRange) + 'px'
 						}}></div>
 				</div>
 				<div onWheel={this.onEventsWrapperWheel} className="events">
