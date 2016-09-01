@@ -69,7 +69,7 @@ export const Timeline = React.createClass({
 
 						this.setState({
 							eventIndex,
-							left: eventIndex * eventWidth
+							left: this.getCappedEventsLeft(eventIndex * eventWidth)
 						}, this.setEventsScroll)
 					}
 				},
@@ -106,6 +106,10 @@ export const Timeline = React.createClass({
 		}, 100) // for styles to show
 	},
 
+	getCappedEventsLeft(left) {
+		return Math.max(0, Math.min(this.nodeWidth - this.windowWidth, left))
+	},
+
 	onDatePickerWheel(e) {
 		e.preventDefault()
 
@@ -129,7 +133,7 @@ export const Timeline = React.createClass({
 
 		const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
 
-		const newLeft = Math.max(0, Math.min(this.nodeWidth, this.state.left + delta))
+		const newLeft = this.getCappedEventsLeft(this.state.left + delta)
 
 		this.setState({
 			left: newLeft,
