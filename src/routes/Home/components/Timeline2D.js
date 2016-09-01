@@ -91,7 +91,7 @@ export const Timeline = React.createClass({
 	},
 
 	onDatePickerWheel(e) {
-		this.updateWindow('datePicker', this.components.datePicker.node.scrollTop / (dayHeight * dateRange))
+		this.updateWindow('datePicker', this.components.datePicker.node.scrollTop / (dayHeight * dateRange - datePickerHeight))
 	},
 
 	onEventsWrapperWheel(e) {
