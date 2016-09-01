@@ -61,13 +61,13 @@ export const Timeline = React.createClass({
 				datePicker: {
 					node: this.node.querySelector(".date-picker .local"),
 					update: function(amount) {
-						this.node.scrollTop = amount * dateRange * dayHeight
+						this.components.datePicker.node.scrollTop = amount * dateRange * dayHeight
 					}
 				},
 				brush: {
 					node: this.node.querySelector(".date-picker .brush"),
 					update: function(amount) {
-						this.node.style.top = (amount * (datePickerHeight - ((nodeHeight / dayHeight) * globalDayHeight))) + 'px'
+						this.components.brush.node.style.top = (amount * (datePickerHeight - ((nodeHeight / dayHeight) * globalDayHeight))) + 'px'
 					}
 				}
 			}
