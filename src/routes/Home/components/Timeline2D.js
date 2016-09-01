@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import moment from 'moment'
-import { findIndex } from 'underscore'
+import { findIndex, debounce } from 'underscore'
 
 let clusters = require('../clusters.json')
 
@@ -43,6 +43,10 @@ export const Timeline = React.createClass({
 			brushMouseDown: false,
 			localDatesTop: 0
 		}
+	},
+
+	datePickerWheelEnd() {
+		this.components.datePicker.node.classList.remove("scrolling")
 	},
 
 	componentDidMount() {
@@ -91,12 +95,16 @@ export const Timeline = React.createClass({
 			visibleDateRange = Math.round(nodeHeight / dayHeight)
 			datePickerScrollHeight = dayHeight * dateRange - datePickerHeight
 
+			this.components.datePicker.node.addEventListener("wheel", debounce(this.datePickerWheelEnd, 150))
+
 			this.forceUpdate()
 		}, 100) // for styles to show
 	},
 
 	onDatePickerWheel(e) {
 		e.preventDefault()
+
+		this.components.datePicker.node.classList.add("scrolling")
 
 		this.setState({
 			localDatesTop: Math.max(0, Math.min(datePickerScrollHeight, this.state.localDatesTop + e.deltaY))

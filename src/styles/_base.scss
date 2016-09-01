@@ -342,10 +342,15 @@ $home-text-link-color: #1E88E5;
 			width: 50%;
 			height: 100%;
 		}
+		.global {
+			border-right: solid 1px $border-color;
+		}
 		.local {
 			transition: all $transition-duration;
-			border-left: solid 1px $border-color;
 			margin-left: -3px;
+			&.scrolling {
+				transition: none;
+			}
 		}
 		.brush {
 			position: absolute;
