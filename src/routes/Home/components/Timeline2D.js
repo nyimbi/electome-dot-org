@@ -81,7 +81,7 @@ export const Timeline = React.createClass({
 			brushOffsetTop = this.components.datePicker.node.getBoundingClientRect().top - this.components.eventsWrapper.node.getBoundingClientRect().top
 
 			this.forceUpdate()
-		}, 0)
+		}, 100) // for styles to show
 	},
 
 	onDatePickerWheel(e) {
@@ -125,18 +125,27 @@ export const Timeline = React.createClass({
 		return false
 	},
 
-	onBrushMouseDown() {
-		this.setState({ brushMouseDown: true })
+	onBrushMouseDown(e) {
+		this.setState({ 
+			brushMouseDown: true,
+			lastBrushTop: this.getBrushTopForMousePosition(e) - (parseInt(this.components.brush.node.style.top) || 0)
+		})
 	},
 
-	onBrushMouseUp() {
+	onTimelineMouseUp() {
 		this.setState({ brushMouseDown: false })
+	},
+
+	getBrushTopForMousePosition(e) {
+		return e.pageY - pageY - brushOffsetTop
 	},
 
 	onTimelineMouseMove(e) {
 		if(!this.state.brushMouseDown) { return }
-		const top = e.pageY - pageY - brushOffsetTop
-		this.components.brush.node.style.top = top + 'px'
+		const top = this.getBrushTopForMousePosition(e)
+		const mouseOffset = this.state.lastBrushTop
+
+		this.components.brush.node.style.top = (top - this.state.lastBrushTop) + 'px'
 
 		this.updateWindow('brush', top / datePickerHeight)
 	},
@@ -172,12 +181,12 @@ export const Timeline = React.createClass({
 			<div className="timeline">
 				<div 
 					onMouseMove={this.onTimelineMouseMove}
+					onMouseUp={this.onTimelineMouseUp} 
 					className="date-picker">
 					<div className="global">{globalDates}</div>
 					<div onWheel={this.onDatePickerWheel} className="local">{localDates}</div>
 					<div
 						onMouseDown={this.onBrushMouseDown} 
-						onMouseUp={this.onBrushMouseUp} 
 						className="brush" 
 						style={{
 							height: (globalDayHeight * (nodeHeight / dayHeight)) + 'px'
