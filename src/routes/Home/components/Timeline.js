@@ -21,7 +21,8 @@ const params = {
 	cameraX: 34,
 	cameraY: 102,
 	cameraZ: 176,
-	cameraLAX: 138,
+	// cameraLAX: 138,
+	cameraLAX: 34,
 	cameraLAY: -48,
 	cameraLAZ: 14,
 	cameraLeft: -178,
@@ -32,7 +33,7 @@ const params = {
 	cameraFar: 10000
 }
 
-export const Timeline = React.createClass({
+export const Timeline3D = React.createClass({
 	getInitialState() {
 		return {
 			dragging: false
@@ -118,8 +119,11 @@ export const Timeline = React.createClass({
 		this.addShape(shape, 20 * index, 0, (dateOffset * dayHeight) + (data.sparkline.length - 1) * dayHeight)
 	},
 
+	createText(data, index) {
+
+	},
+
 	configureDATGUI() {
-		return
 		gui.add(params, "cameraX").min(-200).max(200).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraY").min(0).max(200).step(2).onFinishChange(this.renderViz)
 		gui.add(params, "cameraZ").min(0).max(200).step(2).onFinishChange(this.renderViz)
@@ -180,14 +184,15 @@ export const Timeline = React.createClass({
 		camera.lookAt(new THREE.Vector3(params.cameraLAX, params.cameraLAY, params.cameraLAZ))
 
 		clusters.forEach(this.createShape)
+		clusters.forEach(this.createText)
 
 		renderer.render(scene, camera)
 	},
 
 	componentDidMount() {
-		// gui = new dat.GUI({
-		// 	height: 300
-		// })
+		gui = new dat.GUI({
+			height: 300
+		})
 
 		clusters = clusters.sort((a, b) => {
 			const aStartMoment = moment(a.start_time)
@@ -246,9 +251,9 @@ export const Timeline = React.createClass({
 				onMouseMove={this.onMouseMove}
 				onMouseDown={this.onMouseDown}
 				onMouseUp={this.onMouseUp}
-				className="timeline"></div>
+				className="timeline3D"></div>
 		)
 	}
 })
 
-export default Timeline
+export default Timeline3D
