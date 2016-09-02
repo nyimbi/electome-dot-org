@@ -342,8 +342,13 @@ export const Timeline = React.createClass({
 								top: (clusterOffsets[i] + eventsVPadding) + 'px',
 								left: ((eventWidth * i) + eventsHPadding) + 'px'
 							}}>
-							<svg width={eventWidth}>
-								<polyline points="0,0 20,20 0,40 50,60 0,80" />
+							<svg 
+								height={(c.sparkline.length + 1) * dayHeight}
+								width={eventWidth}>
+								<polyline points={c.sparkline.reduce((acc, curr, index) => {
+									acc += `${curr},${(index + 1) * dayHeight} `
+									return acc
+								}, '0,0 ') + '0,' + ((c.sparkline.length + 1) * dayHeight)} />
 							</svg>
 							<div>{i}</div>
 							<div>{moment(c.start_time).format('M DD') + ' ' + moment(c.end_time).format('M DD')}</div>
