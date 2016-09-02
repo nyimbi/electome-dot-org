@@ -2,6 +2,16 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import moment from 'moment'
 import { findIndex, debounce } from 'underscore'
+import contentful from 'contentful'
+
+const client = contentful.createClient({
+	space: 't0mamnyqwt6r',
+	accessToken: '01c027b53edc25bb3aaebfab1daf051aeee1e2d8ba66bd529887b4b773a0c38d'
+})
+
+client.getEntries().then(entry => {
+	console.log(entry.items)
+})
 
 const eventWidth = 200
 const sparklineMax = eventWidth - 20
