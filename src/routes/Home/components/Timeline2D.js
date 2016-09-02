@@ -3,9 +3,30 @@ import ReactDOM from 'react-dom'
 import moment from 'moment'
 import { findIndex, debounce } from 'underscore'
 
-let clusters = require('../clusters.json')
-
 const eventWidth = 200
+const sparklineMax = eventWidth - 20
+
+let clusters = require('../clusters.json').map(d => {
+	const startMoment = moment(d.start_time)
+	const endMoment = moment(d.end_time)
+	const range = Math.abs(startMoment.diff(endMoment, 'days'))
+	const max = Math.random() * sparklineMax
+	let current = Math.random() * max / 2
+	const peakIndex = 1 + Math.round(Math.random() * (range - 2))
+
+	d.sparkline = []
+	for(let i=0; i<range; i++) {
+		d.sparkline.push(current)
+		if(i < peakIndex) {
+			current = Math.min(max, current + Math.random() * Math.max(0, max - current) / (peakIndex - i))
+		} else {
+			current = Math.max(0, current - Math.random() * Math.max(0, current) / Math.max(1, i - peakIndex))
+		}
+	}
+	
+	return d
+})
+
 const approximateEventHeight = 340
 const dayHeight = 50
 const eventsHPadding = 200
