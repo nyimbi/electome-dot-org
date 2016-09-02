@@ -202,6 +202,21 @@ export const Timeline = React.createClass({
 	},
 
 	onEventClick(i) {
+		const docBrowserNode = this.node.querySelector(".document-browser")
+		const tweetIDs = clusters[i].sample_tweet_ids
+
+		docBrowserNode.querySelector(".tweets").innerHTML = ""
+
+		Promise.all(tweetIDs.map(id =>
+			twttr.widgets.createTweet(id.toString(),
+		  docBrowserNode.querySelector(".tweets"),
+		  {
+		    align: 'left',
+		    conversation: 'none',
+		    cards: 'hidden'
+		  }))).then((data) => {
+		})
+
 		this.setState({
 			activeEventIndex: i,
 			eventIndex: i,
@@ -222,7 +237,7 @@ export const Timeline = React.createClass({
 			})
 
 			setTimeout(() => {
-				this.node.querySelector(".document-browser").style.left = this.node.querySelector("[data-active='true'").getBoundingClientRect().right + 'px'
+				docBrowserNode.style.left = this.node.querySelector("[data-active='true'").getBoundingClientRect().right + 'px'
 			}, 250)
 		})
 	},
@@ -318,7 +333,8 @@ export const Timeline = React.createClass({
 					<div 
 						onClick={this.closeActiveEvent}
 						className="close">close</div>
-					</div>
+					<div className="tweets"></div>
+				</div>
 			</div>
 		)
 	}
