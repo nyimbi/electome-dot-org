@@ -383,6 +383,7 @@ $home-text-link-color: #1E88E5;
 	.event {
 		transition: transform $transition-duration;
 		position: absolute;
+		padding: 0 1rem;
 		&:not([data-active="true"]) {
 			.close {
 				display: none;
@@ -391,6 +392,15 @@ $home-text-link-color: #1E88E5;
 		&[data-active="true"] {
 			.see-more {
 				display: none;
+			}
+		}
+		svg {
+			position: absolute;
+			top: 0;
+			left: 0;
+			polyline {
+				fill-opacity: 0.1;
+				fill: $bittersweet;
 			}
 		}
 	}

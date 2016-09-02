@@ -6,7 +6,7 @@ import { findIndex, debounce } from 'underscore'
 let clusters = require('../clusters.json')
 
 const eventWidth = 200
-const approximateEventHeight = 300
+const approximateEventHeight = 340
 const dayHeight = 50
 const eventsHPadding = 200
 const eventsVPadding = 10
@@ -321,6 +321,9 @@ export const Timeline = React.createClass({
 								top: (clusterOffsets[i] + eventsVPadding) + 'px',
 								left: ((eventWidth * i) + eventsHPadding) + 'px'
 							}}>
+							<svg width={eventWidth}>
+								<polyline points="0,0 20,20 0,40 50,60 0,80" />
+							</svg>
 							<div>{i}</div>
 							<div>{moment(c.start_time).format('M DD') + ' ' + moment(c.end_time).format('M DD')}</div>
 							{words}
