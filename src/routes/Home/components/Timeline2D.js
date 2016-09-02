@@ -197,6 +197,9 @@ export const Timeline = React.createClass({
 	},
 
 	onEventClick(i) {
+		this.node.setAttribute("data-event-activated", true)
+		this.node.querySelectorAll(".event")[i].setAttribute("data-active", true)
+
 		this.setState({
 			activeEventIndex: i,
 			eventIndex: i,
