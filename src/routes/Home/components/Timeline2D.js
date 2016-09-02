@@ -115,6 +115,7 @@ export const Timeline = React.createClass({
 
 	onDatePickerWheel(e) {
 		e.preventDefault()
+		if(this.state.activeEventIndex > -1) { return }
 
 		this.components.datePicker.node.classList.add("scrolling")
 
@@ -171,6 +172,8 @@ export const Timeline = React.createClass({
 	},
 
 	onBrushMouseDown(e) {
+		if(this.state.activeEventIndex > -1) { return }
+
 		this.setState({ 
 			brushMouseDown: true,
 			lastBrushTop: this.getBrushTopForMousePosition(e) - (parseInt(this.components.brush.node.style.top) || 0)
