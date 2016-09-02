@@ -210,17 +210,8 @@ export const Timeline = React.createClass({
 		const docBrowserNode = this.node.querySelector(".document-browser")
 		const tweetIDs = clusters[i].sample_tweet_ids
 
+		docBrowserNode.setAttribute("data-loading", true)
 		docBrowserNode.querySelector(".tweets").innerHTML = ""
-
-		Promise.all(tweetIDs.map(id =>
-			twttr.widgets.createTweet(id.toString(),
-		  docBrowserNode.querySelector(".tweets"),
-		  {
-		    align: 'left',
-		    conversation: 'none',
-		    cards: 'hidden'
-		  }))).then((data) => {
-		})
 
 		this.setState({
 			activeEventIndex: i,
@@ -243,6 +234,17 @@ export const Timeline = React.createClass({
 
 			setTimeout(() => {
 				docBrowserNode.style.left = this.node.querySelector("[data-active='true'").getBoundingClientRect().right + 'px'
+		
+				Promise.all(tweetIDs.map(id =>
+					twttr.widgets.createTweet(id.toString(),
+				  docBrowserNode.querySelector(".tweets"),
+				  {
+				    align: 'left',
+				    conversation: 'none',
+				    cards: 'hidden'
+				  }))).then((data) => {
+					docBrowserNode.setAttribute("data-loading", false)
+				})
 			}, 250)
 		})
 	},
@@ -341,6 +343,7 @@ export const Timeline = React.createClass({
 					<div 
 						onClick={this.closeActiveEvent}
 						className="close">close</div>
+					<div className="loader">Loading</div>
 					<div className="tweets"></div>
 				</div>
 			</div>

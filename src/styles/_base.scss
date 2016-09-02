@@ -371,6 +371,14 @@ $home-text-link-color: #1E88E5;
 		top: 0;
 		bottom: 0;
 		background: white;
+		&[data-loading="true"] {
+			.loader {
+				display: block;
+			}
+		}
+		.loader {
+			display: none;
+		}
 	}
 	.event {
 		transition: transform $transition-duration;
