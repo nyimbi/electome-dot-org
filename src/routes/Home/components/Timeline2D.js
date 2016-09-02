@@ -40,6 +40,7 @@ const clusterOffsets = clusters.map(d =>
 export const Timeline = React.createClass({
 	getInitialState() {
 		return {
+			activeEventIndex: -1,
 			left: 0,
 			eventIndex: -1,
 			brushMouseDown: false,
@@ -195,6 +196,14 @@ export const Timeline = React.createClass({
 		this.updateWindow('brush', top / (datePickerHeight - globalDayHeight * visibleDateRange))
 	},
 
+	onEventClick(i) {
+		this.setState({
+			activeEventIndex: i,
+			eventIndex: i,
+			left: this.getCappedEventsLeft((i + 1.5) * eventWidth - this.windowWidth / 2)
+		}, this.setEventsScroll)
+	},
+
 	render() {
 		const localDates = []
 		for(let i=0; i<dateRange; i++) {
@@ -223,7 +232,9 @@ export const Timeline = React.createClass({
 		}
 
 		return (
-			<div className="timeline">
+			<div 
+				data-event-activated={this.state.activeEventIndex > -1}
+				className="timeline">
 				<div 
 					onMouseMove={this.onTimelineMouseMove}
 					onMouseUp={this.onTimelineMouseUp} 
@@ -247,6 +258,8 @@ export const Timeline = React.createClass({
 							<div key={w[0]} className="word">{w[0]}</div>)
 
 						return <div key={i} className="event"
+							onClick={() => { this.onEventClick(i) }}
+							data-active={i === this.state.activeEventIndex}
 							style={{
 								width: eventWidth + 'px',
 								top: (clusterOffsets[i] + eventsVPadding) + 'px',
