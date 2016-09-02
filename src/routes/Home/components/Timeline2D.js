@@ -132,8 +132,9 @@ export const Timeline = React.createClass({
 	},
 
 	onEventsWrapperWheel(e) {
-		e.preventDefault()
 		if(this.state.activeEventIndex > -1) { return }
+
+		e.preventDefault()
 
 		this.components.eventsWrapper.node.classList.add("scrolling")
 
@@ -328,6 +329,9 @@ export const Timeline = React.createClass({
 					})}
 				</div>
 				<div 
+					onWheel={e => {
+						e.stopPropagation()
+					}}
 					style={{ width: eventWidth + 'px' }}
 					className="document-browser">
 					<div 

@@ -366,6 +366,7 @@ $home-text-link-color: #1E88E5;
 		}
 	}
 	.document-browser {
+		overflow: scroll;
 		position: absolute;
 		top: 0;
 		bottom: 0;
