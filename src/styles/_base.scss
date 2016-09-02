@@ -267,7 +267,16 @@ $home-text-link-color: #1E88E5;
 .timeline {
 	background: $smoke;
 	height: 50rem;
-	box-shadow: inset 0 0 3px rgba(0,0,0,0.1);
+	&:before {
+		content: "";
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		box-shadow: inset 0 0 3px rgba(0,0,0,0.1);
+		pointer-events: none;
+		display: block;
+		z-index: 1;
+	}
 }
 
 .media {
