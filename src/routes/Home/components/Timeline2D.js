@@ -132,6 +132,8 @@ export const Timeline = React.createClass({
 
 	onEventsWrapperWheel(e) {
 		e.preventDefault()
+		if(this.state.activeEventIndex > -1) { return }
+
 		this.components.eventsWrapper.node.classList.add("scrolling")
 
 		const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
@@ -215,6 +217,10 @@ export const Timeline = React.createClass({
 					n.style.transform = "translateX(" + eventWidth + "px)"
 				}
 			})
+
+			setTimeout(() => {
+				this.node.querySelector(".document-browser").style.left = this.node.querySelector("[data-active='true'").getBoundingClientRect().right + 'px'
+			}, 250)
 		})
 	},
 
@@ -298,11 +304,18 @@ export const Timeline = React.createClass({
 								onClick={() => { this.onEventClick(i) }} 
 								className="see-more">See more</div>
 							<div 
-								onClick={() => { this.closeActiveEvent(i) }}
+								onClick={this.closeActiveEvent}
 								className="close">Close</div>
 						</div>
 					})}
 				</div>
+				<div 
+					style={{ width: eventWidth + 'px' }}
+					className="document-browser">
+					<div 
+						onClick={this.closeActiveEvent}
+						className="close">close</div>
+					</div>
 			</div>
 		)
 	}
