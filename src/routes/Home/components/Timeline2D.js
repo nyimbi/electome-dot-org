@@ -157,7 +157,11 @@ export const Timeline = React.createClass({
 
 		const offset = (this.state.left + (this.windowWidth / 2)) - (this.state.eventIndex * eventWidth)
 
-		const yPos = Math.max(0, clusterOffsets[this.state.eventIndex] + (offset / eventWidth) * (clusterOffsets[this.state.eventIndex + 1] - (clusterOffsets[this.state.eventIndex])) - 0.5 * (nodeHeight - approximateEventHeight))
+		const yPos = Math.max(0, 
+			clusterOffsets[this.state.eventIndex] + 
+			Math.max(0, Math.min(1, offset / eventWidth)) * 
+			(clusterOffsets[this.state.eventIndex + 1] - (clusterOffsets[this.state.eventIndex])) -
+			0.5 * (nodeHeight - approximateEventHeight))
 
 		this.components.eventsWrapper.node.style.transform = `translate3d(${-this.state.left}px, ${-yPos}px, 0)`
 	},
