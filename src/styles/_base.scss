@@ -29,6 +29,17 @@ $home-text-link-color: #1E88E5;
 	margin-right: auto;
 }
 
+%home-label {
+	@extend %header;
+	margin-bottom: 3rem;
+	text-align: center;
+}
+
+%home-description {
+	@extend %body-font;
+	font-size: 1.3rem;
+}
+
 .home {
 	text-align: left;
 	padding-top: $header-height;
@@ -241,6 +252,7 @@ $home-text-link-color: #1E88E5;
 }
 
 .info {
+	border-bottom: solid 1px $border-color;
 	.info-content {
 		@extend %home-content-wrapper;
 	}
@@ -248,13 +260,10 @@ $home-text-link-color: #1E88E5;
 		color: $home-text-link-color;
 	}
 	.info-label {
-		@extend %header;
-		margin-bottom: 3rem;
-		text-align: center;
+		@extend %home-label
 	}
 	.description {
-		@extend %body-font;
-		font-size: 1.3rem;
+		@extend %home-description;
 		column-count: 2;
 		column-gap: 4rem;
 	}
@@ -346,6 +355,19 @@ $home-text-link-color: #1E88E5;
 	}
 }
 
+.entry-links {
+	.entry-links-label {
+		@extend %home-label;
+	}
+	.entry-links-content {
+		@extend %home-content-wrapper;
+	}
+	.description {
+		text-align: center;
+		@extend %home-description;
+	}
+}
+
 .timeline {
 	position: relative;
 	overflow: hidden;
@@ -395,6 +417,7 @@ $home-text-link-color: #1E88E5;
 			}
 		}
 		svg {
+			pointer-events: none;
 			position: absolute;
 			top: 0;
 			left: 0;
