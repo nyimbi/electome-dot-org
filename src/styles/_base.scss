@@ -352,7 +352,18 @@ $home-text-link-color: #1E88E5;
 		z-index: 1;
 	}
 	.event {
+		transition: transform $transition-duration;
 		position: absolute;
+		&:not([data-active="true"]) {
+			.close {
+				display: none;
+			}
+		}
+		&[data-active="true"] {
+			.see-more {
+				display: none;
+			}
+		}
 	}
 	.events {
 		position: relative;

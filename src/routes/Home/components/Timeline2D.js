@@ -197,14 +197,37 @@ export const Timeline = React.createClass({
 	},
 
 	onEventClick(i) {
-		this.node.setAttribute("data-event-activated", true)
-		this.node.querySelectorAll(".event")[i].setAttribute("data-active", true)
-
 		this.setState({
 			activeEventIndex: i,
 			eventIndex: i,
 			left: this.getCappedEventsLeft((i + 1.5) * eventWidth - this.windowWidth / 2)
-		}, this.setEventsScroll)
+		}, () => {
+			this.setEventsScroll()
+			this.node.setAttribute("data-event-activated", true)
+			Array.prototype.forEach.call(this.node.querySelectorAll(".event"), (n, ni) => {
+				if(ni < i) {
+					n.setAttribute("data-active", false)
+					n.style.transform = "none"
+				} else if(ni === i) {
+					n.setAttribute("data-active", true)
+				} else {
+					n.setAttribute("data-active", false)
+					n.style.transform = "translateX(" + eventWidth + "px)"
+				}
+			})
+		})
+	},
+
+	closeActiveEvent() {
+		this.setState({
+			activeEventIndex: -1
+		}, () => {
+			this.node.setAttribute("data-event-activated", false)
+			Array.prototype.forEach.call(this.node.querySelectorAll(".event"), n => {
+				n.setAttribute("data-active", false)
+				n.style.transform = "none"
+			})
+		})
 	},
 
 	render() {
@@ -261,7 +284,6 @@ export const Timeline = React.createClass({
 							<div key={w[0]} className="word">{w[0]}</div>)
 
 						return <div key={i} className="event"
-							onClick={() => { this.onEventClick(i) }}
 							data-active={i === this.state.activeEventIndex}
 							style={{
 								width: eventWidth + 'px',
@@ -272,6 +294,12 @@ export const Timeline = React.createClass({
 							<div>{moment(c.start_time).format('M DD') + ' ' + moment(c.end_time).format('M DD')}</div>
 							{words}
 							<div>{c.headline_tweet.tweet}</div>
+							<div 
+								onClick={() => { this.onEventClick(i) }} 
+								className="see-more">See more</div>
+							<div 
+								onClick={() => { this.closeActiveEvent(i) }}
+								className="close">Close</div>
 						</div>
 					})}
 				</div>
