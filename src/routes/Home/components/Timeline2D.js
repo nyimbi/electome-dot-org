@@ -6,7 +6,7 @@ import contentful from 'contentful'
 
 const client = contentful.createClient({
 	space: 't0mamnyqwt6r',
-	accessToken: '01c027b53edc25bb3aaebfab1daf051aeee1e2d8ba66bd529887b4b773a0c38d'
+	accessToken: '419f1f27efbafdd6f29176fad7a2171c766f435964879d9600a2bf068aa8a7e1'
 })
 
 client.getEntries().then(entry => {
