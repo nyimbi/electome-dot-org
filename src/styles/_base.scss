@@ -405,7 +405,25 @@ $home-text-link-color: #1E88E5;
 	.event {
 		transition: transform $transition-duration;
 		position: absolute;
-		padding: .5rem 3rem 0 1.5rem;
+		padding: .5rem 3rem 0 2rem;
+		.see-more, .explore {
+			opacity: 0;
+			transition: all $transition-duration;
+		}
+		&:hover {
+			.see-more, .explore {
+				opacity: 1;
+			}
+			polyline {
+				fill: $amaranth;
+			}
+			.sample_tweet .text {
+				color: $highlight-text-color;
+			}
+			.sample_tweet a {
+				color: darken($downy, 10%);
+			}
+		}
 		&:not([data-active="true"]) {
 			.close {
 				display: none;
@@ -458,6 +476,7 @@ $home-text-link-color: #1E88E5;
 				font-size: 1.2rem;
 			}
 			a {
+				display: inline-block;
 				color: $downy;
 				text-decoration: none;
 			}
@@ -499,13 +518,9 @@ $home-text-link-color: #1E88E5;
 			left: 0;
 			overflow: visible;
 			polyline {
-				fill: none;
-				stroke: $tower_gray;
-				stroke-width: 1px;
-				stroke-opacity: .8;
-			}
-			circle {
-				fill: $gull_gray;
+				fill: $tower_gray;
+				fill-opacity: .2;
+				transition: fill $transition-duration;
 			}
 		}
 	}

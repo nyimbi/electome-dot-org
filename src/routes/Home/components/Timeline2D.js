@@ -387,8 +387,6 @@ export const Timeline = React.createClass({
 									acc += `${curr},${(index + 1) * dayHeight} `
 									return acc
 								}, '0,0 ') + '0,' + ((c.sparkline.length + 1) * dayHeight)} />
-								<circle cx="0" cy="0" r="2"/>
-								<circle cx="0" cy={(c.sparkline.length + 1) * dayHeight} r="2"/>
 							</svg>
 							<div className="date">{moment(c.start_time).format('MMM D')}</div>
 							<div className="words">{words}</div>
@@ -405,6 +403,7 @@ export const Timeline = React.createClass({
 							<div 
 								onClick={this.closeActiveEvent}
 								className="close">Close</div>
+							<div className="explore">Explore</div>
 						</div>
 					})}
 				</div>
