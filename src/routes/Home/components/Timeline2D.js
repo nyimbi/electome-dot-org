@@ -254,7 +254,7 @@ export const Timeline = React.createClass({
 		this.updateWindow('brush', top / (datePickerHeight - globalDayHeight * visibleDateRange))
 	},
 
-	onEventClick(i) {
+	openEvent(i) {
 		const docBrowserNode = this.node.querySelector(".document-browser")
 		const tweetIDs = clusters[i].sample_tweet_ids
 
@@ -297,7 +297,19 @@ export const Timeline = React.createClass({
 		})
 	},
 
-	closeActiveEvent() {
+	onEventClick(i) {
+		if(this.state.activeEventIndex > -1) {
+			this.closeActiveEvent(() => {
+				setTimeout(() => {
+					this.openEvent(i)
+				}, 300) // to wait for transform transition to complete
+			})
+		} else {
+			this.openEvent(i)
+		}
+	},
+
+	closeActiveEvent(cb) {
 		this.setState({
 			activeEventIndex: -1
 		}, () => {
@@ -306,6 +318,8 @@ export const Timeline = React.createClass({
 				n.setAttribute("data-active", false)
 				n.style.transform = "none"
 			})
+
+			if(cb && typeof cb === 'function') { cb() }
 		})
 	},
 
