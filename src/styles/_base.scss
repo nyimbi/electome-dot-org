@@ -429,12 +429,64 @@ $home-text-link-color: #1E88E5;
 		}
 		.words {
 			.word {
+				font-weight: 100;
 				display: inline-block;
 				font-size: 1.2rem;
 				margin-right: 1rem;
 				font-weight: 300;
+				&:not([data-count="1"]) {
+					font-weight: 500;
+				}
+				&[data-count="1"] {
+					.count {
+						display: none;
+					}
+				}
+				.text, .count {
+					display: inline-block;
+				}
+				.count {
+					margin-left: .35rem;
+					font-size: .9rem;
+					font-weight: 100;
+				}
 			}
 			margin-bottom: 2rem;
+		}
+		.sample_tweet {
+			.text {
+				font-size: 1.2rem;
+			}
+			.attribution {
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				width: 100%;
+				margin-bottom: .3rem;
+				.timestamp, .author {
+					display: inline-block;
+					text-transform: uppercase;
+					font-weight: 500;
+					color: darken($subdued-text-color, 10%);
+					letter-spacing: 1px;
+					font-size: .8rem;
+				}
+				.timestamp {
+					margin-right: 1.5rem;
+					position: relative;
+					&:after {
+						content: "";
+						width: 2px;
+						height: 2px;
+						border-radius: 50%;
+						background: currentColor;
+						display: block;
+						position: absolute;
+						left: calc(100% + .5rem);
+						top: 50%;
+						transform: translateY(-50%);
+					}
+				}
+			}
 		}
 		svg {
 			pointer-events: none;
@@ -446,6 +498,7 @@ $home-text-link-color: #1E88E5;
 				fill: none;
 				stroke: $tower_gray;
 				stroke-width: 1px;
+				stroke-opacity: .8;
 			}
 			circle {
 				fill: $gull_gray;

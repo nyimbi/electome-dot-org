@@ -37,6 +37,22 @@ let clusters = require('../clusters.json').map(d => {
 	return d
 })
 
+const wordCounts = clusters.reduce((acc, curr) => {
+	acc.push(...curr.top_scoring_terms.map(d => d[0]))
+	return acc
+}, []).reduce((acc, curr) => {
+	const match = acc[curr]
+
+	if(match) {
+		acc[curr] = acc[curr] + 1
+	} else {
+		acc[curr] = 1
+	}
+	return acc
+}, {})
+
+console.log(clusters)
+
 const approximateEventHeight = 340
 const dayHeight = 50
 const eventsHPadding = 200
@@ -342,8 +358,13 @@ export const Timeline = React.createClass({
 					}}
 					onWheel={this.onEventsWrapperWheel} className="events">
 					{clusters.map((c, i) => {
-						const words = c.top_scoring_terms.map(w =>
-							<div key={w[0]} className="word">{w[0]}</div>)
+						const words = c.top_scoring_terms.map(w => {
+							const count = wordCounts[w[0]]
+							return <div data-count={count} key={w[0]} className="word">
+								<div className="text">{w[0]}</div>
+								<div className="count">{"(" + count + ")"}</div>
+							</div>
+						})
 
 						return <div key={i} className="event"
 							data-active={i === this.state.activeEventIndex}
@@ -364,7 +385,13 @@ export const Timeline = React.createClass({
 							</svg>
 							<div className="date">{moment(c.start_time).format('MMM D')}</div>
 							<div className="words">{words}</div>
-							<div>{c.headline_tweet.tweet}</div>
+							<div className="sample_tweet">
+								<div className="attribution">
+									<div className="timestamp">{moment(c.headline_tweet.time).format('MMM D')}</div>
+									<div className="author">{c.headline_tweet.author_name}</div>
+								</div>
+								<div className="text">{c.headline_tweet.tweet}</div>
+							</div>
 							<div 
 								onClick={() => { this.onEventClick(i) }} 
 								className="see-more">See more</div>
