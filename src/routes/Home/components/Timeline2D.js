@@ -399,11 +399,11 @@ export const Timeline = React.createClass({
 							</div>
 							<div 
 								onClick={() => { this.onEventClick(i) }} 
-								className="see-more">See more</div>
+								className="see-more"><i className="material-icons">more_horiz</i></div>
 							<div 
 								onClick={this.closeActiveEvent}
-								className="close">Close</div>
-							<div className="explore">Explore</div>
+								className="close"><i className="material-icons">close</i></div>
+							<div className="explore"><i className="material-icons">launch</i></div>
 						</div>
 					})}
 				</div>
