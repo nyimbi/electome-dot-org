@@ -389,11 +389,17 @@ $home-text-link-color: #1E88E5;
 	}
 	.document-browser {
 		transition: opacity $transition-duration;
+		padding: 1rem 1.5rem;
 		overflow: scroll;
 		position: absolute;
 		top: 0;
 		bottom: 0;
-		background: white;
+		background: $smoke;
+		border-left: solid 1px $border-color;
+		border-right: solid 1px $border-color;
+		.twitter-tweet {
+			margin: -1px 0 0 0 !important;
+		}
 		&[data-loading="true"] {
 			.loader {
 				display: block;
