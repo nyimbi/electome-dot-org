@@ -416,6 +416,17 @@ $home-text-link-color: #1E88E5;
 				display: none;
 			}
 		}
+		.date {
+			position: absolute;
+			bottom: calc(100% + .5rem);
+			left: 0;
+			transform: translateX(-50%);
+			text-transform: uppercase;
+			font-size: .8rem;
+			font-weight: 500;
+			letter-spacing: 1px;
+			color: darken($subdued-text-color, 10%);
+		}
 		svg {
 			pointer-events: none;
 			position: absolute;
@@ -428,7 +439,7 @@ $home-text-link-color: #1E88E5;
 				stroke-width: 1px;
 			}
 			circle {
-				fill: $regent_gray;
+				fill: $gull_gray;
 			}
 		}
 	}
