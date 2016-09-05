@@ -388,6 +388,7 @@ $home-text-link-color: #1E88E5;
 		}
 	}
 	.document-browser {
+		transition: opacity $transition-duration;
 		overflow: scroll;
 		position: absolute;
 		top: 0;
@@ -402,7 +403,10 @@ $home-text-link-color: #1E88E5;
 			display: none;
 		}
 		&:not(.in-place) {
-			visibility: hidden;
+			opacity: 0;
+		}
+		&.in-place {
+			opacity: 1;
 		}
 	}
 	.event {
