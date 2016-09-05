@@ -282,6 +282,7 @@ export const Timeline = React.createClass({
 
 			setTimeout(() => {
 				docBrowserNode.style.left = this.node.querySelector("[data-active='true'").getBoundingClientRect().right + 'px'
+				docBrowserNode.classList.add("in-place")
 		
 				Promise.all(tweetIDs.map(id =>
 					twttr.widgets.createTweet(id.toString(),
@@ -314,6 +315,7 @@ export const Timeline = React.createClass({
 			activeEventIndex: -1
 		}, () => {
 			this.node.setAttribute("data-event-activated", false)
+			this.node.querySelector(".document-browser").classList.remove("in-place")
 			Array.prototype.forEach.call(this.node.querySelectorAll(".event"), n => {
 				n.setAttribute("data-active", false)
 				n.style.transform = "none"

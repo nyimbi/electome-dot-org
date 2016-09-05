@@ -401,6 +401,9 @@ $home-text-link-color: #1E88E5;
 		.loader {
 			display: none;
 		}
+		&:not(.in-place) {
+			visibility: hidden;
+		}
 	}
 	.event {
 		transition: transform $transition-duration;
@@ -453,8 +456,7 @@ $home-text-link-color: #1E88E5;
 		.date {
 			position: absolute;
 			bottom: calc(100% + .5rem);
-			left: 0;
-			transform: translateX(-50%);
+			left: 2rem;
 			text-transform: uppercase;
 			font-size: .8rem;
 			font-weight: 500;
