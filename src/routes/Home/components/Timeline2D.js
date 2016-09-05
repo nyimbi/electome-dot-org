@@ -366,6 +366,13 @@ export const Timeline = React.createClass({
 							</div>
 						})
 
+						const headlineTweetText = c.headline_tweet.tweet.split(" ").map(word => {
+							if(word.indexOf("http") === -1) {
+								return word + ' '
+							}
+							return <a target='_blank' href={word}>{word}</a>
+						})
+
 						return <div key={i} className="event"
 							data-active={i === this.state.activeEventIndex}
 							style={{
@@ -390,7 +397,7 @@ export const Timeline = React.createClass({
 									<div className="timestamp">{moment(c.headline_tweet.time).format('MMM D')}</div>
 									<div className="author">{c.headline_tweet.author_name}</div>
 								</div>
-								<div className="text">{c.headline_tweet.tweet}</div>
+								<div className="text">{headlineTweetText}</div>
 							</div>
 							<div 
 								onClick={() => { this.onEventClick(i) }} 

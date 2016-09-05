@@ -457,6 +457,10 @@ $home-text-link-color: #1E88E5;
 			.text {
 				font-size: 1.2rem;
 			}
+			a {
+				color: $downy;
+				text-decoration: none;
+			}
 			.attribution {
 				white-space: nowrap;
 				text-overflow: ellipsis;
