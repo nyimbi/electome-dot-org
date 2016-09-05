@@ -54,7 +54,7 @@ const minDate = clusters.reduce((acc, curr) => {
 		return moment(curr.start_time, 'YYYY-MM-DD')
 	}
 	return acc
-}, null)
+}, null).subtract(1, 'days')
 
 const maxDate = clusters.reduce((acc, curr) => {
 	if(!acc || moment(curr.end_time).isAfter(acc)) {
@@ -303,15 +303,15 @@ export const Timeline = React.createClass({
 		}
 
 		const globalDates = []
-		for(let i=0; i<=Math.abs(minDate.diff(maxDate, 'months')); i++) {
+		for(let i=0; i<=Math.abs(minDate.diff(maxDate, 'months')) + 1; i++) {
 			let currentDate = minDate.clone().add(i, 'months')
 			let days = currentDate.daysInMonth()
-
-			// so it's the number of days in that month, minus the number of days offset, if it's the same month as the minDate
 
 			if(currentDate.isSame(minDate, 'month')) {
 				days -= minDate.format('D')
 			}
+
+			days = Math.max(1, days)
 
 			globalDates.push(<div 
 				style={{height: (globalDayHeight * days) + 'px'}}
@@ -359,8 +359,9 @@ export const Timeline = React.createClass({
 									acc += `${curr},${(index + 1) * dayHeight} `
 									return acc
 								}, '0,0 ') + '0,' + ((c.sparkline.length + 1) * dayHeight)} />
+								<circle cx="0" cy="0" r="2"/>
+								<circle cx="0" cy={(c.sparkline.length + 1) * dayHeight} r="2"/>
 							</svg>
-							<div>{i}</div>
 							<div>{moment(c.start_time).format('M DD') + ' ' + moment(c.end_time).format('M DD')}</div>
 							{words}
 							<div>{c.headline_tweet.tweet}</div>

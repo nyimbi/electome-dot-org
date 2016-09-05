@@ -421,9 +421,14 @@ $home-text-link-color: #1E88E5;
 			position: absolute;
 			top: 0;
 			left: 0;
+			overflow: visible;
 			polyline {
-				fill-opacity: 0.1;
-				fill: $bittersweet;
+				fill: none;
+				stroke: $tower_gray;
+				stroke-width: 1px;
+			}
+			circle {
+				fill: $regent_gray;
 			}
 		}
 	}
