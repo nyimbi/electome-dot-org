@@ -426,7 +426,7 @@ $home-text-link-color: #1E88E5;
 				background: darken($border-color, 5%);
 			}
 		}
-		&:hover {
+		&:hover, &[data-active="true"] {
 			.see-more, .explore, .close {
 				opacity: 1;
 			}

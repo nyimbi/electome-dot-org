@@ -13,6 +13,7 @@ client.getEntries().then(entry => {
 	console.log(entry.items)
 })
 
+const docBrowserWidth = 300
 const eventWidth = 200
 const sparklineMax = eventWidth - 20
 
@@ -275,7 +276,7 @@ export const Timeline = React.createClass({
 					n.setAttribute("data-active", true)
 				} else {
 					n.setAttribute("data-active", false)
-					n.style.transform = "translateX(" + eventWidth + "px)"
+					n.style.transform = "translateX(" + docBrowserWidth + "px)"
 				}
 			})
 
@@ -411,7 +412,7 @@ export const Timeline = React.createClass({
 					onWheel={e => {
 						e.stopPropagation()
 					}}
-					style={{ width: eventWidth + 'px' }}
+					style={{ width: docBrowserWidth + 'px' }}
 					className="document-browser">
 					<div 
 						onClick={this.closeActiveEvent}
