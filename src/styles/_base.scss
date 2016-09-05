@@ -405,7 +405,7 @@ $home-text-link-color: #1E88E5;
 	.event {
 		transition: transform $transition-duration;
 		position: absolute;
-		padding: 0 1rem;
+		padding: .5rem 3rem 0 1.5rem;
 		&:not([data-active="true"]) {
 			.close {
 				display: none;
@@ -426,6 +426,15 @@ $home-text-link-color: #1E88E5;
 			font-weight: 500;
 			letter-spacing: 1px;
 			color: darken($subdued-text-color, 10%);
+		}
+		.words {
+			.word {
+				display: inline-block;
+				font-size: 1.2rem;
+				margin-right: 1rem;
+				font-weight: 300;
+			}
+			margin-bottom: 2rem;
 		}
 		svg {
 			pointer-events: none;

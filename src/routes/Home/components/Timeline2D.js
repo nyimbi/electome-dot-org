@@ -363,7 +363,7 @@ export const Timeline = React.createClass({
 								<circle cx="0" cy={(c.sparkline.length + 1) * dayHeight} r="2"/>
 							</svg>
 							<div className="date">{moment(c.start_time).format('MMM D')}</div>
-							{words}
+							<div className="words">{words}</div>
 							<div>{c.headline_tweet.tweet}</div>
 							<div 
 								onClick={() => { this.onEventClick(i) }} 
