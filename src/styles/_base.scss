@@ -35,6 +35,14 @@ $home-text-link-color: #1E88E5;
 	text-align: center;
 }
 
+%home-subdued-label {
+	text-transform: uppercase;
+	font-weight: 500;
+	color: darken($subdued-text-color, 10%);
+	letter-spacing: 1px;
+	font-size: .8rem;
+}
+
 %home-description {
 	@extend %body-font;
 	font-size: 1.3rem;
@@ -387,9 +395,14 @@ $home-text-link-color: #1E88E5;
 			display: none;
 		}
 	}
+	&[data-event-activated="true"] {
+		.event:not([data-active="true"]) {
+			opacity: .5;
+		}
+	}
 	.document-browser {
 		transition: opacity $transition-duration;
-		padding: 1rem 1.5rem;
+		padding: 2rem 1.5rem;
 		overflow: scroll;
 		position: absolute;
 		top: 0;
@@ -413,6 +426,20 @@ $home-text-link-color: #1E88E5;
 		}
 		&.in-place {
 			opacity: 1;
+		}
+		.close {
+			cursor: pointer;
+			position: absolute;
+			top: 1rem;
+			right: 1rem;
+			i {
+				font-size: 1.2rem;
+			}
+		}
+		.document-browser-header {
+			@extend %home-subdued-label;
+			font-size: 1rem;
+			margin-bottom: 1.5rem;
 		}
 	}
 	.event {
@@ -516,11 +543,7 @@ $home-text-link-color: #1E88E5;
 				margin-bottom: .3rem;
 				.timestamp, .author {
 					display: inline-block;
-					text-transform: uppercase;
-					font-weight: 500;
-					color: darken($subdued-text-color, 10%);
-					letter-spacing: 1px;
-					font-size: .8rem;
+					@extend %home-subdued-label;
 				}
 				.timestamp {
 					margin-right: 1.5rem;

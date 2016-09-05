@@ -432,7 +432,8 @@ export const Timeline = React.createClass({
 					className="document-browser">
 					<div 
 						onClick={this.closeActiveEvent}
-						className="close">close</div>
+						className="close"><i className="material-icons">close</i></div>
+					<div className="document-browser-header">Representative Tweets</div>
 					<div className="loader">Loading</div>
 					<div className="tweets"></div>
 				</div>
