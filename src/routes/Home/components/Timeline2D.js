@@ -332,7 +332,7 @@ export const Timeline = React.createClass({
 				style={{height: (globalDayHeight * days) + 'px'}}
 				className="global-date"
 				key={i}>
-				{currentDate.format('MMM')}</div>)
+				<div className="text">{currentDate.format('MMM')}</div></div>)
 		}
 
 		const getEventDOM = (c, i) => {

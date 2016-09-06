@@ -18,7 +18,7 @@ For example:
 
 $header-height: 7rem;
 $home-h-padding: 5vw;
-$home-module-v-padding: 5rem;
+$home-module-v-padding: 6rem;
 $home-divider-color: lighten($border-color, 5%);
 $home-text-link-color: #1E88E5;
 
@@ -176,7 +176,7 @@ $home-text-link-color: #1E88E5;
 		padding: 7rem $home-h-padding 0 $home-h-padding;		
 		.text {
 			text-align: center;
-			margin-bottom: 5rem;
+			margin-bottom: 6rem;
 		}
 	}
 	h1 {
@@ -213,10 +213,10 @@ $home-text-link-color: #1E88E5;
 		color: $porcelain;
 	}
 	.viewdemo {
-		background: $regent_gray;
+		background: $gull_gray;
 		border: none;
 		&:hover {
-			background: rgba($regent_gray, .7);
+			background: rgba($gull_gray, .7);
 		}
 	}
 	.enter {
@@ -632,12 +632,31 @@ $home-text-link-color: #1E88E5;
 				&:first-of-type {
 					visibility: hidden;
 				}
+				text-align: center;
 				padding: 0 .8rem;
 				text-transform: uppercase;
 				font-weight: 500;
 				color: $highlight-text-color;
 				letter-spacing: 1px;
 				font-size: .9rem;
+				position: relative;
+				overflow: hidden;
+				.text {
+					position: relative;
+					z-index: 1;
+				}
+				&:before {
+					content: "";
+					display: block;
+					position: absolute;
+					width: .7rem;
+					top: 2.7rem;
+					bottom: 1rem;
+					transform: translateX(-50%);
+					left: 50%;
+					background-size: 100% 1.3rem;
+					background-image: linear-gradient(darken($smoke, 5%) .1em, transparent .1em);
+				}
 			}
 			z-index: 1;
 			position: relative;
