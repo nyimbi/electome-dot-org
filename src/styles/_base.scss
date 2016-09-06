@@ -587,6 +587,7 @@ $home-text-link-color: #1E88E5;
 		}
 	}
 	.date-picker {
+		$date-picker-border-color: darken($border-color, 5%);
 		overflow: hidden;
 		.global, .local {
 			vertical-align: top;
@@ -595,16 +596,16 @@ $home-text-link-color: #1E88E5;
 			height: 100%;
 		}
 		.global {
-			border-right: solid 1px $border-color;
+			border-right: solid 1px $date-picker-border-color;
 			.global-date {
 				&:first-of-type {
 					visibility: hidden;
 				}
+				padding: 0 .8rem;
 				text-transform: uppercase;
 				font-weight: 500;
 				color: $highlight-text-color;
 				letter-spacing: 1px;
-				text-align: center;
 				font-size: .9rem;
 			}
 		}
@@ -614,7 +615,8 @@ $home-text-link-color: #1E88E5;
 				transition: none;
 			}
 			.local-date {
-				text-align: center;
+				padding: 0 .8rem;
+				text-align: right;
 				font-weight: 500;
 				color: $highlight-text-color;
 				letter-spacing: 2px;
@@ -622,11 +624,16 @@ $home-text-link-color: #1E88E5;
 			}
 		}
 		.brush {
+			cursor: pointer;
 			position: absolute;
-			width: 1rem;
-			background: red;
-			right: 51%;
-			top: 0;
+			width: 1.2rem;
+			background: white;
+			border: solid 1px $date-picker-border-color;
+			border-right: none;
+			border-radius: 3px 0 0 3px;
+			right: 50%;
+			z-index: 1;
+			top: -1px;
 			transition: top $transition-duration / 2;
 			&.scrolling {
 				transition: none;
