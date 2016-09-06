@@ -446,6 +446,18 @@ $home-text-link-color: #1E88E5;
 		transition: transform $transition-duration;
 		position: absolute;
 		padding: .5rem 3rem 0 2rem;
+		&.nugget {
+			.name {
+				font-size: 1.3rem;
+				font-weight: 500;
+				margin-bottom: 1rem;
+			}
+			.description {
+				font-size: 1.1rem;
+				font-weight: 100;
+				margin-bottom: 1rem;
+			}
+		}
 		.content {
 			position: relative;
 			z-index: 1;

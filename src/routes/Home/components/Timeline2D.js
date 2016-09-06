@@ -4,7 +4,7 @@ import moment from 'moment'
 import { findIndex, debounce } from 'underscore'
 
 const docBrowserWidth = 300
-const eventWidth = 200
+const eventWidth = 250
 const approximateEventHeight = 340
 const dayHeight = 50
 const eventsHPadding = 200
@@ -384,8 +384,6 @@ export const Timeline = React.createClass({
 		}
 
 		const getNuggetDOM = (c, i) => {
-			console.log("GET NUGGET")
-			console.log(c)
 			return <div style={{
 				width: eventWidth + 'px',
 				top: (clusterOffsets[i] + eventsVPadding) + 'px',
@@ -394,6 +392,7 @@ export const Timeline = React.createClass({
 				<div className="date">{moment(c.start_time).format('MMM D')}</div>
 				<div className="name">{c.name}</div>
 				<div className="description">{c.description}</div>
+				<a href={c.url} target="_blank" className="explore"><i className="material-icons">launch</i></a>
 			</div>
 		}
 
