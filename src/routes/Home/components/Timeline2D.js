@@ -9,8 +9,20 @@ const client = contentful.createClient({
 	accessToken: '419f1f27efbafdd6f29176fad7a2171c766f435964879d9600a2bf068aa8a7e1'
 })
 
+let nuggets = []
+
 client.getEntries().then(entry => {
-	console.log(entry.items)
+	nuggets = entry.items.map(d => {
+		const obj = d.fields
+		const lookup = {}
+		d.fields.url.split("&").forEach(c => {
+			const split = c.split("=")
+			lookup[split[0]] = decodeURIComponent(split[1])
+		})
+		obj.start_time = lookup.start_date
+		obj.end_time = lookup.end_date
+		return obj
+	})
 })
 
 const docBrowserWidth = 300
