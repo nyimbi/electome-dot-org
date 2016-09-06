@@ -2,70 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import moment from 'moment'
 import { findIndex, debounce } from 'underscore'
-import contentful from 'contentful'
-
-const client = contentful.createClient({
-	space: 't0mamnyqwt6r',
-	accessToken: '419f1f27efbafdd6f29176fad7a2171c766f435964879d9600a2bf068aa8a7e1'
-})
-
-let nuggets = []
-
-client.getEntries().then(entry => {
-	nuggets = entry.items.map(d => {
-		const obj = d.fields
-		const lookup = {}
-		d.fields.url.split("&").forEach(c => {
-			const split = c.split("=")
-			lookup[split[0]] = decodeURIComponent(split[1])
-		})
-		obj.start_time = lookup.start_date
-		obj.end_time = lookup.end_date
-		return obj
-	})
-})
 
 const docBrowserWidth = 300
 const eventWidth = 200
-const sparklineMax = eventWidth - 20
-
-let clusters = require('../clusters.json').map(d => {
-	const startMoment = moment(d.start_time)
-	const endMoment = moment(d.end_time)
-	const range = Math.abs(startMoment.diff(endMoment, 'days'))
-	const max = Math.random() * sparklineMax
-	let current = Math.random() * max / 2
-	const peakIndex = 1 + Math.round(Math.random() * (range - 2))
-
-	d.sparkline = []
-	for(let i=0; i<range; i++) {
-		d.sparkline.push(current)
-		if(i < peakIndex) {
-			current = Math.min(max, current + Math.random() * Math.max(0, max - current) / (peakIndex - i))
-		} else {
-			current = Math.max(0, current - Math.random() * Math.max(0, current) / Math.max(1, i - peakIndex))
-		}
-	}
-	
-	return d
-})
-
-const wordCounts = clusters.reduce((acc, curr) => {
-	acc.push(...curr.top_scoring_terms.map(d => d[0]))
-	return acc
-}, []).reduce((acc, curr) => {
-	const match = acc[curr]
-
-	if(match) {
-		acc[curr] = acc[curr] + 1
-	} else {
-		acc[curr] = 1
-	}
-	return acc
-}, {})
-
-console.log(clusters)
-
 const approximateEventHeight = 340
 const dayHeight = 50
 const eventsHPadding = 200
@@ -77,25 +16,11 @@ let brushOffsetTop = 0
 let pageY = 0
 let visibleDateRange = 0
 let datePickerScrollHeight = 0
-
-const minDate = clusters.reduce((acc, curr) => {
-	if(!acc || moment(curr.start_time).isBefore(acc)) {
-		return moment(curr.start_time, 'YYYY-MM-DD')
-	}
-	return acc
-}, null).subtract(1, 'days')
-
-const maxDate = clusters.reduce((acc, curr) => {
-	if(!acc || moment(curr.end_time).isAfter(acc)) {
-		return moment(curr.end_time, 'YYYY-MM-DD')
-	}
-	return acc
-}, null)
-
-const dateRange = Math.abs(minDate.diff(maxDate, 'days')) + 1
-
-const clusterOffsets = clusters.map(d =>
-	moment(d.start_time, 'YYYY-MM-DD').diff(minDate, 'days') * dayHeight)
+let minDate = null
+let maxDate = null
+let dateRange = 0
+let clusterOffsets = null
+let wordCounts = []
 
 export const Timeline = React.createClass({
 	getInitialState() {
@@ -108,6 +33,43 @@ export const Timeline = React.createClass({
 		}
 	},
 
+	componentWillMount() {
+		const { clusters } = this.props
+
+		wordCounts = clusters.filter(d => d.type !== 'nugget').reduce((acc, curr) => {
+			acc.push(...curr.top_scoring_terms.map(d => d[0]))
+			return acc
+		}, []).reduce((acc, curr) => {
+			const match = acc[curr]
+
+			if(match) {
+				acc[curr] = acc[curr] + 1
+			} else {
+				acc[curr] = 1
+			}
+			return acc
+		}, {})
+
+		minDate = clusters.reduce((acc, curr) => {
+			if(!acc || moment(curr.start_time).isBefore(acc)) {
+				return moment(curr.start_time, 'YYYY-MM-DD')
+			}
+			return acc
+		}, null).subtract(1, 'days')
+
+		maxDate = clusters.reduce((acc, curr) => {
+			if(!acc || moment(curr.end_time).isAfter(acc)) {
+				return moment(curr.end_time, 'YYYY-MM-DD')
+			}
+			return acc
+		}, null)
+
+		dateRange = Math.abs(minDate.diff(maxDate, 'days')) + 1
+
+		clusterOffsets = clusters.map(d =>
+			moment(d.start_time, 'YYYY-MM-DD').diff(minDate, 'days') * dayHeight)
+	},
+
 	datePickerWheelEnd() {
 		this.components.datePicker.node.classList.remove("scrolling")
 	},
@@ -117,6 +79,8 @@ export const Timeline = React.createClass({
 	},
 
 	componentDidMount() {
+		const { clusters } = this.props
+
 		setTimeout(() => {
 			this.node = ReactDOM.findDOMNode(this)
 			this.components = {
@@ -194,6 +158,8 @@ export const Timeline = React.createClass({
 	onEventsWrapperWheel(e) {
 		if(this.state.activeEventIndex > -1) { return }
 
+		const { clusters } = this.props
+
 		e.preventDefault()
 
 		this.components.eventsWrapper.node.classList.add("scrolling")
@@ -213,7 +179,7 @@ export const Timeline = React.createClass({
 	},
 
 	setEventsScroll() {
-		if(this.state.eventIndex > (clusters.length - 2)) { return }
+		if(this.state.eventIndex > (this.props.clusters.length - 2)) { return }
 
 		const offset = (this.state.left + (this.windowWidth / 2)) - (this.state.eventIndex * eventWidth)
 
@@ -268,7 +234,7 @@ export const Timeline = React.createClass({
 
 	openEvent(i) {
 		const docBrowserNode = this.node.querySelector(".document-browser")
-		const tweetIDs = clusters[i].sample_tweet_ids
+		const tweetIDs = this.props.clusters[i].sample_tweet_ids
 
 		docBrowserNode.setAttribute("data-loading", true)
 		docBrowserNode.querySelector(".tweets").innerHTML = ""
@@ -387,7 +353,7 @@ export const Timeline = React.createClass({
 						padding: `${eventsVPadding}px ${eventsHPadding}px`
 					}}
 					onWheel={this.onEventsWrapperWheel} className="events">
-					{clusters.map((c, i) => {
+					{this.props.clusters.filter(d => d.type !== 'nugget').map((c, i) => {
 						const words = c.top_scoring_terms.map(w => {
 							const count = wordCounts[w[0]]
 							return <div data-count={count} key={w[0]} className="word">

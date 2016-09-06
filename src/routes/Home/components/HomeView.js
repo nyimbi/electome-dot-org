@@ -2,7 +2,76 @@ import React from 'react'
 import Timeline from './Timeline2D'
 import Timeline3D from './Timeline'
 import VideoPlayer from './VideoPlayer'
+import contentful from 'contentful'
 const media = require('../media.json')
+import moment from 'moment'
+
+const sparklineMax = 180
+
+const client = contentful.createClient({
+	space: 't0mamnyqwt6r',
+	accessToken: '419f1f27efbafdd6f29176fad7a2171c766f435964879d9600a2bf068aa8a7e1'
+})
+
+let clusters = require('../clusters.json').map(d => {
+	const startMoment = moment(d.start_time)
+	const endMoment = moment(d.end_time)
+	const range = Math.abs(startMoment.diff(endMoment, 'days'))
+	const max = Math.random() * sparklineMax
+	let current = Math.random() * max / 2
+	const peakIndex = 1 + Math.round(Math.random() * (range - 2))
+
+	d.sparkline = []
+	for(let i=0; i<range; i++) {
+		d.sparkline.push(current)
+		if(i < peakIndex) {
+			current = Math.min(max, current + Math.random() * Math.max(0, max - current) / (peakIndex - i))
+		} else {
+			current = Math.max(0, current - Math.random() * Math.max(0, current) / Math.max(1, i - peakIndex))
+		}
+	}
+	
+	return d
+})
+
+let nuggetsLoaded = false
+const nuggetsLoadedCB = []
+let nuggets = []
+
+client.getEntries().then(entry => {
+	nuggets = entry.items.map(d => {
+		const obj = d.fields
+		const lookup = {}
+		d.fields.url.split("&").forEach(c => {
+			const split = c.split("=")
+			lookup[split[0]] = decodeURIComponent(split[1])
+		})
+		obj.type = "nugget"
+		obj.start_time = lookup.start_date
+		obj.end_time = lookup.end_date
+		return obj
+	})
+
+	clusters = clusters.concat(nuggets).sort((a, b) => {
+		const aStartMoment = moment(a.start_time)
+		const bStartMoment = moment(b.start_time)
+		if(moment(aStartMoment.format('YYYY-MM-DD')).isBefore(moment(bStartMoment.format('YYYY-MM-DD')))) {
+			return -1
+		}
+		if(moment(aStartMoment.format('YYYY-MM-DD')).isAfter(bStartMoment.format('YYYY-MM-DD'))) {
+			return 1
+		}
+		if(moment(a.end_time).isBefore(b.end_time)) {
+			return -1
+		}
+		return 1
+	})
+
+	nuggetsLoaded = true
+	console.log("loaded")
+	console.log(clusters)
+	nuggetsLoadedCB.forEach(d => d())
+})
 
 export const HomeView = React.createClass({
 	getInitialState() {
@@ -11,7 +80,16 @@ export const HomeView = React.createClass({
 		}
 	},
 
+	componentWillMount() {
+		nuggetsLoadedCB.push(this.forceUpdate.bind(this))
+	},
+
 	render() {
+		let timeline = null
+		if(nuggetsLoaded) {
+			timeline = <Timeline clusters={clusters} />
+		}
+
 		return (
 			<div className="home">
 		  	<div className="header">
@@ -54,8 +132,8 @@ export const HomeView = React.createClass({
 			  		<div className="entry-links-label">Explore</div>
 			  		<div className="description">Check out different events below.</div>
 		  		</div>
-		  		<Timeline />
 		  	</div>
+	  		{timeline}
 		  	<div className="partnerships">
 		  		<div className="partnerships-label">In partnership with</div>
 		  		<div className="logos">
