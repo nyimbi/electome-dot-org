@@ -587,7 +587,7 @@ $home-text-link-color: #1E88E5;
 		}
 	}
 	.date-picker {
-		$date-picker-border-color: darken($border-color, 5%);
+		$date-picker-border-color: $border-color;
 		overflow: hidden;
 		.global, .local {
 			vertical-align: top;
@@ -636,6 +636,19 @@ $home-text-link-color: #1E88E5;
 			transition: top $transition-duration / 2;
 			&.scrolling {
 				transition: none;
+			}
+			&:after {
+				content: "";
+				width: 0; 
+			  height: 0; 
+			  border-top: 8px solid transparent;
+			  border-bottom: 8px solid transparent;
+			  border-left: 8px solid darken($smoke, 2%);
+			  position: absolute;
+			  left: calc(100% - 2px);
+			  top: 50%;
+			  transform: translateY(-50%);
+			  z-index: 10;
 			}
 		}
 	}
