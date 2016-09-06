@@ -453,9 +453,9 @@ $home-text-link-color: #1E88E5;
 				margin-bottom: 1rem;
 			}
 			.description {
-				font-size: 1.1rem;
+				font-size: 1.2rem;
 				font-weight: 100;
-				margin-bottom: 1rem;
+				margin-bottom: 2rem;
 			}
 		}
 		.content {
@@ -520,7 +520,6 @@ $home-text-link-color: #1E88E5;
 				display: inline-block;
 				font-size: 1.2rem;
 				margin-right: 1rem;
-				font-weight: 300;
 				&:not([data-count="1"]) {
 					font-weight: 500;
 				}
@@ -544,6 +543,7 @@ $home-text-link-color: #1E88E5;
 			margin-bottom: 1.5rem;
 			.text {
 				font-size: 1.2rem;
+				font-weight: 100;
 			}
 			a {
 				display: inline-block;
