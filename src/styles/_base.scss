@@ -608,6 +608,9 @@ $home-text-link-color: #1E88E5;
 				letter-spacing: 1px;
 				font-size: .9rem;
 			}
+			z-index: 1;
+			position: relative;
+			pointer-events: none;
 		}
 		.local {
 			transition: all $transition-duration / 2;
@@ -626,14 +629,10 @@ $home-text-link-color: #1E88E5;
 		.brush {
 			cursor: pointer;
 			position: absolute;
-			width: 1.2rem;
-			background: white;
-			border: solid 1px $date-picker-border-color;
-			border-right: none;
-			border-radius: 3px 0 0 3px;
-			right: 50%;
-			z-index: 1;
-			top: -1px;
+			width: 50%;
+			background: darken($smoke, 2%);
+			left: 0;
+			top: 0px;
 			transition: top $transition-duration / 2;
 			&.scrolling {
 				transition: none;
