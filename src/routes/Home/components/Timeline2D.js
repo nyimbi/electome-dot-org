@@ -418,22 +418,24 @@ export const Timeline = React.createClass({
 									return acc
 								}, '0,0 ') + '0,' + ((c.sparkline.length + 1) * dayHeight)} />
 							</svg>
-							<div className="date">{moment(c.start_time).format('MMM D')}</div>
-							<div className="words">{words}</div>
-							<div className="sample_tweet">
-								<div className="attribution">
-									<div className="timestamp">{moment(c.headline_tweet.time).format('MMM D')}</div>
-									<div className="author">{c.headline_tweet.author_name}</div>
+							<div className="content">
+								<div className="date">{moment(c.start_time).format('MMM D')}</div>
+								<div className="words">{words}</div>
+								<div className="sample_tweet">
+									<div className="attribution">
+										<div className="timestamp">{moment(c.headline_tweet.time).format('MMM D')}</div>
+										<div className="author">{c.headline_tweet.author_name}</div>
+									</div>
+									<div className="text">{headlineTweetText}</div>
 								</div>
-								<div className="text">{headlineTweetText}</div>
+								<div 
+									onClick={() => { this.onEventClick(i) }} 
+									className="see-more"><i className="material-icons">more_horiz</i></div>
+								<div 
+									onClick={this.closeActiveEvent}
+									className="close"><i className="material-icons">close</i></div>
+								<div className="explore"><i className="material-icons">launch</i></div>
 							</div>
-							<div 
-								onClick={() => { this.onEventClick(i) }} 
-								className="see-more"><i className="material-icons">more_horiz</i></div>
-							<div 
-								onClick={this.closeActiveEvent}
-								className="close"><i className="material-icons">close</i></div>
-							<div className="explore"><i className="material-icons">launch</i></div>
 						</div>
 					})}
 				</div>

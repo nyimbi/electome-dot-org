@@ -446,6 +446,10 @@ $home-text-link-color: #1E88E5;
 		transition: transform $transition-duration;
 		position: absolute;
 		padding: .5rem 3rem 0 2rem;
+		.content {
+			position: relative;
+			z-index: 1;
+		}
 		.see-more, .explore, .close {
 			cursor: pointer;
 			opacity: 0;
@@ -569,7 +573,6 @@ $home-text-link-color: #1E88E5;
 			top: 0;
 			left: 0;
 			overflow: visible;
-			z-index: -1;
 			polyline {
 				fill: $tower_gray;
 				fill-opacity: .2;
