@@ -97,14 +97,14 @@ export const Timeline = React.createClass({
 						this.setState({
 							eventIndex,
 							left: this.getCappedEventsLeft(eventIndex * eventWidth)
-						}, this.setEventsScroll)
+						}, () => { this.setEventsScroll(true) })
 					}
 				},
 				datePicker: {
 					node: this.node.querySelector(".date-picker .local"),
 					update: function(amount) {
 						this.setState({
-							localDatesTop: amount * datePickerScrollHeight
+							localDatesTop: amount * (datePickerScrollHeight + datePickerHeight)
 						}, this.setDatePickerTransform)
 					}
 				},
@@ -178,8 +178,11 @@ export const Timeline = React.createClass({
 		})
 	},
 
-	setEventsScroll() {
+	setEventsScroll(alignTop) {
 		if(this.state.eventIndex > (this.props.clusters.length - 2)) { return }
+
+		let topBuffer = 0.5 * (nodeHeight - approximateEventHeight)
+		if(alignTop) { topBuffer = eventsVPadding }
 
 		const offset = (this.state.left + (this.windowWidth / 2)) - (this.state.eventIndex * eventWidth)
 
@@ -187,7 +190,7 @@ export const Timeline = React.createClass({
 			clusterOffsets[this.state.eventIndex] + 
 			Math.max(0, Math.min(1, offset / eventWidth)) * 
 			(clusterOffsets[this.state.eventIndex + 1] - (clusterOffsets[this.state.eventIndex])) -
-			0.5 * (nodeHeight - approximateEventHeight))
+			topBuffer)
 
 		this.components.eventsWrapper.node.style.transform = `translate3d(${-this.state.left}px, ${-yPos}px, 0)`
 	},
@@ -225,11 +228,12 @@ export const Timeline = React.createClass({
 
 	onTimelineMouseMove(e) {
 		if(!this.state.brushMouseDown) { return }
-		const top = Math.max(0, Math.min(datePickerHeight - (globalDayHeight * visibleDateRange), this.getBrushTopForMousePosition(e) - this.state.lastBrushTop))
+		const brushHeight = globalDayHeight * visibleDateRange
+		const top = Math.max(0, Math.min(datePickerHeight - brushHeight, this.getBrushTopForMousePosition(e) - this.state.lastBrushTop))
 
 		this.components.brush.node.style.top = top + 'px'
 
-		this.updateWindow('brush', top / (datePickerHeight - globalDayHeight * visibleDateRange))
+		this.updateWindow('brush', (top / (datePickerHeight)))
 	},
 
 	openEvent(i) {
