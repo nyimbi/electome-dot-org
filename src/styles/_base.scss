@@ -170,6 +170,7 @@ $home-text-link-color: #1E88E5;
 .hero {
 	border-bottom: solid 1px $home-divider-color;
 	position: relative;
+	background: rgba($smoke, .7);
 	.hero-content {
 		@extend %home-content-wrapper;
 		padding: 7rem $home-h-padding 0 $home-h-padding;		
@@ -185,7 +186,7 @@ $home-text-link-color: #1E88E5;
 		letter-spacing: 2px;
 		text-transform: uppercase;
 		font-weight: 700;
-		margin-bottom: 2rem;
+		margin-bottom: 1.5rem;
 	}
 	.description {
 		@extend %body-font;
@@ -193,6 +194,7 @@ $home-text-link-color: #1E88E5;
 		max-width: 500px;
 		margin-left: auto;
 		margin-right: auto;
+		color: darken($text-color, 1%) !important;
 	}
 	.ctas {
 		margin-top: 3rem;
@@ -207,6 +209,22 @@ $home-text-link-color: #1E88E5;
 		padding: 1rem 1.8rem .8rem 1.8rem;
 		display: inline-block;
 		text-transform: uppercase;
+		transition: all $transition-duration;
+		color: $porcelain;
+	}
+	.viewdemo {
+		background: $regent_gray;
+		border: none;
+		&:hover {
+			background: rgba($regent_gray, .7);
+		}
+	}
+	.enter {
+		background: $fruit-salad;
+		border: none;
+		&:hover {
+			background: rgba($fruit-salad, .7);
+		}
 	}
 	.browser {
 		$browser-controls-height: 2.5rem;
