@@ -495,9 +495,7 @@ $home-text-link-color: #1E88E5;
 			}
 		}
 		.date {
-			position: absolute;
-			bottom: calc(100% + .5rem);
-			left: 2rem;
+			margin-bottom: 1rem;
 			text-transform: uppercase;
 			font-size: .8rem;
 			font-weight: 500;

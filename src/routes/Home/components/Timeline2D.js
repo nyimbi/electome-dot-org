@@ -331,6 +331,72 @@ export const Timeline = React.createClass({
 				{currentDate.format('MMM')}</div>)
 		}
 
+		const getEventDOM = (c, i) => {
+			const words = c.top_scoring_terms.map(w => {
+				const count = wordCounts[w[0]]
+				return <div data-count={count} key={w[0]} className="word">
+					<div className="text">{w[0]}</div>
+					<div className="count">{"(" + count + ")"}</div>
+				</div>
+			})
+
+			const headlineTweetText = c.headline_tweet.tweet.split(" ").map(word => {
+				if(word.indexOf("http") === -1) {
+					return word + ' '
+				}
+				return <a target='_blank' href={word}>{word}</a>
+			})
+
+			return <div key={i} className="event"
+				data-active={i === this.state.activeEventIndex}
+				style={{
+					width: eventWidth + 'px',
+					top: (clusterOffsets[i] + eventsVPadding) + 'px',
+					left: ((eventWidth * i) + eventsHPadding) + 'px'
+				}}>
+				<svg 
+					height={(c.sparkline.length + 1) * dayHeight}
+					width={eventWidth}>
+					<polyline points={c.sparkline.reduce((acc, curr, index) => {
+						acc += `${curr},${(index + 1) * dayHeight} `
+						return acc
+					}, '0,0 ') + '0,' + ((c.sparkline.length + 1) * dayHeight)} />
+				</svg>
+				<div className="content">
+					<div className="date">{moment(c.start_time).format('MMM D')}</div>
+					<div className="words">{words}</div>
+					<div className="sample_tweet">
+						<div className="attribution">
+							<div className="timestamp">{moment(c.headline_tweet.time).format('MMM D')}</div>
+							<div className="author">{c.headline_tweet.author_name}</div>
+						</div>
+						<div className="text">{headlineTweetText}</div>
+					</div>
+					<div 
+						onClick={() => { this.onEventClick(i) }} 
+						className="see-more"><i className="material-icons">more_horiz</i></div>
+					<div 
+						onClick={this.closeActiveEvent}
+						className="close"><i className="material-icons">close</i></div>
+					<div className="explore"><i className="material-icons">launch</i></div>
+				</div>
+			</div>
+		}
+
+		const getNuggetDOM = (c, i) => {
+			console.log("GET NUGGET")
+			console.log(c)
+			return <div style={{
+				width: eventWidth + 'px',
+				top: (clusterOffsets[i] + eventsVPadding) + 'px',
+				left: ((eventWidth * i) + eventsHPadding) + 'px'
+			}} key={i} className="event nugget">
+				<div className="date">{moment(c.start_time).format('MMM D')}</div>
+				<div className="name">{c.name}</div>
+				<div className="description">{c.description}</div>
+			</div>
+		}
+
 		return (
 			<div 
 				data-event-activated={this.state.activeEventIndex > -1}
@@ -353,56 +419,9 @@ export const Timeline = React.createClass({
 						padding: `${eventsVPadding}px ${eventsHPadding}px`
 					}}
 					onWheel={this.onEventsWrapperWheel} className="events">
-					{this.props.clusters.filter(d => d.type !== 'nugget').map((c, i) => {
-						const words = c.top_scoring_terms.map(w => {
-							const count = wordCounts[w[0]]
-							return <div data-count={count} key={w[0]} className="word">
-								<div className="text">{w[0]}</div>
-								<div className="count">{"(" + count + ")"}</div>
-							</div>
-						})
-
-						const headlineTweetText = c.headline_tweet.tweet.split(" ").map(word => {
-							if(word.indexOf("http") === -1) {
-								return word + ' '
-							}
-							return <a target='_blank' href={word}>{word}</a>
-						})
-
-						return <div key={i} className="event"
-							data-active={i === this.state.activeEventIndex}
-							style={{
-								width: eventWidth + 'px',
-								top: (clusterOffsets[i] + eventsVPadding) + 'px',
-								left: ((eventWidth * i) + eventsHPadding) + 'px'
-							}}>
-							<svg 
-								height={(c.sparkline.length + 1) * dayHeight}
-								width={eventWidth}>
-								<polyline points={c.sparkline.reduce((acc, curr, index) => {
-									acc += `${curr},${(index + 1) * dayHeight} `
-									return acc
-								}, '0,0 ') + '0,' + ((c.sparkline.length + 1) * dayHeight)} />
-							</svg>
-							<div className="content">
-								<div className="date">{moment(c.start_time).format('MMM D')}</div>
-								<div className="words">{words}</div>
-								<div className="sample_tweet">
-									<div className="attribution">
-										<div className="timestamp">{moment(c.headline_tweet.time).format('MMM D')}</div>
-										<div className="author">{c.headline_tweet.author_name}</div>
-									</div>
-									<div className="text">{headlineTweetText}</div>
-								</div>
-								<div 
-									onClick={() => { this.onEventClick(i) }} 
-									className="see-more"><i className="material-icons">more_horiz</i></div>
-								<div 
-									onClick={this.closeActiveEvent}
-									className="close"><i className="material-icons">close</i></div>
-								<div className="explore"><i className="material-icons">launch</i></div>
-							</div>
-						</div>
+					{this.props.clusters.map((c, i) => {
+						if(c.type === 'nugget') { return getNuggetDOM(c, i) }
+						return getEventDOM(c, i)
 					})}
 				</div>
 				<div 
