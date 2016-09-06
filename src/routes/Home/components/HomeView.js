@@ -68,8 +68,6 @@ client.getEntries().then(entry => {
 	})
 
 	nuggetsLoaded = true
-	console.log("loaded")
-	console.log(clusters)
 	nuggetsLoadedCB.forEach(d => d())
 })
 
