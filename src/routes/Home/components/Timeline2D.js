@@ -332,7 +332,7 @@ export const Timeline = React.createClass({
 				key={i} 
 				style={{height: dayHeight + 'px'}}
 				className="local-date">
-				{minDate.clone().add(i, 'days').format('M DD')}</div>)
+				{minDate.clone().add(i, 'days').format('M/D')}</div>)
 		}
 
 		const globalDates = []
@@ -348,6 +348,7 @@ export const Timeline = React.createClass({
 
 			globalDates.push(<div 
 				style={{height: (globalDayHeight * days) + 'px'}}
+				className="global-date"
 				key={i}>
 				{currentDate.format('MMM')}</div>)
 		}

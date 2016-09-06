@@ -596,12 +596,29 @@ $home-text-link-color: #1E88E5;
 		}
 		.global {
 			border-right: solid 1px $border-color;
+			.global-date {
+				&:first-of-type {
+					visibility: hidden;
+				}
+				text-transform: uppercase;
+				font-weight: 500;
+				color: $highlight-text-color;
+				letter-spacing: 1px;
+				text-align: center;
+				font-size: .9rem;
+			}
 		}
 		.local {
 			transition: all $transition-duration / 2;
-			margin-left: -3px;
 			&.scrolling {
 				transition: none;
+			}
+			.local-date {
+				text-align: center;
+				font-weight: 500;
+				color: $highlight-text-color;
+				letter-spacing: 2px;
+				font-size: .9rem;
 			}
 		}
 		.brush {
