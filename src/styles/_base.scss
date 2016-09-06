@@ -592,8 +592,6 @@ $home-text-link-color: #1E88E5;
 	}
 	.events {
 		position: relative;
-		width: 100%;
-		height: 100%;
 		transition: all $transition-duration / 2;
 		&.scrolling {
 			transition: none;

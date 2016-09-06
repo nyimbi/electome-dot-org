@@ -419,7 +419,9 @@ export const Timeline = React.createClass({
 				</div>
 				<div 
 					style={{
-						padding: `${eventsVPadding}px ${eventsHPadding}px`
+						padding: `${eventsVPadding}px ${eventsHPadding}px`,
+						width: eventWidth * this.props.clusters.length + 'px',
+						height: dayHeight * dateRange + 'px'
 					}}
 					onWheel={this.onEventsWrapperWheel} className="events">
 					{this.props.clusters.map((c, i) => {
