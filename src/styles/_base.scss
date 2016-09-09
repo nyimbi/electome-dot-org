@@ -104,17 +104,17 @@ $home-text-link-color: #1E88E5;
 .video-player {
 	display: inline-block;
 	&[data-video-showing="true"] {
-		z-index: 2;
+		z-index: 3;
 		.iframe-wrapper {
 			display: block;
 			top: 50vh;
 			left: 50vw;
 			transform: translate3d(-50%, -50%, 0);
-			z-index: 1;
+			z-index: 3;
 		}
 		.blackout {
 			display: block;
-			z-index: 1;
+			z-index: 2;
 			pointer-events: auto;
 		}
 	}
